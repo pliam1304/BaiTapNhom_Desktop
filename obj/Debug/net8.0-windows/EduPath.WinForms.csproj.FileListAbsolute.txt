@@ -1,0 +1,14 @@
+H:\CodePlace\TEST\QLyDangKyHocPhan\obj\Debug\net8.0-windows\EduPath.WinForms.GeneratedMSBuildEditorConfig.editorconfig
+H:\CodePlace\TEST\QLyDangKyHocPhan\obj\Debug\net8.0-windows\EduPath.WinForms.AssemblyInfoInputs.cache
+H:\CodePlace\TEST\QLyDangKyHocPhan\obj\Debug\net8.0-windows\EduPath.WinForms.AssemblyInfo.cs
+H:\CodePlace\TEST\QLyDangKyHocPhan\obj\Debug\net8.0-windows\EduPath.WinForms.csproj.CoreCompileInputs.cache
+H:\CodePlace\TEST\QLyDangKyHocPhan\bin\Debug\net8.0-windows\EduPath.WinForms.exe
+H:\CodePlace\TEST\QLyDangKyHocPhan\bin\Debug\net8.0-windows\EduPath.WinForms.deps.json
+H:\CodePlace\TEST\QLyDangKyHocPhan\bin\Debug\net8.0-windows\EduPath.WinForms.runtimeconfig.json
+H:\CodePlace\TEST\QLyDangKyHocPhan\bin\Debug\net8.0-windows\EduPath.WinForms.dll
+H:\CodePlace\TEST\QLyDangKyHocPhan\bin\Debug\net8.0-windows\EduPath.WinForms.pdb
+H:\CodePlace\TEST\QLyDangKyHocPhan\obj\Debug\net8.0-windows\EduPath.WinForms.dll
+H:\CodePlace\TEST\QLyDangKyHocPhan\obj\Debug\net8.0-windows\refint\EduPath.WinForms.dll
+H:\CodePlace\TEST\QLyDangKyHocPhan\obj\Debug\net8.0-windows\EduPath.WinForms.pdb
+H:\CodePlace\TEST\QLyDangKyHocPhan\obj\Debug\net8.0-windows\EduPath.WinForms.genruntimeconfig.cache
+H:\CodePlace\TEST\QLyDangKyHocPhan\obj\Debug\net8.0-windows\ref\EduPath.WinForms.dll
