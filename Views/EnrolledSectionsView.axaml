@@ -1,0 +1,61 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:EduPath.Avalonia.ViewModels"
+             x:Class="EduPath.Avalonia.Views.EnrolledSectionsView"
+             x:Name="Root"
+             x:DataType="vm:EnrolledSectionsViewModel">
+
+  <StackPanel Spacing="18">
+
+    <Grid ColumnDefinitions="*,Auto">
+      <StackPanel Grid.Column="0" Spacing="2">
+        <TextBlock Text="Học phần đã đăng ký" FontSize="22" FontWeight="Bold" Foreground="{StaticResource TextDarkBrush}" />
+        <TextBlock Text="Danh sách các lớp học phần bạn đang theo học trong học kỳ này." Foreground="{StaticResource TextMutedBrush}" />
+      </StackPanel>
+      <Border Classes="badge-ok" VerticalAlignment="Center">
+        <TextBlock Text="{Binding TotalCredits, StringFormat='Tổng {0} tín chỉ'}" />
+      </Border>
+    </Grid>
+
+    <Border Classes="feedback-ok" CornerRadius="8" Padding="12,9" IsVisible="{Binding HasFeedback}">
+      <TextBlock Text="{Binding Feedback}" TextWrapping="Wrap" />
+    </Border>
+
+    <ItemsControl ItemsSource="{Binding Sections}">
+      <ItemsControl.ItemsPanel>
+        <ItemsPanelTemplate>
+          <StackPanel Spacing="12" />
+        </ItemsPanelTemplate>
+      </ItemsControl.ItemsPanel>
+      <ItemsControl.ItemTemplate>
+        <DataTemplate x:DataType="vm:SectionRow">
+          <Border Classes="card" Padding="18">
+            <Grid ColumnDefinitions="*,Auto,Auto">
+              <StackPanel Grid.Column="0" Spacing="4">
+                <StackPanel Orientation="Horizontal" Spacing="10">
+                  <TextBlock Text="{Binding CourseName}" FontWeight="Bold" FontSize="15" Foreground="{StaticResource TextDarkBrush}" />
+                  <TextBlock Text="{Binding Credits, StringFormat='{}{0} TC'}" FontSize="12" Foreground="{StaticResource TextMutedBrush}" VerticalAlignment="Center" />
+                </StackPanel>
+                <TextBlock FontSize="12.5" Foreground="{StaticResource TextMutedBrush}">
+                  <Run Text="{Binding SectionId}" /> · <Run Text="{Binding Schedule}" /> · Phòng <Run Text="{Binding RoomId}" /> · GV <Run Text="{Binding LecturerName}" />
+                </TextBlock>
+              </StackPanel>
+
+              <Border Grid.Column="1" Classes="badge-ok" VerticalAlignment="Center" Margin="0,0,16,0">
+                <TextBlock Text="Đã đăng ký" />
+              </Border>
+
+              <Button Grid.Column="2" Content="Hủy đăng ký" Classes="danger" VerticalAlignment="Center"
+                      Command="{Binding #Root.((vm:EnrolledSectionsViewModel)DataContext).CancelCommand}"
+                      CommandParameter="{Binding}" />
+            </Grid>
+          </Border>
+        </DataTemplate>
+      </ItemsControl.ItemTemplate>
+    </ItemsControl>
+
+    <TextBlock Text="Bạn chưa đăng ký học phần nào. Hãy sang mục &quot;Đăng ký học phần&quot; để bắt đầu."
+               Foreground="{StaticResource TextMutedBrush}" IsVisible="{Binding NoResults}"
+               Margin="0,20,0,0" HorizontalAlignment="Center" TextWrapping="Wrap" />
+  </StackPanel>
+</UserControl>

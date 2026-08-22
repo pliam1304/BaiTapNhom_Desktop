@@ -1,0 +1,245 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:EduPath.Avalonia.ViewModels"
+             xmlns:views="using:EduPath.Avalonia.Views"
+             x:Class="EduPath.Avalonia.App"
+             RequestedThemeVariant="Light">
+
+  <Application.DataTemplates>
+    <DataTemplate DataType="vm:LoginViewModel">
+      <views:LoginView />
+    </DataTemplate>
+    <DataTemplate DataType="vm:StudentShellViewModel">
+      <views:StudentShellView />
+    </DataTemplate>
+    <DataTemplate DataType="vm:AdminShellViewModel">
+      <views:AdminShellView />
+    </DataTemplate>
+    <DataTemplate DataType="vm:StudentDashboardViewModel">
+      <views:StudentDashboardView />
+    </DataTemplate>
+    <DataTemplate DataType="vm:OpenSectionsViewModel">
+      <views:OpenSectionsView />
+    </DataTemplate>
+    <DataTemplate DataType="vm:EnrolledSectionsViewModel">
+      <views:EnrolledSectionsView />
+    </DataTemplate>
+    <DataTemplate DataType="vm:TimetableViewModel">
+      <views:TimetableView />
+    </DataTemplate>
+    <DataTemplate DataType="vm:HistoryViewModel">
+      <views:HistoryView />
+    </DataTemplate>
+    <DataTemplate DataType="vm:AdminDashboardViewModel">
+      <views:AdminDashboardView />
+    </DataTemplate>
+    <DataTemplate DataType="vm:SectionsAdminViewModel">
+      <views:SectionsAdminView />
+    </DataTemplate>
+    <DataTemplate DataType="vm:CoursesAdminViewModel">
+      <views:CoursesAdminView />
+    </DataTemplate>
+  </Application.DataTemplates>
+
+  <Application.Styles>
+    <FluentTheme />
+
+    <!-- ============ Bảng màu (giữ tinh thần navy/gold của bản gốc) ============ -->
+    <Style>
+      <Style.Resources>
+        <Color x:Key="Navy">#09213e</Color>
+        <Color x:Key="NavyLight">#173d65</Color>
+        <Color x:Key="Gold">#e8a91f</Color>
+        <Color x:Key="GoldText">#f4bd3c</Color>
+        <Color x:Key="Bg">#eef2f7</Color>
+        <Color x:Key="CardBg">#ffffff</Color>
+        <Color x:Key="BorderC">#dce5ef</Color>
+        <Color x:Key="TextMuted">#64748b</Color>
+        <Color x:Key="TextDark">#17233b</Color>
+
+        <SolidColorBrush x:Key="NavyBrush" Color="{StaticResource Navy}" />
+        <SolidColorBrush x:Key="NavyLightBrush" Color="{StaticResource NavyLight}" />
+        <SolidColorBrush x:Key="GoldBrush" Color="{StaticResource Gold}" />
+        <SolidColorBrush x:Key="GoldTextBrush" Color="{StaticResource GoldText}" />
+        <SolidColorBrush x:Key="BgBrush" Color="{StaticResource Bg}" />
+        <SolidColorBrush x:Key="CardBgBrush" Color="{StaticResource CardBg}" />
+        <SolidColorBrush x:Key="BorderBrush2" Color="{StaticResource BorderC}" />
+        <SolidColorBrush x:Key="TextMutedBrush" Color="{StaticResource TextMuted}" />
+        <SolidColorBrush x:Key="TextDarkBrush" Color="{StaticResource TextDark}" />
+      </Style.Resources>
+    </Style>
+
+    <!-- ============ Thẻ (card) bo góc, đổ bóng nhẹ, có hiệu ứng hover ============ -->
+    <Style Selector="Border.card">
+      <Setter Property="Background" Value="{StaticResource CardBgBrush}" />
+      <Setter Property="CornerRadius" Value="16" />
+      <Setter Property="BorderBrush" Value="{StaticResource BorderBrush2}" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="Padding" Value="20" />
+      <Setter Property="BoxShadow" Value="0 1 3 0 #14000000" />
+      <Setter Property="Transitions">
+        <Transitions>
+          <BoxShadowsTransition Property="BoxShadow" Duration="0:0:0.18" />
+          <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.18" />
+        </Transitions>
+      </Setter>
+      <Setter Property="RenderTransform" Value="none" />
+    </Style>
+    <Style Selector="Border.card:pointerover">
+      <Setter Property="BoxShadow" Value="0 8 20 0 #22000000" />
+      <Setter Property="RenderTransform" Value="translateY(-2px)" />
+    </Style>
+
+    <!-- Thẻ KPI: xuất hiện dạng fade + trượt lên khi được gắn class "in" (stagger từ code-behind) -->
+    <Style Selector="Border.kpi">
+      <Setter Property="Opacity" Value="0" />
+      <Setter Property="RenderTransform" Value="translateY(14px)" />
+      <Setter Property="Transitions">
+        <Transitions>
+          <DoubleTransition Property="Opacity" Duration="0:0:0.42" Easing="CubicEaseOut" />
+          <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.42" Easing="CubicEaseOut" />
+        </Transitions>
+      </Setter>
+    </Style>
+    <Style Selector="Border.kpi.in">
+      <Setter Property="Opacity" Value="1" />
+      <Setter Property="RenderTransform" Value="translateY(0px)" />
+    </Style>
+
+    <!-- ============ Nút vàng chính ============ -->
+    <Style Selector="Button.primary">
+      <Setter Property="Background" Value="{StaticResource GoldBrush}" />
+      <Setter Property="Foreground" Value="{StaticResource NavyBrush}" />
+      <Setter Property="FontWeight" Value="Bold" />
+      <Setter Property="Padding" Value="16,10" />
+      <Setter Property="CornerRadius" Value="10" />
+      <Setter Property="BorderThickness" Value="0" />
+      <Setter Property="Cursor" Value="Hand" />
+      <Setter Property="Transitions">
+        <Transitions>
+          <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.12" />
+        </Transitions>
+      </Setter>
+    </Style>
+    <Style Selector="Button.primary:pointerover /template/ ContentPresenter">
+      <Setter Property="Background" Value="#f4bd3c" />
+    </Style>
+    <Style Selector="Button.primary:pressed">
+      <Setter Property="RenderTransform" Value="scale(0.97)" />
+    </Style>
+
+    <!-- ============ Nút viền mảnh ============ -->
+    <Style Selector="Button.outline">
+      <Setter Property="Background" Value="Transparent" />
+      <Setter Property="Foreground" Value="{StaticResource TextDarkBrush}" />
+      <Setter Property="Padding" Value="14,8" />
+      <Setter Property="CornerRadius" Value="10" />
+      <Setter Property="BorderBrush" Value="#94a3b8" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="Cursor" Value="Hand" />
+    </Style>
+
+    <!-- ============ Nút hủy / nguy hiểm ============ -->
+    <Style Selector="Button.danger">
+      <Setter Property="Background" Value="#fdecec" />
+      <Setter Property="Foreground" Value="#b3261e" />
+      <Setter Property="Padding" Value="12,7" />
+      <Setter Property="CornerRadius" Value="8" />
+      <Setter Property="BorderThickness" Value="0" />
+      <Setter Property="FontWeight" Value="SemiBold" />
+      <Setter Property="Cursor" Value="Hand" />
+    </Style>
+
+    <!-- ============ Thanh điều hướng dạng pill nằm ngang — thay cho sidebar trái cũ ============ -->
+    <Style Selector="ListBox.navpills">
+      <Setter Property="Background" Value="Transparent" />
+      <Setter Property="Padding" Value="0" />
+    </Style>
+    <Style Selector="ListBox.navpills ScrollViewer">
+      <Setter Property="HorizontalScrollBarVisibility" Value="Disabled" />
+    </Style>
+    <Style Selector="ListBox.navpills ListBoxItem">
+      <Setter Property="Padding" Value="16,9" />
+      <Setter Property="Margin" Value="3,0" />
+      <Setter Property="CornerRadius" Value="20" />
+      <Setter Property="Foreground" Value="#c9d6e8" />
+      <Setter Property="FontWeight" Value="SemiBold" />
+      <Setter Property="FontSize" Value="13.5" />
+      <Setter Property="Cursor" Value="Hand" />
+      <Setter Property="Transitions">
+        <Transitions>
+          <BrushTransition Property="Background" Duration="0:0:0.15" />
+        </Transitions>
+      </Setter>
+    </Style>
+    <Style Selector="ListBox.navpills ListBoxItem:selected /template/ ContentPresenter">
+      <Setter Property="Background" Value="{StaticResource GoldBrush}" />
+      <Setter Property="TextBlock.Foreground" Value="{StaticResource NavyBrush}" />
+      <Setter Property="CornerRadius" Value="20" />
+    </Style>
+    <Style Selector="ListBox.navpills ListBoxItem:pointerover /template/ ContentPresenter">
+      <Setter Property="Background" Value="#ffffff18" />
+    </Style>
+
+    <!-- ============ Badge trạng thái ============ -->
+    <Style Selector="Border.badge-ok">
+      <Setter Property="Background" Value="#e9f7f1" />
+      <Setter Property="CornerRadius" Value="20" />
+      <Setter Property="Padding" Value="10,3" />
+    </Style>
+    <Style Selector="Border.badge-ok TextBlock">
+      <Setter Property="Foreground" Value="#167255" />
+      <Setter Property="FontWeight" Value="Bold" />
+      <Setter Property="FontSize" Value="11.5" />
+    </Style>
+    <Style Selector="Border.badge-warn">
+      <Setter Property="Background" Value="#fff4d8" />
+      <Setter Property="CornerRadius" Value="20" />
+      <Setter Property="Padding" Value="10,3" />
+    </Style>
+    <Style Selector="Border.badge-warn TextBlock">
+      <Setter Property="Foreground" Value="#9d6800" />
+      <Setter Property="FontWeight" Value="Bold" />
+      <Setter Property="FontSize" Value="11.5" />
+    </Style>
+    <Style Selector="Border.badge-off">
+      <Setter Property="Background" Value="#f2f4f7" />
+      <Setter Property="CornerRadius" Value="20" />
+      <Setter Property="Padding" Value="10,3" />
+    </Style>
+    <Style Selector="Border.badge-off TextBlock">
+      <Setter Property="Foreground" Value="#667085" />
+      <Setter Property="FontWeight" Value="Bold" />
+      <Setter Property="FontSize" Value="11.5" />
+    </Style>
+
+    <!-- ============ TextBox / ComboBox bo tròn dùng cho Login & filter ============ -->
+    <Style Selector="TextBox.rounded, ComboBox.rounded">
+      <Setter Property="CornerRadius" Value="10" />
+      <Setter Property="Padding" Value="12,9" />
+      <Setter Property="BorderBrush" Value="{StaticResource BorderBrush2}" />
+    </Style>
+
+    <!-- Thanh tiến trình tín chỉ -->
+    <Style Selector="ProgressBar.credit">
+      <Setter Property="Height" Value="10" />
+      <Setter Property="CornerRadius" Value="5" />
+      <Setter Property="Foreground" Value="{StaticResource GoldBrush}" />
+      <Setter Property="Background" Value="#e2e8f0" />
+    </Style>
+
+    <!-- ============ Banner phản hồi (thành công / lỗi) ============ -->
+    <Style Selector="Border.feedback-ok">
+      <Setter Property="Background" Value="#e9f7f1" />
+    </Style>
+    <Style Selector="Border.feedback-ok TextBlock">
+      <Setter Property="Foreground" Value="#167255" />
+    </Style>
+    <Style Selector="Border.feedback-error">
+      <Setter Property="Background" Value="#fdecec" />
+    </Style>
+    <Style Selector="Border.feedback-error TextBlock">
+      <Setter Property="Foreground" Value="#b3261e" />
+    </Style>
+  </Application.Styles>
+</Application>

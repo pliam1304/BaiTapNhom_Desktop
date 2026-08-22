@@ -1,0 +1,77 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:EduPath.Avalonia.ViewModels"
+             xmlns:behaviors="using:EduPath.Avalonia.Behaviors"
+             x:Class="EduPath.Avalonia.Views.StudentDashboardView"
+             x:DataType="vm:StudentDashboardViewModel">
+
+  <StackPanel Spacing="22">
+
+    <StackPanel Spacing="2">
+      <TextBlock Text="{Binding StudentName, StringFormat='Chào mừng trở lại, {0} 👋'}" FontSize="22" FontWeight="Bold" Foreground="{StaticResource TextDarkBrush}" />
+      <TextBlock Text="{Binding StudentMeta}" Foreground="{StaticResource TextMutedBrush}" />
+    </StackPanel>
+
+    <!-- ===== Hàng thẻ KPI ===== -->
+    <UniformGrid Columns="3" Name="KpiRow">
+      <Border Classes="kpi card" Margin="0,0,10,0">
+        <StackPanel Spacing="8">
+          <TextBlock Text="TÍN CHỈ ĐÃ ĐĂNG KÝ" FontSize="11" FontWeight="Bold" Foreground="{StaticResource TextMutedBrush}" />
+          <TextBlock Text="{Binding CreditLabel}" FontSize="19" FontWeight="Bold" Foreground="{StaticResource TextDarkBrush}" />
+          <ProgressBar Classes="credit" Minimum="0" Maximum="100" Value="{Binding CreditProgress}" />
+        </StackPanel>
+      </Border>
+
+      <Border Classes="kpi card" Margin="5,0">
+        <StackPanel Spacing="8">
+          <TextBlock Text="LỚP HỌC PHẦN ĐANG HỌC" FontSize="11" FontWeight="Bold" Foreground="{StaticResource TextMutedBrush}" />
+          <TextBlock Text="{Binding EnrolledCount}" FontSize="28" FontWeight="Bold" Foreground="{StaticResource TextDarkBrush}" />
+          <Button Content="Xem đã đăng ký →" Classes="outline" Command="{Binding GoToTimetable}" Padding="10,5" FontSize="12" />
+        </StackPanel>
+      </Border>
+
+      <Border Classes="kpi card" Margin="10,0,0,0">
+        <StackPanel Spacing="8">
+          <TextBlock Text="ĐỢT ĐĂNG KÝ HIỆN HÀNH" FontSize="11" FontWeight="Bold" Foreground="{StaticResource TextMutedBrush}" />
+          <TextBlock Text="{Binding PeriodName}" FontSize="14.5" FontWeight="Bold" Foreground="{StaticResource TextDarkBrush}" TextWrapping="Wrap" />
+          <TextBlock Text="{Binding PeriodDateRange}" FontSize="11.5" Foreground="{StaticResource TextMutedBrush}" />
+          <Border behaviors:ClassBinding.Value="{Binding PeriodBadge}" HorizontalAlignment="Left">
+            <TextBlock Text="{Binding PeriodStatusText}" />
+          </Border>
+        </StackPanel>
+      </Border>
+    </UniformGrid>
+
+    <!-- ===== Học phần gần đây + lối tắt ===== -->
+    <Border Classes="card">
+      <StackPanel Spacing="14">
+        <Grid ColumnDefinitions="*,Auto">
+          <TextBlock Grid.Column="0" Text="Học phần đã đăng ký gần đây" FontSize="16" FontWeight="Bold" Foreground="{StaticResource TextDarkBrush}" />
+          <Button Grid.Column="1" Content="Đăng ký thêm" Classes="primary" Command="{Binding GoToOpenSections}" />
+        </Grid>
+
+        <ItemsControl ItemsSource="{Binding RecentEnrollments}">
+          <ItemsControl.ItemTemplate>
+            <DataTemplate x:DataType="vm:SectionRow">
+              <Border BorderBrush="{StaticResource BorderBrush2}" BorderThickness="0,0,0,1" Padding="0,12">
+                <Grid ColumnDefinitions="*,Auto,Auto">
+                  <StackPanel Grid.Column="0" Spacing="2">
+                    <TextBlock Text="{Binding CourseName}" FontWeight="SemiBold" Foreground="{StaticResource TextDarkBrush}" />
+                    <TextBlock Text="{Binding Schedule}" FontSize="12" Foreground="{StaticResource TextMutedBrush}" />
+                  </StackPanel>
+                  <TextBlock Grid.Column="1" Text="{Binding LecturerName}" FontSize="12.5" Foreground="{StaticResource TextMutedBrush}" VerticalAlignment="Center" Margin="0,0,16,0" />
+                  <Border Grid.Column="2" behaviors:ClassBinding.Value="{Binding StatusBadge}" VerticalAlignment="Center">
+                    <TextBlock Text="{Binding StatusText}" />
+                  </Border>
+                </Grid>
+              </Border>
+            </DataTemplate>
+          </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
+        <TextBlock Text="Chưa có học phần nào được đăng ký." Foreground="{StaticResource TextMutedBrush}"
+                   IsVisible="{Binding HasNoRecentEnrollments}" />
+      </StackPanel>
+    </Border>
+  </StackPanel>
+</UserControl>

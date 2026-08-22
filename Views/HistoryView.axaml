@@ -1,0 +1,42 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:EduPath.Avalonia.ViewModels"
+             xmlns:behaviors="using:EduPath.Avalonia.Behaviors"
+             x:Class="EduPath.Avalonia.Views.HistoryView"
+             x:DataType="vm:HistoryViewModel">
+
+  <StackPanel Spacing="18">
+    <StackPanel Spacing="2">
+      <TextBlock Text="Lịch sử đăng ký" FontSize="22" FontWeight="Bold" Foreground="{StaticResource TextDarkBrush}" />
+      <TextBlock Text="Toàn bộ các lượt đăng ký và hủy học phần của bạn." Foreground="{StaticResource TextMutedBrush}" />
+    </StackPanel>
+
+    <Border Classes="card" Padding="0">
+      <StackPanel>
+        <Grid ColumnDefinitions="*,140,170,110" Margin="20,16">
+          <TextBlock Grid.Column="0" Text="Học phần" FontWeight="Bold" FontSize="12" Foreground="{StaticResource TextMutedBrush}" />
+          <TextBlock Grid.Column="1" Text="Mã lớp" FontWeight="Bold" FontSize="12" Foreground="{StaticResource TextMutedBrush}" />
+          <TextBlock Grid.Column="2" Text="Thời gian" FontWeight="Bold" FontSize="12" Foreground="{StaticResource TextMutedBrush}" />
+          <TextBlock Grid.Column="3" Text="Trạng thái" FontWeight="Bold" FontSize="12" Foreground="{StaticResource TextMutedBrush}" />
+        </Grid>
+
+        <ItemsControl ItemsSource="{Binding Rows}">
+          <ItemsControl.ItemTemplate>
+            <DataTemplate x:DataType="vm:HistoryRow">
+              <Border BorderBrush="{StaticResource BorderBrush2}" BorderThickness="0,1,0,0" Padding="20,13">
+                <Grid ColumnDefinitions="*,140,170,110">
+                  <TextBlock Grid.Column="0" Text="{Binding CourseName}" Foreground="{StaticResource TextDarkBrush}" FontWeight="SemiBold" />
+                  <TextBlock Grid.Column="1" Text="{Binding SectionId}" Foreground="{StaticResource TextMutedBrush}" />
+                  <TextBlock Grid.Column="2" Text="{Binding RegisteredAt}" Foreground="{StaticResource TextMutedBrush}" FontSize="12.5" />
+                  <Border Grid.Column="3" behaviors:ClassBinding.Value="{Binding StatusBadge}" HorizontalAlignment="Left">
+                    <TextBlock Text="{Binding StatusText}" />
+                  </Border>
+                </Grid>
+              </Border>
+            </DataTemplate>
+          </ItemsControl.ItemTemplate>
+        </ItemsControl>
+      </StackPanel>
+    </Border>
+  </StackPanel>
+</UserControl>

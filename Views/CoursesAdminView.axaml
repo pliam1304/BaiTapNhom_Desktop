@@ -1,0 +1,39 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:EduPath.Avalonia.ViewModels"
+             xmlns:models="using:EduPath.Avalonia.Models"
+             x:Class="EduPath.Avalonia.Views.CoursesAdminView"
+             x:DataType="vm:CoursesAdminViewModel">
+
+  <StackPanel Spacing="18">
+    <StackPanel Spacing="2">
+      <TextBlock Text="Danh mục học phần" FontSize="22" FontWeight="Bold" Foreground="{StaticResource TextDarkBrush}" />
+      <TextBlock Text="Toàn bộ học phần đang được giảng dạy trong chương trình." Foreground="{StaticResource TextMutedBrush}" />
+    </StackPanel>
+
+    <ItemsControl ItemsSource="{Binding Courses}">
+      <ItemsControl.ItemsPanel>
+        <ItemsPanelTemplate>
+          <WrapPanel />
+        </ItemsPanelTemplate>
+      </ItemsControl.ItemsPanel>
+      <ItemsControl.ItemTemplate>
+        <DataTemplate x:DataType="models:Course">
+          <Border Classes="card" Width="260" Margin="0,0,14,14">
+            <StackPanel Spacing="8">
+              <StackPanel Orientation="Horizontal" Spacing="8">
+                <TextBlock Text="{Binding CourseCode}" FontWeight="Bold" Foreground="{StaticResource GoldBrush}" />
+                <TextBlock Text="{Binding Credits, StringFormat='{}{0} TC'}" Foreground="{StaticResource TextMutedBrush}" FontSize="12" VerticalAlignment="Center" />
+              </StackPanel>
+              <TextBlock Text="{Binding CourseName}" FontWeight="SemiBold" FontSize="15" TextWrapping="Wrap" Foreground="{StaticResource TextDarkBrush}" />
+              <TextBlock Text="{Binding Faculty}" FontSize="12" Foreground="{StaticResource TextMutedBrush}" />
+              <TextBlock FontSize="12" Foreground="{StaticResource TextMutedBrush}" IsVisible="{Binding PrerequisiteCode, Converter={x:Static StringConverters.IsNotNullOrEmpty}}">
+                Tiên quyết: <Run Text="{Binding PrerequisiteCode}" />
+              </TextBlock>
+            </StackPanel>
+          </Border>
+        </DataTemplate>
+      </ItemsControl.ItemTemplate>
+    </ItemsControl>
+  </StackPanel>
+</UserControl>

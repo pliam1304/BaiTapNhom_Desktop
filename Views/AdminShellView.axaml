@@ -1,0 +1,53 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:EduPath.Avalonia.ViewModels"
+             x:Class="EduPath.Avalonia.Views.AdminShellView"
+             x:DataType="vm:AdminShellViewModel">
+
+  <Grid RowDefinitions="Auto,*" Background="{StaticResource BgBrush}">
+
+    <Border Grid.Row="0" Background="{StaticResource NavyBrush}" Padding="28,0">
+      <Grid ColumnDefinitions="Auto,*,Auto" Height="66">
+
+        <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="10" VerticalAlignment="Center">
+          <Border Background="{StaticResource GoldBrush}" CornerRadius="9" Width="34" Height="34">
+            <TextBlock Text="🛠" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" />
+          </Border>
+          <StackPanel Spacing="0">
+            <TextBlock Text="EduPath" FontWeight="Bold" FontSize="17" Foreground="White" />
+            <TextBlock Text="Bảng quản trị" FontSize="10.5" Foreground="#93a4bd" />
+          </StackPanel>
+        </StackPanel>
+
+        <ListBox Grid.Column="1" Classes="navpills" ItemsSource="{Binding NavItems}"
+                  SelectedItem="{Binding SelectedNav}"
+                  HorizontalAlignment="Center" VerticalAlignment="Center">
+          <ListBox.ItemsPanel>
+            <ItemsPanelTemplate>
+              <StackPanel Orientation="Horizontal" />
+            </ItemsPanelTemplate>
+          </ListBox.ItemsPanel>
+          <ListBox.ItemTemplate>
+            <DataTemplate x:DataType="vm:NavItem">
+              <StackPanel Orientation="Horizontal" Spacing="7">
+                <TextBlock Text="{Binding Icon}" FontSize="13" />
+                <TextBlock Text="{Binding Label}" />
+              </StackPanel>
+            </DataTemplate>
+          </ListBox.ItemTemplate>
+        </ListBox>
+
+        <Button Grid.Column="2" Content="Đăng xuất" Classes="outline" Command="{Binding LogoutCommand}"
+                Foreground="White" BorderBrush="#3a5578" VerticalAlignment="Center" />
+      </Grid>
+    </Border>
+
+    <ScrollViewer Grid.Row="1" Padding="32,26">
+      <TransitioningContentControl Content="{Binding CurrentPage}" MaxWidth="1180" HorizontalAlignment="Stretch">
+        <TransitioningContentControl.PageTransition>
+          <PageSlide Duration="0:0:0.26" Orientation="Horizontal" />
+        </TransitioningContentControl.PageTransition>
+      </TransitioningContentControl>
+    </ScrollViewer>
+  </Grid>
+</UserControl>

@@ -1,0 +1,17 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:EduPath.Avalonia.ViewModels"
+        x:Class="EduPath.Avalonia.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Title="EduPath — Quản lý đăng ký học phần"
+        Width="1280" Height="820" MinWidth="980" MinHeight="640"
+        Background="{StaticResource BgBrush}"
+        WindowStartupLocation="CenterScreen">
+
+  <TransitioningContentControl Content="{Binding CurrentView}">
+    <TransitioningContentControl.PageTransition>
+      <CrossFade Duration="0:0:0.28" />
+    </TransitioningContentControl.PageTransition>
+  </TransitioningContentControl>
+
+</Window>

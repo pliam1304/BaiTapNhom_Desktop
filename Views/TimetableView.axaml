@@ -1,0 +1,56 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:EduPath.Avalonia.ViewModels"
+             x:Class="EduPath.Avalonia.Views.TimetableView"
+             x:DataType="vm:TimetableViewModel">
+
+  <StackPanel Spacing="18">
+    <StackPanel Spacing="2">
+      <TextBlock Text="Thời khóa biểu" FontSize="22" FontWeight="Bold" Foreground="{StaticResource TextDarkBrush}" />
+      <TextBlock Text="Lịch học theo tuần cho các lớp học phần đã đăng ký." Foreground="{StaticResource TextMutedBrush}" />
+    </StackPanel>
+
+    <ScrollViewer HorizontalScrollBarVisibility="Auto">
+      <ItemsControl ItemsSource="{Binding Days}">
+        <ItemsControl.ItemsPanel>
+          <ItemsPanelTemplate>
+            <StackPanel Orientation="Horizontal" Spacing="14" />
+          </ItemsPanelTemplate>
+        </ItemsControl.ItemsPanel>
+        <ItemsControl.ItemTemplate>
+          <DataTemplate x:DataType="vm:DayColumn">
+            <Border Classes="card" Width="230" VerticalAlignment="Top" Padding="16">
+              <StackPanel Spacing="12">
+                <TextBlock Text="{Binding Label}" FontWeight="Bold" FontSize="14.5" Foreground="{StaticResource TextDarkBrush}" />
+
+                <ItemsControl ItemsSource="{Binding Sections}">
+                  <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                      <StackPanel Spacing="10" />
+                    </ItemsPanelTemplate>
+                  </ItemsControl.ItemsPanel>
+                  <ItemsControl.ItemTemplate>
+                    <DataTemplate x:DataType="vm:SectionRow">
+                      <Border Background="{StaticResource BgBrush}" CornerRadius="10" Padding="10">
+                        <StackPanel Spacing="3">
+                          <TextBlock Text="{Binding CourseName}" FontWeight="SemiBold" FontSize="12.5" TextWrapping="Wrap" Foreground="{StaticResource TextDarkBrush}" />
+                          <TextBlock Text="{Binding Section.TimeLabel}" FontSize="11.5" Foreground="{StaticResource TextMutedBrush}" />
+                          <TextBlock FontSize="11" Foreground="{StaticResource TextMutedBrush}">
+                            Phòng <Run Text="{Binding RoomId}" />
+                          </TextBlock>
+                        </StackPanel>
+                      </Border>
+                    </DataTemplate>
+                  </ItemsControl.ItemTemplate>
+                </ItemsControl>
+
+                <TextBlock Text="Không có lịch" FontSize="12" Foreground="{StaticResource TextMutedBrush}"
+                           IsVisible="{Binding !HasClasses}" />
+              </StackPanel>
+            </Border>
+          </DataTemplate>
+        </ItemsControl.ItemTemplate>
+      </ItemsControl>
+    </ScrollViewer>
+  </StackPanel>
+</UserControl>
