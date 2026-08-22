@@ -1,4 +1,5 @@
 using EduPath.Avalonia.Data;
+
 using EduPath.Avalonia.Models;
 
 namespace EduPath.Avalonia.Services

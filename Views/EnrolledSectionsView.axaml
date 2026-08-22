@@ -8,7 +8,7 @@
   <StackPanel Spacing="18">
 
     <Grid ColumnDefinitions="*,Auto">
-      <StackPanel Grid.Column="0" Spacing="2">
+      <StackPanel Grid.Column="0" Spacing="30">
         <TextBlock Text="Học phần đã đăng ký" FontSize="22" FontWeight="Bold" Foreground="{StaticResource TextDarkBrush}" />
         <TextBlock Text="Danh sách các lớp học phần bạn đang theo học trong học kỳ này." Foreground="{StaticResource TextMutedBrush}" />
       </StackPanel>

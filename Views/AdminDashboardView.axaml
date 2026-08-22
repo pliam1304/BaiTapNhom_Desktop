@@ -8,8 +8,10 @@
   <StackPanel Spacing="22">
 
     <Grid ColumnDefinitions="*,Auto">
-      <StackPanel Grid.Column="0" Spacing="2">
-        <TextBlock Text="Tổng quan hệ thống" FontSize="22" FontWeight="Bold" Foreground="{StaticResource TextDarkBrush}" />
+      <StackPanel Grid.Column="0" 
+                  Spacing="40"
+                  Margin="0,8,0,0">
+        <TextBlock Text="Tổng quan hệ thống" FontSize="22" FontWeight="Bold" Foreground="{StaticResource TextDarkBrush}" Width="250" />
         <TextBlock Text="{Binding PeriodName, StringFormat='Đợt hiện hành: {0}'}" Foreground="{StaticResource TextMutedBrush}" />
       </StackPanel>
       <Border behaviors:ClassBinding.Value="{Binding PeriodBadge}" VerticalAlignment="Center">

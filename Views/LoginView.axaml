@@ -61,7 +61,8 @@
                   HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="0,18,0,0" />
 
           <TextBlock Margin="0,16,0,0" FontSize="11.5" Foreground="{StaticResource TextMutedBrush}" TextWrapping="Wrap"
-                     Text="Demo: SV20260018 / 123456 (Sinh viên) · AD0001 / admin123 (Quản trị)" />
+                     Text="Quên mật khẩu?. Liên hệ quản trị viên để được hỗ trợ. 
+                     (AD0001 MK: admin123) (SV2411869 MK: 123456)" />
         </StackPanel>
       </Border>
     </Grid>
