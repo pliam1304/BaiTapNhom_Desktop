@@ -1,14 +1,20 @@
+// View/Features/Shells/AdminShellViewModel.cs
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
 namespace EduPath.Avalonia.ViewModels
 {
     public class AdminShellViewModel : ViewModelBase
     {
         public event Action? LogoutRequested;
 
+        // Đã cập nhật sử dụng IconPath với file ảnh .png giống hệt cấu trúc của Student
         public List<NavItem> NavItems { get; } = new()
         {
-            new NavItem { Key = "dashboard", Label = "Tổng quan", Icon = "📊" },
-            new NavItem { Key = "sections",  Label = "Lớp học phần", Icon = "🏫" },
-            new NavItem { Key = "courses",   Label = "Học phần", Icon = "📘" },
+            new NavItem { Key = "dashboard", Label = "Tổng quan", IconPath = "avares://EduPath.Avalonia/images_icons/tổng quan.png" },
+            new NavItem { Key = "courses",   Label = "Môn học", IconPath = "avares://EduPath.Avalonia/images_icons/môn học.png" },
+            new NavItem { Key = "sections",  Label = "Lớp học phần", IconPath = "avares://EduPath.Avalonia/images_icons/danh sách.png" }
         };
 
         private NavItem _selectedNav;
@@ -43,8 +49,8 @@ namespace EduPath.Avalonia.ViewModels
                 page = key switch
                 {
                     "dashboard" => new AdminDashboardViewModel(this),
-                    "sections" => new SectionsAdminViewModel(),
                     "courses" => new CoursesAdminViewModel(),
+                    "sections" => new SectionsAdminViewModel(),
                     _ => new AdminDashboardViewModel(this)
                 };
                 _pageCache[key] = page;

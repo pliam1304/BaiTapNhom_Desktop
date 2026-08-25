@@ -5,73 +5,205 @@
              x:Class="EduPath.Avalonia.Views.StudentDashboardView"
              x:DataType="vm:StudentDashboardViewModel">
 
-  <StackPanel Spacing="22">
+  <ScrollViewer VerticalScrollBarVisibility="Auto">
+    <StackPanel Spacing="16" Margin="0,0,16,16">
 
-    <StackPanel Spacing="2">
-      <TextBlock Text="{Binding StudentName, StringFormat='Chào mừng trở lại, {0} 👋'}" FontSize="22" FontWeight="Bold" Foreground="{StaticResource TextDarkBrush}" />
-      <TextBlock Text="{Binding StudentMeta}" Foreground="{StaticResource TextMutedBrush}" />
-    </StackPanel>
+      <!-- ========================================== -->
+      <!-- BANNER CHÀO MỪNG (DỮ LIỆU CỨNG)            -->
+      <!-- ========================================== -->
+      <Border Background="{StaticResource NavyBrush}" CornerRadius="12" Padding="24" ClipToBounds="True">
+        <Grid ColumnDefinitions="*, Auto">
+          <!-- Thông tin sinh viên bên trái -->
+          <StackPanel Grid.Column="0" Spacing="6" VerticalAlignment="Center">
+            <!-- Giả định tên, bạn có thể sửa thành {Binding StudentName} sau -->
+            <TextBlock Text="👋 Chào mừng trở lại, Huỳnh Phúc Lâm" FontSize="20" FontWeight="Bold" Foreground="{StaticResource GoldTextBrush}" />
+            <TextBlock Text="Học kỳ 1 • Năm học 2026-2027 • Ngành: Công nghệ thông tin" FontSize="13" Foreground="#c9d6e8" />
+          </StackPanel>
 
-    <!-- ===== Hàng thẻ KPI ===== -->
-    <UniformGrid Columns="3" Name="KpiRow">
-      <Border Classes="kpi card" Margin="0,0,10,0">
-        <StackPanel Spacing="8">
-          <TextBlock Text="TÍN CHỈ ĐÃ ĐĂNG KÝ" FontSize="11" FontWeight="Bold" Foreground="{StaticResource TextMutedBrush}" />
-          <TextBlock Text="{Binding CreditLabel}" FontSize="19" FontWeight="Bold" Foreground="{StaticResource TextDarkBrush}" />
-          <ProgressBar Classes="credit" Minimum="0" Maximum="100" Value="{Binding CreditProgress}" />
-        </StackPanel>
-      </Border>
-
-      <Border Classes="kpi card" Margin="5,0">
-        <StackPanel Spacing="8">
-          <TextBlock Text="LỚP HỌC PHẦN ĐANG HỌC" FontSize="11" FontWeight="Bold" Foreground="{StaticResource TextMutedBrush}" />
-          <TextBlock Text="{Binding EnrolledCount}" FontSize="28" FontWeight="Bold" Foreground="{StaticResource TextDarkBrush}" />
-          <Button Content="Xem đã đăng ký →" Classes="outline" Command="{Binding GoToTimetable}" Padding="10,5" FontSize="12" />
-        </StackPanel>
-      </Border>
-
-      <Border Classes="kpi card" Margin="10,0,0,0">
-        <StackPanel Spacing="8">
-          <TextBlock Text="ĐỢT ĐĂNG KÝ HIỆN HÀNH" FontSize="11" FontWeight="Bold" Foreground="{StaticResource TextMutedBrush}" />
-          <TextBlock Text="{Binding PeriodName}" FontSize="14.5" FontWeight="Bold" Foreground="{StaticResource TextDarkBrush}" TextWrapping="Wrap" />
-          <TextBlock Text="{Binding PeriodDateRange}" FontSize="11.5" Foreground="{StaticResource TextMutedBrush}" />
-          <Border behaviors:ClassBinding.Value="{Binding PeriodBadge}" HorizontalAlignment="Left">
-            <TextBlock Text="{Binding PeriodStatusText}" />
+          <!-- Nút/Badge trạng thái bên phải -->
+          <Border Grid.Column="1" Background="{StaticResource NavyLightBrush}" CornerRadius="8" Padding="16,10" VerticalAlignment="Center">
+            <TextBlock Text="Đợt đăng ký: ĐANG MỞ" FontSize="12.5" FontWeight="Bold" Foreground="{StaticResource GoldTextBrush}" />
           </Border>
-        </StackPanel>
-      </Border>
-    </UniformGrid>
-
-    <!-- ===== Học phần gần đây + lối tắt ===== -->
-    <Border Classes="card">
-      <StackPanel Spacing="14">
-        <Grid ColumnDefinitions="*,Auto">
-          <TextBlock Grid.Column="0" Text="Học phần đã đăng ký gần đây" FontSize="16" FontWeight="Bold" Foreground="{StaticResource TextDarkBrush}" />
-          <Button Grid.Column="1" Content="Đăng ký thêm" Classes="primary" Command="{Binding GoToOpenSections}" />
         </Grid>
+      </Border>
 
-        <ItemsControl ItemsSource="{Binding RecentEnrollments}">
-          <ItemsControl.ItemTemplate>
-            <DataTemplate x:DataType="vm:SectionRow">
-              <Border BorderBrush="{StaticResource BorderBrush2}" BorderThickness="0,0,0,1" Padding="0,12">
-                <Grid ColumnDefinitions="*,Auto,Auto">
-                  <StackPanel Grid.Column="0" Spacing="2">
-                    <TextBlock Text="{Binding CourseName}" FontWeight="SemiBold" Foreground="{StaticResource TextDarkBrush}" />
-                    <TextBlock Text="{Binding Schedule}" FontSize="12" Foreground="{StaticResource TextMutedBrush}" />
-                  </StackPanel>
-                  <TextBlock Grid.Column="1" Text="{Binding LecturerName}" FontSize="12.5" Foreground="{StaticResource TextMutedBrush}" VerticalAlignment="Center" Margin="0,0,16,0" />
-                  <Border Grid.Column="2" behaviors:ClassBinding.Value="{Binding StatusBadge}" VerticalAlignment="Center">
-                    <TextBlock Text="{Binding StatusText}" />
+      <!-- ========================================== -->
+      <!-- HÀNG THẺ KPI (4 CỘT)                       -->
+      <!-- ========================================== -->
+      <UniformGrid Columns="4" Name="KpiRow">
+        <!-- KPI 1: Tín chỉ -->
+        <Border Classes="kpi card" Margin="0,0,8,0">
+          <StackPanel Spacing="10">
+            <TextBlock Text="Số tín chỉ đã đăng ký" FontSize="12" Foreground="{StaticResource TextMutedBrush}" />
+            <!-- DỮ LIỆU CỨNG -->
+            <StackPanel Orientation="Horizontal" Spacing="4" VerticalAlignment="Bottom">
+              <TextBlock Text="12" FontSize="26" FontWeight="Bold" Foreground="{StaticResource TextDarkBrush}" />
+              <TextBlock Text="/ 24 TC tối đa" FontSize="13" Foreground="{StaticResource TextMutedBrush}" VerticalAlignment="Bottom" Margin="0,0,0,4" />
+            </StackPanel>
+            <ProgressBar Classes="credit" Minimum="0" Maximum="24" Value="12" Margin="0,4,0,0" />
+          </StackPanel>
+        </Border>
+
+        <!-- KPI 2: Lớp học phần -->
+        <Border Classes="kpi card" Margin="4,0,4,0">
+          <StackPanel Spacing="10">
+            <TextBlock Text="Lớp học phần đã chọn" FontSize="12" Foreground="{StaticResource TextMutedBrush}" />
+            <!-- DỮ LIỆU CỨNG -->
+            <TextBlock Text="3" FontSize="26" FontWeight="Bold" Foreground="{StaticResource TextDarkBrush}" />
+            <TextBlock Text="✓ Toàn bộ đã được duyệt" FontSize="12" Foreground="#167255" />
+          </StackPanel>
+        </Border>
+
+        <!-- KPI 3: Học phí -->
+        <Border Classes="kpi card" Margin="4,0,4,0">
+          <StackPanel Spacing="10">
+            <TextBlock Text="Tạm tính học phí" FontSize="12" Foreground="{StaticResource TextMutedBrush}" />
+            <!-- DỮ LIỆU CỨNG -->
+            <TextBlock Text="3.600.000 đ" FontSize="22" FontWeight="Bold" Foreground="{StaticResource TextDarkBrush}" />
+            <TextBlock Text="Đơn giá: 300.000 đ/tín chỉ" FontSize="12" Foreground="{StaticResource TextMutedBrush}" />
+          </StackPanel>
+        </Border>
+
+        <!-- KPI 4: Thời hạn -->
+        <Border Classes="kpi card" Margin="8,0,0,0">
+          <StackPanel Spacing="10">
+            <TextBlock Text="Thời hạn đăng ký HK1" FontSize="12" Foreground="{StaticResource TextMutedBrush}" />
+            <!-- DỮ LIỆU CỨNG -->
+            <TextBlock Text="Còn 3 ngày 05 giờ" FontSize="18" FontWeight="Bold" Foreground="#b3261e" />
+            <TextBlock Text="Hạn chót: 23:59 - 30/08/2026" FontSize="12" Foreground="{StaticResource TextMutedBrush}" />
+          </StackPanel>
+        </Border>
+      </UniformGrid>
+
+      <!-- ========================================== -->
+      <!-- KHỐI NỘI DUNG CHÍNH (CHIA TỈ LỆ 2:1)       -->
+      <!-- ========================================== -->
+      <Grid ColumnDefinitions="2.2*, 1*">
+        
+        <!-- CỘT TRÁI: Bảng học phần gần đây -->
+        <Border Grid.Column="0" Classes="card" Margin="0,0,8,0">
+          <StackPanel Spacing="16">
+            <!-- Tiêu đề bảng -->
+            <Grid ColumnDefinitions="*,Auto">
+              <TextBlock Grid.Column="0" Text="Lớp học phần đã đăng ký gần đây" FontSize="16" FontWeight="Bold" Foreground="{StaticResource TextDarkBrush}" />
+              <Border Grid.Column="1" Background="#fff4d8" CornerRadius="6" Padding="8,4">
+                 <TextBlock Text="Mới cập nhật" FontSize="11" FontWeight="Bold" Foreground="#9d6800" />
+              </Border>
+            </Grid>
+
+            <!-- Bảng dữ liệu (Fake table layout) -->
+            <!-- Bảng dữ liệu (Fake table layout) -->
+            <StackPanel Spacing="0">
+              <!-- Header của bảng -->
+              <Border Padding="8,10" Background="{StaticResource BgBrush}">
+                <Grid ColumnDefinitions="1.2*, 3*, 0.8*, 2*, 1.2*">
+                  <TextBlock Grid.Column="0" Text="Mã Lớp" FontSize="12" FontWeight="Bold" Foreground="{StaticResource TextMutedBrush}" />
+                  <TextBlock Grid.Column="1" Text="Tên Môn Học" FontSize="12" FontWeight="Bold" Foreground="{StaticResource TextMutedBrush}" />
+                  <TextBlock Grid.Column="2" Text="TC" FontSize="12" FontWeight="Bold" Foreground="{StaticResource TextMutedBrush}" />
+                  <TextBlock Grid.Column="3" Text="Giảng Viên" FontSize="12" FontWeight="Bold" Foreground="{StaticResource TextMutedBrush}" />
+                  <TextBlock Grid.Column="4" Text="Trạng Thái" FontSize="12" FontWeight="Bold" Foreground="{StaticResource TextMutedBrush}" HorizontalAlignment="Center" />
+                </Grid>
+              </Border>
+
+              <!-- DỮ LIỆU CỨNG: Hàng 1 -->
+              <Border Padding="8,14" BorderBrush="{StaticResource BorderBrush2}" BorderThickness="0,0,0,1">
+                <Grid ColumnDefinitions="1.2*, 3*, 0.8*, 2*, 1.2*">
+                  <TextBlock Grid.Column="0" Text="CT101-01" FontWeight="SemiBold" VerticalAlignment="Center"/>
+                  <TextBlock Grid.Column="1" Text="Cấu trúc dữ liệu và giải thuật" VerticalAlignment="Center"/>
+                  <TextBlock Grid.Column="2" Text="4" VerticalAlignment="Center"/>
+                  <TextBlock Grid.Column="3" Text="Trần Thế Anh" Foreground="{StaticResource TextMutedBrush}" VerticalAlignment="Center"/>
+                  <Border Grid.Column="4" Classes="badge-ok" HorizontalAlignment="Center">
+                    <TextBlock Text="Thành công" />
                   </Border>
                 </Grid>
               </Border>
-            </DataTemplate>
-          </ItemsControl.ItemTemplate>
-        </ItemsControl>
 
-        <TextBlock Text="Chưa có học phần nào được đăng ký." Foreground="{StaticResource TextMutedBrush}"
-                   IsVisible="{Binding HasNoRecentEnrollments}" />
-      </StackPanel>
-    </Border>
-  </StackPanel>
+              <!-- DỮ LIỆU CỨNG: Hàng 2 -->
+              <Border Padding="8,14" BorderBrush="{StaticResource BorderBrush2}" BorderThickness="0,0,0,1">
+                <Grid ColumnDefinitions="1.2*, 3*, 0.8*, 2*, 1.2*">
+                  <TextBlock Grid.Column="0" Text="CSDL101-02" FontWeight="SemiBold" VerticalAlignment="Center"/>
+                  <TextBlock Grid.Column="1" Text="Cơ sở dữ liệu" VerticalAlignment="Center"/>
+                  <TextBlock Grid.Column="2" Text="4" VerticalAlignment="Center"/>
+                  <TextBlock Grid.Column="3" Text="Nguyễn Minh Thu" Foreground="{StaticResource TextMutedBrush}" VerticalAlignment="Center"/>
+                  <Border Grid.Column="4" Classes="badge-ok" HorizontalAlignment="Center">
+                    <TextBlock Text="Thành công" />
+                  </Border>
+                </Grid>
+              </Border>
+
+              <!-- DỮ LIỆU CỨNG: Hàng 3 -->
+              <Border Padding="8,14">
+                <Grid ColumnDefinitions="1.2*, 3*, 0.8*, 2*, 1.2*">
+                  <TextBlock Grid.Column="0" Text="HTTT01-01" FontWeight="SemiBold" VerticalAlignment="Center"/>
+                  <TextBlock Grid.Column="1" Text="Hệ thống thông tin quản lý" VerticalAlignment="Center"/>
+                  <TextBlock Grid.Column="2" Text="4" VerticalAlignment="Center"/>
+                  <TextBlock Grid.Column="3" Text="Lê Hoàng Nam" Foreground="{StaticResource TextMutedBrush}" VerticalAlignment="Center"/>
+                  <Border Grid.Column="4" Classes="badge-warn" HorizontalAlignment="Center">
+                    <TextBlock Text="Chờ phê duyệt" />
+                  </Border>
+                </Grid>
+              </Border>
+            </StackPanel>
+          </StackPanel>
+        </Border>
+
+        <!-- CỘT PHẢI: Biểu đồ & Thông báo -->
+        <StackPanel Grid.Column="1" Spacing="16" Margin="8,0,0,0">
+          
+          <!-- Card Biểu đồ (Mô phỏng) -->
+          <Border Classes="card">
+            <StackPanel Spacing="16">
+              <TextBlock Text="Biểu đồ đăng ký tín chỉ" FontSize="15" FontWeight="Bold" Foreground="{StaticResource TextDarkBrush}" />
+              <Grid ColumnDefinitions="Auto, *">
+                <!-- Mô phỏng vòng tròn biểu đồ -->
+                <Grid Grid.Column="0" Width="80" Height="80" Margin="0,0,16,0">
+                  <Ellipse Stroke="#e2e8f0" StrokeThickness="10" />
+                  <!-- Giả lập phần đã đăng ký (màu xanh) -->
+                  <Ellipse Stroke="#3b82f6" StrokeThickness="10" StrokeDashArray="1.5, 2" />
+                  <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <TextBlock Text="50%" FontWeight="Bold" FontSize="16" HorizontalAlignment="Center"/>
+                    <TextBlock Text="Đăng ký" FontSize="10" Foreground="{StaticResource TextMutedBrush}" HorizontalAlignment="Center"/>
+                  </StackPanel>
+                </Grid>
+                <!-- Chú thích -->
+                <StackPanel Grid.Column="1" VerticalAlignment="Center" Spacing="8">
+                  <StackPanel Orientation="Horizontal" Spacing="6">
+                    <Ellipse Width="10" Height="10" Fill="#3b82f6" />
+                    <TextBlock Text="Đã đăng ký (12 TC)" FontSize="12" Foreground="{StaticResource TextDarkBrush}" />
+                  </StackPanel>
+                  <StackPanel Orientation="Horizontal" Spacing="6">
+                    <Ellipse Width="10" Height="10" Fill="#e2e8f0" />
+                    <TextBlock Text="Chưa đăng ký (12 TC)" FontSize="12" Foreground="{StaticResource TextMutedBrush}" />
+                  </StackPanel>
+                </StackPanel>
+              </Grid>
+            </StackPanel>
+          </Border>
+
+          <!-- Card Thông báo hệ thống -->
+          <Border Classes="card">
+            <StackPanel Spacing="12">
+              <TextBlock Text="Thông báo hệ thống" FontSize="15" FontWeight="Bold" Foreground="{StaticResource TextDarkBrush}" />
+              <!-- DỮ LIỆU CỨNG -->
+              <UniformGrid Columns="3">
+                <StackPanel Margin="0,0,8,0">
+                  <TextBlock Text="Đợt đăng ký tín chỉ HK1 2026-2027 chính thức diễn ra." FontSize="11.5" TextWrapping="Wrap" />
+                  <TextBlock Text="Hôm nay, 08:00" FontSize="10" Foreground="{StaticResource TextMutedBrush}" Margin="0,4,0,0"/>
+                </StackPanel>
+                <StackPanel Margin="4,0,4,0">
+                  <TextBlock Text="Cập nhật đơn giá học phí chính thức năm học mới." FontSize="11.5" TextWrapping="Wrap" />
+                  <TextBlock Text="21/08/2026" FontSize="10" Foreground="{StaticResource TextMutedBrush}" Margin="0,4,0,0"/>
+                </StackPanel>
+                <StackPanel Margin="8,0,0,0">
+                  <TextBlock Text="Lịch kiểm tra điều kiện tiên quyết các học phần cơ sở ngành." FontSize="11.5" TextWrapping="Wrap" />
+                  <TextBlock Text="Hôm qua, 14:30" FontSize="10" Foreground="{StaticResource TextMutedBrush}" Margin="0,4,0,0"/>
+                </StackPanel>
+              </UniformGrid>
+            </StackPanel>
+          </Border>
+
+        </StackPanel>
+      </Grid>
+    </StackPanel>
+  </ScrollViewer>
 </UserControl>

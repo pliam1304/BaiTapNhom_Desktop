@@ -4,14 +4,14 @@
         x:Class="EduPath.Avalonia.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Title="EduPath — Quản lý đăng ký học phần"
-        Width="1280" Height="820" MinWidth="980" MinHeight="640"
-        Background="{StaticResource BgBrush}"
+        WindowState="Maximized"
         WindowStartupLocation="CenterScreen">
-
-  <TransitioningContentControl Content="{Binding CurrentView}">
-    <TransitioningContentControl.PageTransition>
-      <CrossFade Duration="0:0:0.28" />
-    </TransitioningContentControl.PageTransition>
-  </TransitioningContentControl>
-
+    
+    <!-- Cách 1: Dùng TransitioningContentControl để có hiệu ứng chuyển trang -->
+    <TransitioningContentControl Content="{Binding CurrentView}">
+        <TransitioningContentControl.PageTransition>
+            <CrossFade Duration="0:0:0.28" />
+        </TransitioningContentControl.PageTransition>
+    </TransitioningContentControl>
+    
 </Window>

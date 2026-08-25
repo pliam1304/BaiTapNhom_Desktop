@@ -1,3 +1,4 @@
+// Views/Features/Shells/StudentShellViewModel.cs
 using EduPath.Avalonia.Models;
 
 namespace EduPath.Avalonia.ViewModels
@@ -6,13 +7,13 @@ namespace EduPath.Avalonia.ViewModels
     {
         public string Key { get; init; } = string.Empty;
         public string Label { get; init; } = string.Empty;
-        public string Icon { get; init; } = string.Empty; // ký tự glyph đơn giản, không cần font icon ngoài
+        // CẬP NHẬT: Đổi thành IconPath để chứa đường dẫn ảnh thay vì Emoji
+        public string IconPath { get; init; } = string.Empty; 
     }
 
     /// <summary>
-    /// Shell của Sinh viên — thay cho StudentShellBuilder (sidebar trái) trong bản WinForms.
-    /// Ở đây dùng thanh điều hướng dạng "pill" nằm ngang phía trên, mỗi lần chuyển trang sẽ
-    /// phát lại animation fade/slide qua TransitioningContentControl.
+    /// Shell của Sinh viên — Giao diện Sidebar trái.
+    /// Mỗi lần chuyển trang sẽ phát lại animation qua TransitioningContentControl.
     /// </summary>
     public class StudentShellViewModel : ViewModelBase
     {
@@ -20,13 +21,15 @@ namespace EduPath.Avalonia.ViewModels
 
         public Student Student { get; }
 
+        // CẬP NHẬT: Map chính xác tên file ảnh bạn cung cấp vào đường dẫn avares
+        // Lưu ý: Tên file phải khớp từng dấu cách, dấu tiếng Việt như bạn đã tạo
         public List<NavItem> NavItems { get; } = new()
         {
-            new NavItem { Key = "dashboard", Label = "Tổng quan", Icon = "🏠" },
-            new NavItem { Key = "open",      Label = "Đăng ký học phần", Icon = "📚" },
-            new NavItem { Key = "enrolled",  Label = "Đã đăng ký", Icon = "✅" },
-            new NavItem { Key = "timetable", Label = "Thời khóa biểu", Icon = "🗓" },
-            new NavItem { Key = "history",   Label = "Lịch sử", Icon = "🕘" },
+            new NavItem { Key = "dashboard", Label = "Tổng quan", IconPath = "avares://EduPath.Avalonia/images_icons/tổng quan.png" },
+            new NavItem { Key = "open",      Label = "Đăng ký học phần", IconPath = "avares://EduPath.Avalonia/images_icons/đăng kí học phần.png" },
+            new NavItem { Key = "enrolled",  Label = "Đã đăng ký", IconPath = "avares://EduPath.Avalonia/images_icons/danh sách.png" },
+            new NavItem { Key = "timetable", Label = "Thời khóa biểu", IconPath = "avares://EduPath.Avalonia/images_icons/thời khoá biểu.png" },
+            new NavItem { Key = "history",   Label = "Lịch sử", IconPath = "avares://EduPath.Avalonia/images_icons/thông báo.png" },
         };
 
         private NavItem _selectedNav;
