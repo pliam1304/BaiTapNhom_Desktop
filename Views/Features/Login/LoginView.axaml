@@ -16,10 +16,10 @@
                   HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="-100,0,0,-100" />
 
         <StackPanel VerticalAlignment="Center" Margin="72,0" Spacing="18" MaxWidth="460">
-          <Border Background="{StaticResource GoldBrush}" CornerRadius="12" Width="52" Height="52">
-            <TextBlock Text="🎓" FontSize="26" HorizontalAlignment="Center" VerticalAlignment="Center" />
+          <Border Background="{StaticResource GoldBrush}" CornerRadius="12" Width="100" Height="100">
+            <TextBlock Text="🎓" FontSize="100" HorizontalAlignment="Center" VerticalAlignment="Center" />
           </Border>
-          <TextBlock Text="EduPath" FontSize="34" FontWeight="Bold" Foreground="White" />
+          <TextBlock Text="DLU" FontSize="34" FontWeight="Bold" Foreground="White" />
           <TextBlock Text="Hệ thống quản lý đăng ký học phần"
                      FontSize="16" Foreground="#c9d6e8" TextWrapping="Wrap" />
           <TextBlock Margin="0,20,0,0" Foreground="#93a4bd" TextWrapping="Wrap" LineHeight="22"
@@ -34,18 +34,19 @@
         <StackPanel Spacing="6">
           <TextBlock Text="Đăng nhập" FontSize="22" FontWeight="Bold" Foreground="{StaticResource TextDarkBrush}" />
           <TextBlock Text="Chọn vai trò và nhập thông tin tài khoản" Foreground="{StaticResource TextMutedBrush}" Margin="0,0,0,14" />
-
-          <!-- Toggle vai trò dạng segmented control -->
-          <Border Background="{StaticResource BgBrush}" CornerRadius="10" Padding="4" Margin="0,0,0,14">
-            <Grid ColumnDefinitions="*,*">
-              <Button Grid.Column="0" Content="Sinh viên" Command="{Binding SelectStudentRoleCommand}"
-                      Classes="outline" BorderThickness="0" HorizontalContentAlignment="Center"
-                      Classes.primary="{Binding IsStudentRole}" />
-              <Button Grid.Column="1" Content="Quản trị" Command="{Binding SelectAdminRoleCommand}"
-                      Classes="outline" BorderThickness="0" HorizontalContentAlignment="Center"
-                      Classes.primary="{Binding IsAdminRole}" />
-            </Grid>
-          </Border>
+                  <!-- 
+                  Toggle vai trò dạng segmented control 
+                  khi đăng nhập kiểm tra trong DB nếu tài khoản được cấp quyền admin thì tự login vào admin, người dùng không cần tương tác nhiều 
+                  <Border Background="{StaticResource BgBrush}" CornerRadius="10" Padding="4" Margin="0,0,0,14">
+                    <Grid ColumnDefinitions="*,*">
+                      <Button Grid.Column="0" Content="Sinh viên" Command="{Binding SelectStudentRoleCommand}"
+                              Classes="outline" BorderThickness="0" HorizontalContentAlignment="Center"
+                              Classes.primary="{Binding IsStudentRole}" />
+                      <Button Grid.Column="1" Content="Quản trị" Command="{Binding SelectAdminRoleCommand}"
+                              Classes="outline" BorderThickness="0" HorizontalContentAlignment="Center"
+                              Classes.primary="{Binding IsAdminRole}" />
+                    </Grid>
+                  </Border> -->
 
           <TextBlock Text="Tên đăng nhập" FontSize="12.5" Foreground="{StaticResource TextMutedBrush}" Margin="0,4,0,4" />
           <TextBox Classes="rounded" Text="{Binding Username}" Watermark="VD: SV20260018" />
@@ -62,7 +63,7 @@
 
           <TextBlock Margin="0,16,0,0" FontSize="11.5" Foreground="{StaticResource TextMutedBrush}" TextWrapping="Wrap"
                      Text="Quên mật khẩu?. Liên hệ quản trị viên để được hỗ trợ. 
-                     (AD0001 MK: admin123) (SV2411869 MK: 123456)" />
+                     (admin MK: 111) (sinhvien MK: 000)" />
         </StackPanel>
       </Border>
     </Grid>

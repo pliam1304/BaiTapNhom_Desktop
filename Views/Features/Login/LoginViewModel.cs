@@ -23,28 +23,6 @@ namespace EduPath.Avalonia.ViewModels
             set { SetProperty(ref _password, value); ErrorMessage = null; }
         }
 
-        public List<Role> Roles { get; } = new() { Role.Student, Role.Admin };
-
-        private Role _selectedRole = Role.Student;
-        public Role SelectedRole
-        {
-            get => _selectedRole;
-            set
-            {
-                if (SetProperty(ref _selectedRole, value))
-                {
-                    RaisePropertyChanged(nameof(IsStudentRole));
-                    RaisePropertyChanged(nameof(IsAdminRole));
-                }
-            }
-        }
-
-        public bool IsStudentRole => SelectedRole == Role.Student;
-        public bool IsAdminRole => SelectedRole == Role.Admin;
-
-        public RelayCommand SelectStudentRoleCommand { get; }
-        public RelayCommand SelectAdminRoleCommand { get; }
-
         private string? _errorMessage;
         public string? ErrorMessage
         {
@@ -59,19 +37,19 @@ namespace EduPath.Avalonia.ViewModels
         public LoginViewModel()
         {
             LoginCommand = new RelayCommand(DoLogin);
-            SelectStudentRoleCommand = new RelayCommand(() => SelectedRole = Role.Student);
-            SelectAdminRoleCommand = new RelayCommand(() => SelectedRole = Role.Admin);
         }
 
         private void DoLogin()
         {
-            var result = _auth.Login(Username.Trim(), Password, SelectedRole);
+            // Gọi hàm đăng nhập tự động nhận diện vai trò (không truyền Role vào nữa)
+            var result = _auth.Login(Username.Trim(), Password);
             if (!result.Success)
             {
                 ErrorMessage = result.ErrorMessage;
                 return;
             }
 
+            // Đăng nhập thành công, truyền thông tin tài khoản và đối tượng sang tầng xử lý tiếp theo
             LoginSucceeded?.Invoke(result.Account!, result.Student);
         }
     }

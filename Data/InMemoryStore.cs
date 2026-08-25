@@ -713,8 +713,8 @@ namespace EduPath.Avalonia.Data
                 // Sinh viên 1
                 new Account
                 {
-                    Username = "SV2411869",
-                    PasswordHash = "123456",
+                    Username = "sinhvien",
+                    PasswordHash = "000",
                     Role = Role.Student,
                     LinkedId = "SV2411869"
                 },
@@ -749,8 +749,8 @@ namespace EduPath.Avalonia.Data
                 // Admin
                 new Account
                 {
-                    Username = "AD0001",
-                    PasswordHash = "admin123",
+                    Username = "admin",
+                    PasswordHash = "111",
                     Role = Role.Admin,
                     LinkedId = null
                 }
