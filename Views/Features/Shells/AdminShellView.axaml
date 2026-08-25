@@ -59,7 +59,7 @@
             <DataTemplate x:DataType="vm:NavItem">
               <StackPanel Orientation="Horizontal" Spacing="14">
                 <!-- Hiển thị Icon từ file ảnh PNG -->
-                <Image Source="{Binding IconPath}" Width="20" Height="20" 
+                <Image Source="{Binding IconImage}" Width="20" Height="20" 
                        RenderOptions.BitmapInterpolationMode="HighQuality"/>
                 <TextBlock Text="{Binding Label}" VerticalAlignment="Center" />
               </StackPanel>

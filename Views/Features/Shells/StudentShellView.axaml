@@ -60,7 +60,7 @@
               <StackPanel Orientation="Horizontal" Spacing="14">
                 <!-- SỬ DỤNG ẢNH BẠN CUNG CẤP THAY CHO ICON -->
                 <!-- RenderOptions.BitmapInterpolationMode="HighQuality" giúp ảnh nhỏ không bị vỡ -->
-                <Image Source="{Binding IconPath}" Width="20" Height="20" 
+                <Image Source="{Binding IconImage}" Width="20" Height="20" 
                        RenderOptions.BitmapInterpolationMode="HighQuality"/>
                 <TextBlock Text="{Binding Label}" VerticalAlignment="Center" />
               </StackPanel>

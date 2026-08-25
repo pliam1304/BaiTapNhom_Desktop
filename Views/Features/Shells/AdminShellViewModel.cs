@@ -2,19 +2,46 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System;
+using Avalonia.Media.Imaging;
+using Avalonia.Platform;
 
 namespace EduPath.Avalonia.ViewModels
 {
     public class AdminShellViewModel : ViewModelBase
     {
         public event Action? LogoutRequested;
+        public class NavItem
+        {
+            public string Key { get; init; } = string.Empty;
+            public string Label { get; init; } = string.Empty;
+            public string IconPath { get; init; } = string.Empty;
 
+            // THÊM THUỘC TÍNH NÀY: Nó sẽ tự động đọc chuỗi IconPath và biên dịch thành Ảnh (Bitmap)
+            public Bitmap? IconImage
+            {
+                get
+                {
+                    if (string.IsNullOrWhiteSpace(IconPath)) return null;
+                    try
+                    {
+                        // Đọc file ảnh từ Resource của dự án
+                        return new Bitmap(AssetLoader.Open(new Uri(IconPath)));
+                    }
+                    catch
+                    {
+                        // Tránh crash app nếu lỡ đường dẫn bị sai hoặc chưa có file
+                        return null;
+                    }
+                }
+            }
+        }
         // Đã cập nhật sử dụng IconPath với file ảnh .png giống hệt cấu trúc của Student
         public List<NavItem> NavItems { get; } = new()
         {
-            new NavItem { Key = "dashboard", Label = "Tổng quan", IconPath = "avares://EduPath.Avalonia/images_icons/tổng quan.png" },
-            new NavItem { Key = "courses",   Label = "Môn học", IconPath = "avares://EduPath.Avalonia/images_icons/môn học.png" },
-            new NavItem { Key = "sections",  Label = "Lớp học phần", IconPath = "avares://EduPath.Avalonia/images_icons/danh sách.png" }
+            new NavItem { Key = "dashboard", Label = "Tổng quan", IconPath = "avares://EduPath.Avalonia/images_icons/tongQuan.png" },
+            new NavItem { Key = "courses",   Label = "Môn học", IconPath = "avares://EduPath.Avalonia/images_icons/monHoc.png" },
+            new NavItem { Key = "sections",  Label = "Lớp học phần", IconPath = "avares://EduPath.Avalonia/images_icons/danhSach.png" }
         };
 
         private NavItem _selectedNav;

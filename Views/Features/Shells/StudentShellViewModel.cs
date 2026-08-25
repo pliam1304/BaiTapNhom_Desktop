@@ -1,5 +1,7 @@
 // Views/Features/Shells/StudentShellViewModel.cs
 using EduPath.Avalonia.Models;
+using Avalonia.Media.Imaging; // Bắt buộc phải có
+using Avalonia.Platform;      // Bắt buộc phải có
 
 namespace EduPath.Avalonia.ViewModels
 {
@@ -7,8 +9,26 @@ namespace EduPath.Avalonia.ViewModels
     {
         public string Key { get; init; } = string.Empty;
         public string Label { get; init; } = string.Empty;
-        // CẬP NHẬT: Đổi thành IconPath để chứa đường dẫn ảnh thay vì Emoji
-        public string IconPath { get; init; } = string.Empty; 
+        public string IconPath { get; init; } = string.Empty;
+
+        // THÊM THUỘC TÍNH NÀY: Nó sẽ tự động đọc chuỗi IconPath và biên dịch thành Ảnh (Bitmap)
+        public Bitmap? IconImage
+        {
+            get
+            {
+                if (string.IsNullOrWhiteSpace(IconPath)) return null;
+                try
+                {
+                    // Đọc file ảnh từ Resource của dự án
+                    return new Bitmap(AssetLoader.Open(new Uri(IconPath)));
+                }
+                catch
+                {
+                    // Tránh crash app nếu lỡ đường dẫn bị sai hoặc chưa có file
+                    return null;
+                }
+            }
+        }
     }
 
     /// <summary>
