@@ -1,97 +1,153 @@
-// View/Features/Shells/AdminShellViewModel.cs
+// Views/Features/Shells/AdminShellViewModel.cs
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System;
-using Avalonia.Media.Imaging;
-using Avalonia.Platform;
 
 namespace EduPath.Avalonia.ViewModels
 {
     public class AdminShellViewModel : ViewModelBase
     {
         public event Action? LogoutRequested;
-        public class NavItem
-        {
-            public string Key { get; init; } = string.Empty;
-            public string Label { get; init; } = string.Empty;
-            public string IconPath { get; init; } = string.Empty;
 
-            // THÊM THUỘC TÍNH NÀY: Nó sẽ tự động đọc chuỗi IconPath và biên dịch thành Ảnh (Bitmap)
-            public Bitmap? IconImage
-            {
-                get
-                {
-                    if (string.IsNullOrWhiteSpace(IconPath)) return null;
-                    try
-                    {
-                        // Đọc file ảnh từ Resource của dự án
-                        return new Bitmap(AssetLoader.Open(new Uri(IconPath)));
-                    }
-                    catch
-                    {
-                        // Tránh crash app nếu lỡ đường dẫn bị sai hoặc chưa có file
-                        return null;
-                    }
-                }
-            }
-        }
-        // Đã cập nhật sử dụng IconPath với file ảnh .png giống hệt cấu trúc của Student
+
+        // =====================================================
+        // MENU ADMIN
+        // =====================================================
+        // Sử dụng NavItem dùng chung được khai báo trong
+        // StudentShellViewModel.cs
         public List<NavItem> NavItems { get; } = new()
         {
-            new NavItem { Key = "dashboard", Label = "Tổng quan", IconPath = "avares://EduPath.Avalonia/images_icons/tongQuan.png" },
-            new NavItem { Key = "courses",   Label = "Môn học", IconPath = "avares://EduPath.Avalonia/images_icons/monHoc.png" },
-            new NavItem { Key = "sections",  Label = "Lớp học phần", IconPath = "avares://EduPath.Avalonia/images_icons/danhSach.png" }
+            new NavItem(
+                "dashboard",
+                "Tổng quan",
+                "images_icons/tongQuan.png"
+            ),
+
+            new NavItem(
+                "courses",
+                "Môn học",
+                "images_icons/monHoc.png"
+            ),
+
+            new NavItem(
+                "sections",
+                "Lớp học phần",
+                "images_icons/danhSach.png"
+            )
         };
 
+
+        // =====================================================
+        // SELECTED NAV
+        // =====================================================
         private NavItem _selectedNav;
+
         public NavItem SelectedNav
         {
             get => _selectedNav;
-            set { if (SetProperty(ref _selectedNav, value)) Navigate(value.Key); }
+
+            set
+            {
+                if (SetProperty(ref _selectedNav, value))
+                {
+                    Navigate(value.Key);
+                }
+            }
         }
 
+
+        // =====================================================
+        // CURRENT PAGE
+        // =====================================================
         private object _currentPage = null!;
+
         public object CurrentPage
         {
             get => _currentPage;
-            private set => SetProperty(ref _currentPage, value);
+
+            private set => SetProperty(
+                ref _currentPage,
+                value
+            );
         }
 
+
+        // =====================================================
+        // LOGOUT
+        // =====================================================
         public RelayCommand LogoutCommand { get; }
 
+
+        // =====================================================
+        // PAGE CACHE
+        // =====================================================
         private readonly Dictionary<string, object> _pageCache = new();
 
+
+        // =====================================================
+        // CONSTRUCTOR
+        // =====================================================
         public AdminShellViewModel()
         {
-            LogoutCommand = new RelayCommand(() => LogoutRequested?.Invoke());
+            LogoutCommand = new RelayCommand(
+                () => LogoutRequested?.Invoke()
+            );
+
             _selectedNav = NavItems[0];
+
             Navigate("dashboard");
         }
 
+
+        // =====================================================
+        // NAVIGATE
+        // =====================================================
         public void Navigate(string key)
         {
             if (!_pageCache.TryGetValue(key, out var page))
             {
                 page = key switch
                 {
-                    "dashboard" => new AdminDashboardViewModel(this),
-                    "courses" => new CoursesAdminViewModel(),
-                    "sections" => new SectionsAdminViewModel(),
-                    _ => new AdminDashboardViewModel(this)
+                    "dashboard" =>
+                        new AdminDashboardViewModel(this),
+
+                    "courses" =>
+                        new CoursesAdminViewModel(),
+
+                    "sections" =>
+                        new SectionsAdminViewModel(),
+
+                    _ =>
+                        new AdminDashboardViewModel(this)
                 };
+
                 _pageCache[key] = page;
             }
-            else if (page is IRefreshable r)
+            else if (page is IRefreshable refreshable)
             {
-                r.Refresh();
+                refreshable.Refresh();
             }
 
             CurrentPage = page;
-            var match = NavItems.FirstOrDefault(n => n.Key == key);
-            if (match != null) _selectedNav = match;
+
+            var match = NavItems.FirstOrDefault(
+                n => n.Key == key
+            );
+
+            if (match != null)
+            {
+                _selectedNav = match;
+            }
         }
 
-        public void InvalidateAll() => _pageCache.Clear();
+
+        // =====================================================
+        // CLEAR CACHE
+        // =====================================================
+        public void InvalidateAll()
+        {
+            _pageCache.Clear();
+        }
     }
 }

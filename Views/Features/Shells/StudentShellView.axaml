@@ -4,109 +4,247 @@
              x:Class="EduPath.Avalonia.Views.StudentShellView"
              x:DataType="vm:StudentShellViewModel">
 
-  <!-- Chia màn hình thành 2 cột: Sidebar (260px) và Nội dung chính (tự co giãn) -->
-  <Grid ColumnDefinitions="260, *">
+  <Grid ColumnDefinitions="260,*">
 
     <!-- ========================================== -->
-    <!-- CỘT TRÁI: SIDEBAR MENU                     -->
+    <!-- SIDEBAR -->
     <!-- ========================================== -->
-    <Border Grid.Column="0" Background="{StaticResource NavyBrush}" Padding="16,24,16,24">
-  <Grid RowDefinitions="Auto, *, Auto">
-        <!-- 1. HEADER (LOGO & TÊN HỆ THỐNG) -->
-        <StackPanel Grid.Row="0" Orientation="Horizontal" Spacing="12" Margin="10,0,0,32">
-          <Border Background="{StaticResource GoldBrush}" CornerRadius="8" Width="40" Height="40">
-            <TextBlock Text="DL" FontSize="20" FontWeight="Bold" Foreground="{StaticResource NavyBrush}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+
+    <Border Grid.Column="0"
+            Background="{StaticResource NavyBrush}"
+            Padding="16,24,16,24">
+
+      <Grid RowDefinitions="Auto,*,Auto">
+
+        <!-- HEADER -->
+
+        <StackPanel Grid.Row="0"
+                    Orientation="Horizontal"
+                    Spacing="12"
+                    Margin="10,0,0,32">
+
+          <Border Background="{StaticResource GoldBrush}"
+                  CornerRadius="8"
+                  Width="40"
+                  Height="40">
+
+            <TextBlock Text="DL"
+                       FontSize="20"
+                       FontWeight="Bold"
+                       Foreground="{StaticResource NavyBrush}"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center" />
+
           </Border>
+
           <StackPanel VerticalAlignment="Center">
-            <TextBlock Text="DKHP" FontWeight="Bold" FontSize="18" Foreground="White" />
-            <TextBlock Text="Hệ thống học phần" FontSize="12" Foreground="#93a4bd" />
+
+            <TextBlock Text="DKHP"
+                       FontWeight="Bold"
+                       FontSize="18"
+                       Foreground="White" />
+
+            <TextBlock Text="Hệ thống học phần"
+                       FontSize="12"
+                       Foreground="#93a4bd" />
+
           </StackPanel>
+
         </StackPanel>
 
-        <!-- 2. DANH SÁCH MENU ĐIỀU HƯỚNG -->
-        <ListBox Grid.Row="1" ItemsSource="{Binding NavItems}"
+
+        <!-- ====================================== -->
+        <!-- MENU -->
+        <!-- ====================================== -->
+
+        <ListBox Grid.Row="1"
+                 ItemsSource="{Binding NavItems}"
                  SelectedItem="{Binding SelectedNav}"
-                 Background="Transparent" BorderThickness="0">
-          
-          <!-- Định dạng giao diện cho các thẻ ListBoxItem để giống y hệt ảnh -->
+                 Background="Transparent"
+                 BorderThickness="0">
+
           <ListBox.Styles>
+
+            <!-- ITEM -->
+
             <Style Selector="ListBoxItem">
-              <Setter Property="Padding" Value="16,14" />
-              <Setter Property="Margin" Value="0,4" />
-              <Setter Property="CornerRadius" Value="8" />
-              <Setter Property="Cursor" Value="Hand" />
+
+              <Setter Property="Padding"
+                      Value="16,14" />
+
+              <Setter Property="Margin"
+                      Value="0,4" />
+
+              <Setter Property="CornerRadius"
+                      Value="8" />
+
+              <Setter Property="Cursor"
+                      Value="Hand" />
+
             </Style>
-            <!-- Màu chữ mặc định (chưa chọn) -->
+
+
+            <!-- TEXT -->
+
             <Style Selector="ListBoxItem TextBlock">
-              <Setter Property="Foreground" Value="#c9d6e8" />
-              <Setter Property="FontWeight" Value="Medium" />
-              <Setter Property="FontSize" Value="14.5" />
+
+              <Setter Property="Foreground"
+                      Value="#c9d6e8" />
+
+              <Setter Property="FontWeight"
+                      Value="Medium" />
+
+              <Setter Property="FontSize"
+                      Value="14.5" />
+
             </Style>
-            <!-- Hiệu ứng khi di chuột (Hover) -->
+
+
+            <!-- HOVER -->
+
             <Style Selector="ListBoxItem:pointerover /template/ ContentPresenter">
-              <Setter Property="Background" Value="#142c4c" /> 
+
+              <Setter Property="Background"
+                      Value="#142c4c" />
+
             </Style>
-            <!-- Trạng thái ĐƯỢC CHỌN (Active) -->
+
+
+            <!-- SELECTED -->
+
             <Style Selector="ListBoxItem:selected /template/ ContentPresenter">
-              <Setter Property="Background" Value="{StaticResource NavyLightBrush}" />
+
+              <Setter Property="Background"
+                      Value="{StaticResource NavyLightBrush}" />
+
             </Style>
+
+
             <Style Selector="ListBoxItem:selected TextBlock">
-              <Setter Property="Foreground" Value="{StaticResource GoldTextBrush}" />
+
+              <Setter Property="Foreground"
+                      Value="{StaticResource GoldTextBrush}" />
+
             </Style>
+
           </ListBox.Styles>
 
+
+          <!-- ==================================== -->
+          <!-- ITEM TEMPLATE -->
+          <!-- ==================================== -->
+
           <ListBox.ItemTemplate>
+
             <DataTemplate x:DataType="vm:NavItem">
-              <StackPanel Orientation="Horizontal" Spacing="14">
-                <!-- SỬ DỤNG ẢNH BẠN CUNG CẤP THAY CHO ICON -->
-                <!-- RenderOptions.BitmapInterpolationMode="HighQuality" giúp ảnh nhỏ không bị vỡ -->
-                <Image Source="{Binding IconImage}" Width="20" Height="20" 
-                       RenderOptions.BitmapInterpolationMode="HighQuality"/>
-                <TextBlock Text="{Binding Label}" VerticalAlignment="Center" />
+
+              <StackPanel Orientation="Horizontal"
+                          Spacing="14">
+
+                <Image Source="{Binding IconImage}"
+                       Width="20"
+                       Height="20"
+                       Stretch="Uniform"
+                       RenderOptions.BitmapInterpolationMode="HighQuality" />
+
+                <TextBlock Text="{Binding Label}"
+                           VerticalAlignment="Center" />
+
               </StackPanel>
+
             </DataTemplate>
+
           </ListBox.ItemTemplate>
+
         </ListBox>
 
-        <!-- 3. FOOTER (ĐĂNG XUẤT) -->
-        <StackPanel Grid.Row="2" Spacing="16">
-          <!-- Đường phân cách -->
-          <Border Height="1" Background="#1e3656" Margin="10,0" />
-          
-          <Button Command="{Binding LogoutCommand}" Background="Transparent" BorderThickness="0" 
-                  HorizontalAlignment="Stretch" Padding="16,14" CornerRadius="8" Cursor="Hand">
+
+        <!-- ====================================== -->
+        <!-- FOOTER -->
+        <!-- ====================================== -->
+
+        <StackPanel Grid.Row="2"
+                    Spacing="16">
+
+          <Border Height="1"
+                  Background="#1e3656"
+                  Margin="10,0" />
+
+          <Button Command="{Binding LogoutCommand}"
+                  Background="Transparent"
+                  BorderThickness="0"
+                  HorizontalAlignment="Stretch"
+                  Padding="16,14"
+                  CornerRadius="8"
+                  Cursor="Hand">
+
             <Button.Styles>
-               <Style Selector="Button:pointerover /template/ ContentPresenter">
-                  <Setter Property="Background" Value="#142c4c" />
-               </Style>
+
+              <Style Selector="Button:pointerover /template/ ContentPresenter">
+
+                <Setter Property="Background"
+                        Value="#142c4c" />
+
+              </Style>
+
             </Button.Styles>
-            <StackPanel Orientation="Horizontal" Spacing="14">
-              <!-- Ký hiệu tạm cho nút đăng xuất, bạn có thể thay bằng thẻ <Image> nếu có ảnh -->
-              <TextBlock Text="[→" FontSize="16" Foreground="#c9d6e8" VerticalAlignment="Center" /> 
-              <TextBlock Text="Đăng xuất" Foreground="#c9d6e8" FontSize="14.5" FontWeight="Medium" VerticalAlignment="Center" />
+
+
+            <StackPanel Orientation="Horizontal"
+                        Spacing="14">
+
+              <TextBlock Text="[→"
+                         FontSize="16"
+                         Foreground="#c9d6e8"
+                         VerticalAlignment="Center" />
+
+              <TextBlock Text="Đăng xuất"
+                         Foreground="#c9d6e8"
+                         FontSize="14.5"
+                         FontWeight="Medium"
+                         VerticalAlignment="Center" />
+
             </StackPanel>
+
           </Button>
+
         </StackPanel>
 
       </Grid>
+
     </Border>
 
+
     <!-- ========================================== -->
-    <!-- CỘT PHẢI: NỘI DUNG TRANG CHÍNH             -->
+    <!-- MAIN CONTENT -->
     <!-- ========================================== -->
-    <Border Grid.Column="1" Background="{StaticResource BgBrush}">
-      <!-- Loại bỏ Padding ở đây nếu bạn muốn trang tự quản lý margin -->
+
+    <Border Grid.Column="1"
+            Background="{StaticResource BgBrush}">
+
       <ScrollViewer>
-        <!-- Bọc nội dung bằng Padding thay vì ScrollViewer để cuộn mượt hơn -->
+
         <Border Padding="32">
-          <TransitioningContentControl Content="{Binding CurrentPage}" MaxWidth="1400" HorizontalAlignment="Stretch">
+
+          <TransitioningContentControl
+              Content="{Binding CurrentPage}"
+              MaxWidth="1400"
+              HorizontalAlignment="Stretch">
+
             <TransitioningContentControl.PageTransition>
-              <CrossFade Duration="0:0:0.2" /> <!-- Đổi hiệu ứng chuyển trang sang mờ dần cho sang trọng -->
+
+              <CrossFade Duration="0:0:0.2" />
+
             </TransitioningContentControl.PageTransition>
+
           </TransitioningContentControl>
+
         </Border>
+
       </ScrollViewer>
+
     </Border>
 
   </Grid>
+
 </UserControl>
