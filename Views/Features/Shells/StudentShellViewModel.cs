@@ -59,8 +59,8 @@ namespace EduPath.Avalonia.ViewModels
                     )
                 );
 
-                Console.WriteLine($"[NavItem] Đang load ảnh:");
-                Console.WriteLine($"[NavItem] {fullPath}");
+                //Console.WriteLine($"[NavItem] Đang load ảnh:");
+                //Console.WriteLine($"[NavItem] {fullPath}");
 
                 if (!File.Exists(fullPath))
                 {
@@ -75,9 +75,9 @@ namespace EduPath.Avalonia.ViewModels
             }
             catch (Exception ex)
             {
-                Console.WriteLine(
-                    $"[NavItem] Lỗi khi load ảnh: {imagePath}"
-                );
+                    // //Console.WriteLine(
+                    //     $"[NavItem] Lỗi khi load ảnh: {imagePath}"
+                    // );
 
                 Console.WriteLine(ex);
 
@@ -106,28 +106,31 @@ namespace EduPath.Avalonia.ViewModels
                 "Tổng quan",
                 "images_icons/tongQuan.png"
             ),
-
             new NavItem(
-                "open",
+                "open", 
                 "Đăng ký học phần",
                 "images_icons/dangKiHocPhan.png"
             ),
-
             new NavItem(
-                "enrolled",
-                "Đã đăng ký",
+                "enrolled", // Đổi từ "open" thành "enrolled" để map với EnrolledSectionsViewModel
+                "Lớp học phần",
                 "images_icons/danhSach.png"
             ),
-
             new NavItem(
                 "timetable",
-                "Thời khóa biểu",
+                "Thời khoá biểu",
                 "images_icons/thoiKhoaBieu.png"
             ),
-
+            // Các trang dưới đây chưa có View trong hàm Navigate, 
+            // tạm thời đặt key riêng để không bị đụng độ với "open"
             new NavItem(
-                "history",
-                "Lịch sử",
+                "fee", 
+                "Học phí",
+                "images_icons/hocPhi.png"
+            ),
+            new NavItem(
+                "notification", 
+                "Thông báo",
                 "images_icons/thongBao.png"
             )
         };
@@ -219,7 +222,7 @@ namespace EduPath.Avalonia.ViewModels
                         ),
 
                     "enrolled" =>
-                        new EnrolledSectionsViewModel(
+                        new StudentOpenSectionsViewModel(
                             Student,
                             this
                         ),

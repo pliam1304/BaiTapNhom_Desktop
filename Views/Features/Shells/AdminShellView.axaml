@@ -1,52 +1,63 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:vm="using:EduPath.Avalonia.ViewModels"
+             xmlns:conv="using:EduPath.Avalonia.Converters" 
              x:Class="EduPath.Avalonia.Views.AdminShellView"
              x:DataType="vm:AdminShellViewModel">
 
-  <!-- Chia màn hình: Cột trái Sidebar (260px) - Cột phải Nội dung -->
-  <Grid ColumnDefinitions="260, *">
+  <!-- Khai báo Converter để dùng cho việc ẩn/hiện -->
+  <UserControl.Resources>
+    <conv:SidebarWidthConverter x:Key="SidebarWidthConv"/>
+  </UserControl.Resources>
+
+  <!-- ĐỔI THÀNH 3 CỘT: Cột 0 thiết lập MinWidth để không bị kéo mất hẳn -->
+  <Grid>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="260" MinWidth="85" MaxWidth="350"/>
+      <ColumnDefinition Width="Auto"/>
+      <ColumnDefinition Width="*"/>
+    </Grid.ColumnDefinitions>
 
     <!-- ========================================== -->
-    <!-- CỘT TRÁI: SIDEBAR MENU DÀNH CHO ADMIN      -->
+    <!-- CỘT 0: SIDEBAR (Gắn tên là SidebarBorder để theo dõi chiều rộng) -->
     <!-- ========================================== -->
-    <Border Grid.Column="0" Background="{StaticResource NavyBrush}" Padding="16,24,16,24">
-  <Grid RowDefinitions="Auto, *, Auto">
+    <Border Grid.Column="0" Background="{StaticResource NavyBrush}" Name="SidebarBorder" Padding="16,24,12,24">
+      <Grid RowDefinitions="Auto, *, Auto">
 
         <!-- 1. HEADER (LOGO & TÊN HỆ THỐNG) -->
-        <StackPanel Grid.Row="0" Orientation="Horizontal" Spacing="12" Margin="10,0,0,32">
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Spacing="12" Margin="10,0,0,32" HorizontalAlignment="Left">
           <Border Background="{StaticResource GoldBrush}" CornerRadius="8" Width="40" Height="40">
             <TextBlock Text="DL" FontSize="20" FontWeight="Bold" Foreground="{StaticResource NavyBrush}" HorizontalAlignment="Center" VerticalAlignment="Center" />
           </Border>
-          <StackPanel VerticalAlignment="Center">
+          <!-- ẨN/HIỆN CHỮ Ở ĐÂY -->
+          <StackPanel VerticalAlignment="Center"
+                      IsVisible="{Binding #SidebarBorder.Bounds.Width, Converter={StaticResource SidebarWidthConv}}">
             <TextBlock Text="DKHP" FontWeight="Bold" FontSize="18" Foreground="White" />
             <TextBlock Text="Hệ thống học phần" FontSize="12" Foreground="#93a4bd" />
           </StackPanel>
         </StackPanel>
 
-        <!-- 2. DANH SÁCH MENU ĐIỀU HƯỚNG -->
+        <!-- 2. DANH SÁCH MENU -->
         <ListBox Grid.Row="1" ItemsSource="{Binding NavItems}"
                  SelectedItem="{Binding SelectedNav}"
                  Background="Transparent" BorderThickness="0">
           
           <ListBox.Styles>
+            <!-- Giữ nguyên các Style của bạn ở đây... -->
             <Style Selector="ListBoxItem">
-              <Setter Property="Padding" Value="16,14" />
+              <Setter Property="Padding" Value="14,14" />
               <Setter Property="Margin" Value="0,4" />
               <Setter Property="CornerRadius" Value="8" />
               <Setter Property="Cursor" Value="Hand" />
             </Style>
-            <!-- Trạng thái mặc định -->
             <Style Selector="ListBoxItem TextBlock">
               <Setter Property="Foreground" Value="#c9d6e8" />
               <Setter Property="FontWeight" Value="Medium" />
               <Setter Property="FontSize" Value="14.5" />
             </Style>
-            <!-- Trạng thái hover -->
             <Style Selector="ListBoxItem:pointerover /template/ ContentPresenter">
               <Setter Property="Background" Value="#142c4c" /> 
             </Style>
-            <!-- Trạng thái đang chọn (Active) -->
             <Style Selector="ListBoxItem:selected /template/ ContentPresenter">
               <Setter Property="Background" Value="{StaticResource NavyLightBrush}" />
             </Style>
@@ -58,10 +69,10 @@
           <ListBox.ItemTemplate>
             <DataTemplate x:DataType="vm:NavItem">
               <StackPanel Orientation="Horizontal" Spacing="14">
-                <!-- Hiển thị Icon từ file ảnh PNG -->
-                <Image Source="{Binding IconImage}" Width="20" Height="20" 
-                       RenderOptions.BitmapInterpolationMode="HighQuality"/>
-                <TextBlock Text="{Binding Label}" VerticalAlignment="Center" />
+                <Image Source="{Binding IconImage}" Width="20" Height="20" RenderOptions.BitmapInterpolationMode="HighQuality"/>
+                <!-- ẨN/HIỆN TÊN MENU Ở ĐÂY -->
+                <TextBlock Text="{Binding Label}" VerticalAlignment="Center"
+                           IsVisible="{Binding #SidebarBorder.Bounds.Width, Converter={StaticResource SidebarWidthConv}}"/>
               </StackPanel>
             </DataTemplate>
           </ListBox.ItemTemplate>
@@ -72,7 +83,7 @@
           <Border Height="1" Background="#1e3656" Margin="10,0" />
           
           <Button Command="{Binding LogoutCommand}" Background="Transparent" BorderThickness="0" 
-                  HorizontalAlignment="Stretch" Padding="16,14" CornerRadius="8" Cursor="Hand">
+                  HorizontalAlignment="Stretch" Padding="14,14" CornerRadius="8" Cursor="Hand">
             <Button.Styles>
                <Style Selector="Button:pointerover /template/ ContentPresenter">
                   <Setter Property="Background" Value="#142c4c" />
@@ -80,18 +91,24 @@
             </Button.Styles>
             <StackPanel Orientation="Horizontal" Spacing="14">
               <TextBlock Text="[→" FontSize="16" Foreground="#c9d6e8" VerticalAlignment="Center" /> 
-              <TextBlock Text="Đăng xuất" Foreground="#c9d6e8" FontSize="14.5" FontWeight="Medium" VerticalAlignment="Center" />
+              <!-- ẨN/HIỆN CHỮ ĐĂNG XUẤT Ở ĐÂY -->
+              <TextBlock Text="Đăng xuất" Foreground="#c9d6e8" FontSize="14.5" FontWeight="Medium" VerticalAlignment="Center"
+                         IsVisible="{Binding #SidebarBorder.Bounds.Width, Converter={StaticResource SidebarWidthConv}}"/>
             </StackPanel>
           </Button>
         </StackPanel>
-
       </Grid>
     </Border>
 
     <!-- ========================================== -->
-    <!-- CỘT PHẢI: NỘI DUNG TRANG CHÍNH CỦA ADMIN   -->
+    <!-- CỘT 1: GRID SPLITTER (THANH CẦM KÉO DÃN)   -->
     <!-- ========================================== -->
-    <Border Grid.Column="1" Background="{StaticResource BgBrush}">
+    <GridSplitter Grid.Column="1" Width="4" Background="#142c4c" ResizeDirection="Columns" />
+
+    <!-- ========================================== -->
+    <!-- CỘT 2: NỘI DUNG CHÍNH                      -->
+    <!-- ========================================== -->
+    <Border Grid.Column="2" Background="{StaticResource BgBrush}">
       <ScrollViewer>
         <Border Padding="32">
           <TransitioningContentControl Content="{Binding CurrentPage}" MaxWidth="1400" HorizontalAlignment="Stretch">

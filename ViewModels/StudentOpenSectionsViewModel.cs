@@ -1,10 +1,12 @@
+using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using EduPath.Avalonia.Models;
 using EduPath.Avalonia.Services;
 
 namespace EduPath.Avalonia.ViewModels
 {
-    public class OpenSectionsViewModel : ViewModelBase, IRefreshable
+    public class StudentOpenSectionsViewModel : ViewModelBase, IRefreshable
     {
         private readonly Student _student;
         private readonly StudentShellViewModel _shell;
@@ -26,17 +28,38 @@ namespace EduPath.Avalonia.ViewModels
             get => _feedback;
             set { SetProperty(ref _feedback, value); RaisePropertyChanged(nameof(HasFeedback)); }
         }
+        
         public bool HasFeedback => !string.IsNullOrEmpty(Feedback);
+        
         private bool _feedbackIsError;
-        public bool FeedbackIsError { get => _feedbackIsError; set { SetProperty(ref _feedbackIsError, value); RaisePropertyChanged(nameof(FeedbackClass)); } }
+        public bool FeedbackIsError 
+        { 
+            get => _feedbackIsError; 
+            set { SetProperty(ref _feedbackIsError, value); RaisePropertyChanged(nameof(FeedbackClass)); } 
+        }
+        
         public string FeedbackClass => FeedbackIsError ? "feedback-error" : "feedback-ok";
 
         private bool _noResults;
-        public bool NoResults { get => _noResults; set => SetProperty(ref _noResults, value); }
+        public bool NoResults 
+        { 
+            get => _noResults; 
+            set => SetProperty(ref _noResults, value); 
+        }
+
+        private SectionRow? _selectedSection;
+        public SectionRow? SelectedSection 
+        { 
+            get => _selectedSection; 
+            set { SetProperty(ref _selectedSection, value); RaisePropertyChanged(nameof(IsDetailVisible)); } 
+        }
+
+        // Trạng thái hiển thị bảng chi tiết (ẩn nếu chưa chọn lớp nào)
+        public bool IsDetailVisible => SelectedSection != null;
 
         public RelayCommand<SectionRow> RegisterCommand { get; }
 
-        public OpenSectionsViewModel(Student student, StudentShellViewModel shell)
+        public StudentOpenSectionsViewModel(Student student, StudentShellViewModel shell)
         {
             _student = student;
             _shell = shell;
@@ -45,6 +68,12 @@ namespace EduPath.Avalonia.ViewModels
         }
 
         public void Refresh() => Load();
+
+        // Hàm đóng chi tiết
+        public void CloseDetail()
+        {
+            SelectedSection = null;
+        }
 
         private void Load()
         {

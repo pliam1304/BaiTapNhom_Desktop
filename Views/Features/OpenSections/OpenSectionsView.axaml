@@ -4,7 +4,7 @@
              xmlns:behaviors="using:EduPath.Avalonia.Behaviors"
              x:Class="EduPath.Avalonia.Views.OpenSectionsView"
              x:Name="Root"
-             x:DataType="vm:OpenSectionsViewModel">
+             x:DataType="vm:StudentOpenSectionsViewModel">
 
   <StackPanel Spacing="18">
 
@@ -51,8 +51,8 @@
               </Border>
 
               <Button Grid.Column="3" Content="Đăng ký" Classes="primary" VerticalAlignment="Center"
-                      Command="{Binding #Root.((vm:OpenSectionsViewModel)DataContext).RegisterCommand}"
-                      CommandParameter="{Binding}" IsEnabled="{Binding !IsFull}" />
+        Command="{Binding #Root.((vm:StudentOpenSectionsViewModel)DataContext).RegisterCommand}"
+        CommandParameter="{Binding}" IsEnabled="{Binding !IsFull}" />
             </Grid>
           </Border>
         </DataTemplate>
