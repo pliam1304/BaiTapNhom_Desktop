@@ -10,6 +10,7 @@ namespace EduPath.Avalonia.ViewModels
         public Course? Course { get; }
 
         public Lecturer? Lecturer { get; }
+        
 
         private bool _isSelected;
 
@@ -131,6 +132,7 @@ namespace EduPath.Avalonia.ViewModels
             };
         }
 
+
         // =====================================================
         // CAPACITY
         // =====================================================
@@ -201,5 +203,22 @@ namespace EduPath.Avalonia.ViewModels
             Course = course;
             Lecturer = lecturer;
         }
+
+        public List<ScheduleSlot> Schedules =>
+    Section.Schedules?.Count > 0
+        ? Section.Schedules
+        : new List<ScheduleSlot>
+        {
+            // fallback từ dữ liệu cũ (1 lịch)
+            new ScheduleSlot
+            {
+                DayOfWeek = Section.DayOfWeek,
+                StartTime = Section.StartTime,
+                EndTime = Section.EndTime,
+                RoomId = Section.RoomId,
+                SessionType = "Lý thuyết",
+                Periods = "Tiết 1-3"
+            }
+        };
     }
 }

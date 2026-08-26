@@ -48,7 +48,7 @@
       <!-- 3. BẢNG MÔN BẮT BUỘC (Cuộn độc lập) -->
       <Grid Grid.Row="3" RowDefinitions="Auto, *" Margin="0,0,0,20">
         <TextBlock Grid.Row="0" Text="HỌC PHẦN BẮT BUỘC" FontWeight="Bold" Foreground="{StaticResource TextDarkBrush}" Margin="0,0,0,10" />
-        <DataGrid Grid.Row="1" ItemsSource="{Binding RequiredSections}" AutoGenerateColumns="False" IsReadOnly="True" GridLinesVisibility="Horizontal" HeadersVisibility="Column" Background="White" BorderBrush="{StaticResource BorderBrush2}" BorderThickness="1" CornerRadius="8">
+        <DataGrid Grid.Row="1" ItemsSource="{Binding RequiredSections}" AutoGenerateColumns="False" IsReadOnly="True" GridLinesVisibility="Horizontal" HeadersVisibility="Column" Background="White" BorderBrush="{StaticResource BorderBrush2}" BorderThickness="1" CornerRadius="8" MaxHeight="500">
           <DataGrid.Columns>
             <!-- Môn bắt buộc hiển thị đậm (FontWeight="Bold") -->
             <DataGridTemplateColumn Header="Mã lớp" Width="1.2*">

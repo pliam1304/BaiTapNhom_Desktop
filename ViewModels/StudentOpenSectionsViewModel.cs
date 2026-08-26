@@ -1,3 +1,5 @@
+// ViewModels/StudentOpenSectionsViewModel.cs
+
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -209,144 +211,67 @@ namespace EduPath.Avalonia.ViewModels
         // LOAD
         // =====================================================
 
-        private void Load()
-        {
-            Console.WriteLine(
-                "========================================"
-            );
+    private void Load()
+{
+    Console.WriteLine("========================================");
+    Console.WriteLine("[StudentOpenSections] Load()");
 
-            Console.WriteLine(
-                "[StudentOpenSections] Load()"
-            );
+    var period = _periodSvc.GetCurrent();
+    var term = period?.Term ?? "HK1 2026-2027";
 
+    Console.WriteLine($"[StudentOpenSections] Term: {term}");
 
-            var period =
-                _periodSvc.GetCurrent();
+    // =================================================
+    // LẤY TRỰC TIẾP TỪ InMemoryStore (test)
+    // =================================================
+    var store = EduPath.Avalonia.Data.InMemoryStore.Instance;
 
+    var query = store.Sections
+        .Where(s => s.Term == term && s.IsOpen)
+        .Select(s => new SectionRow(
+            s,
+            store.Courses.FirstOrDefault(c => c.CourseCode == s.CourseCode),
+            store.Lecturers.FirstOrDefault(l => l.LecturerId == s.LecturerId)
+        ))
+        .ToList();
 
-            var term =
-                period?.Term
-                ?? "HK1 2026-2027";
+    Console.WriteLine($"[StudentOpenSections] Data thật: {query.Count}");
 
+    // Nếu vẫn = 0 thì in thêm để debug
+    if (query.Count == 0)
+    {
+        Console.WriteLine($"[DEBUG] Tổng Section trong store: {store.Sections.Count}");
+        Console.WriteLine($"[DEBUG] Các Term có trong store: {string.Join(", ", store.Sections.Select(s => s.Term).Distinct())}");
+    }
 
-            Console.WriteLine(
-                $"[StudentOpenSections] Term: {term}"
-            );
+    // =================================================
+    // SEARCH
+    // =================================================
+    if (!string.IsNullOrWhiteSpace(SearchText))
+    {
+        var kw = SearchText.Trim();
 
+        query = query
+            .Where(r =>
+                r.CourseName.Contains(kw, StringComparison.OrdinalIgnoreCase) ||
+                r.CourseCode.Contains(kw, StringComparison.OrdinalIgnoreCase) ||
+                r.SectionId.Contains(kw, StringComparison.OrdinalIgnoreCase))
+            .ToList();
+    }
 
-            // =================================================
-            // LẤY DATA THẬT
-            // =================================================
+    // =================================================
+    // UPDATE COLLECTION
+    // =================================================
+    Sections.Clear();
 
-            var query =
-                _enrollSvc
-                    .GetOpenSections(term)
-                    .Select(
-                        s =>
-                            new SectionRow(
-                                s,
-                                _enrollSvc.GetCourse(
-                                    s.CourseCode
-                                ),
-                                _enrollSvc.GetLecturer(
-                                    s.LecturerId
-                                )
-                            )
-                    )
-                    .ToList();
+    foreach (var row in query)
+        Sections.Add(row);
 
+    NoResults = Sections.Count == 0;
 
-            Console.WriteLine(
-                $"[StudentOpenSections] " +
-                $"Data thật: {query.Count}"
-            );
-
-
-            // =================================================
-            // MOCK DATA
-            // =================================================
-
-            if (!query.Any())
-            {
-                Console.WriteLine(
-                    "[StudentOpenSections] " +
-                    "Database không có data."
-                );
-
-                Console.WriteLine(
-                    "[StudentOpenSections] " +
-                    "Đang sử dụng MockData."
-                );
-
-
-                query =
-                    MockDataHelper
-                        .GetMockSectionRows();
-            }
-
-
-            // =================================================
-            // SEARCH
-            // =================================================
-
-            if (!string.IsNullOrWhiteSpace(
-                SearchText))
-            {
-                var kw =
-                    SearchText.Trim();
-
-
-                query =
-                    query
-                        .Where(
-                            r =>
-                                r.CourseName.Contains(
-                                    kw,
-                                    StringComparison.OrdinalIgnoreCase
-                                )
-                                ||
-                                r.CourseCode.Contains(
-                                    kw,
-                                    StringComparison.OrdinalIgnoreCase
-                                )
-                                ||
-                                r.SectionId.Contains(
-                                    kw,
-                                    StringComparison.OrdinalIgnoreCase
-                                )
-                        )
-                        .ToList();
-            }
-
-
-            // =================================================
-            // UPDATE COLLECTION
-            // =================================================
-
-            Sections.Clear();
-
-
-            foreach (var row in query)
-            {
-                Sections.Add(row);
-            }
-
-
-            NoResults =
-                Sections.Count == 0;
-
-
-            Console.WriteLine(
-                $"[StudentOpenSections] " +
-                $"Sections.Count = {Sections.Count}"
-            );
-
-
-            Console.WriteLine(
-                "========================================"
-            );
-        }
-
+    Console.WriteLine($"[StudentOpenSections] Sections.Count = {Sections.Count}");
+    Console.WriteLine("========================================");
+}
 
         // =====================================================
         // REGISTER
@@ -669,5 +594,7 @@ namespace EduPath.Avalonia.ViewModels
 
             return list;
         }
+
+        
     }
 }

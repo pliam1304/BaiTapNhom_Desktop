@@ -332,293 +332,734 @@ namespace EduPath.Avalonia.Data
                 IsOpen = false
             });
 
-            // =========================================================
-            // SECTIONS
-            // Tổng cộng 20 lớp học phần (giữ nguyên, nhưng có thể bổ sung sau)
-            // =========================================================
-            Sections.AddRange(new[]
-            {
-                // 01 - CS201
-                new Section
-                {
-                    SectionId = "CS201-01",
-                    CourseCode = "CS201",
-                    Term = "HK1 2026-2027",
-                    LecturerId = "GV0008",
-                    RoomId = "A201",
-                    DayOfWeek = 2,
-                    StartTime = new TimeSpan(9, 0, 0),
-                    EndTime = new TimeSpan(10, 30, 0),
-                    Capacity = 60,
-                    Enrolled = 45
-                },
-                // 02 - CS201
-                new Section
-                {
-                    SectionId = "CS201-02",
-                    CourseCode = "CS201",
-                    Term = "HK1 2026-2027",
-                    LecturerId = "GV0012",
-                    RoomId = "B203",
-                    DayOfWeek = 5,
-                    StartTime = new TimeSpan(13, 0, 0),
-                    EndTime = new TimeSpan(14, 30, 0),
-                    Capacity = 60,
-                    Enrolled = 35
-                },
-                // 03 - CS208
-                new Section
-                {
-                    SectionId = "CS208-01",
-                    CourseCode = "CS208",
-                    Term = "HK1 2026-2027",
-                    LecturerId = "GV0015",
-                    RoomId = "A302",
-                    DayOfWeek = 3,
-                    StartTime = new TimeSpan(13, 0, 0),
-                    EndTime = new TimeSpan(14, 30, 0),
-                    Capacity = 60,
-                    Enrolled = 58
-                },
-                // 04 - CS208
-                new Section
-                {
-                    SectionId = "CS208-02",
-                    CourseCode = "CS208",
-                    Term = "HK1 2026-2027",
-                    LecturerId = "GV0025",
-                    RoomId = "B203",
-                    DayOfWeek = 6,
-                    StartTime = new TimeSpan(15, 0, 0),
-                    EndTime = new TimeSpan(16, 30, 0),
-                    Capacity = 60,
-                    Enrolled = 30
-                },
-                // 05 - CS305
-                new Section
-                {
-                    SectionId = "CS305-01",
-                    CourseCode = "CS305",
-                    Term = "HK1 2026-2027",
-                    LecturerId = "GV0015",
-                    RoomId = "A302",
-                    DayOfWeek = 4,
-                    StartTime = new TimeSpan(9, 0, 0),
-                    EndTime = new TimeSpan(10, 30, 0),
-                    Capacity = 60,
-                    Enrolled = 60
-                },
-                // 06 - CS305
-                new Section
-                {
-                    SectionId = "CS305-02",
-                    CourseCode = "CS305",
-                    Term = "HK1 2026-2027",
-                    LecturerId = "GV0037",
-                    RoomId = "C205",
-                    DayOfWeek = 2,
-                    StartTime = new TimeSpan(18, 0, 0),
-                    EndTime = new TimeSpan(19, 30, 0),
-                    Capacity = 40,
-                    Enrolled = 25
-                },
-                // 07 - CS310
-                new Section
-                {
-                    SectionId = "CS310-01",
-                    CourseCode = "CS310",
-                    Term = "HK1 2026-2027",
-                    LecturerId = "GV0031",
-                    RoomId = "A305",
-                    DayOfWeek = 3,
-                    StartTime = new TimeSpan(7, 0, 0),
-                    EndTime = new TimeSpan(8, 30, 0),
-                    Capacity = 45,
-                    Enrolled = 32
-                },
-                // 08 - CS310
-                new Section
-                {
-                    SectionId = "CS310-02",
-                    CourseCode = "CS310",
-                    Term = "HK1 2026-2027",
-                    LecturerId = "GV0053",
-                    RoomId = "B301",
-                    DayOfWeek = 6,
-                    StartTime = new TimeSpan(19, 0, 0),
-                    EndTime = new TimeSpan(20, 30, 0),
-                    Capacity = 40,
-                    Enrolled = 20
-                },
-                // 09 - CS315
-                new Section
-                {
-                    SectionId = "CS315-01",
-                    CourseCode = "CS315",
-                    Term = "HK1 2026-2027",
-                    LecturerId = "GV0025",
-                    RoomId = "A305",
-                    DayOfWeek = 4,
-                    StartTime = new TimeSpan(13, 0, 0),
-                    EndTime = new TimeSpan(14, 30, 0),
-                    Capacity = 45,
-                    Enrolled = 40
-                },
-                // 10 - CS320
-                new Section
-                {
-                    SectionId = "CS320-01",
-                    CourseCode = "CS320",
-                    Term = "HK1 2026-2027",
-                    LecturerId = "GV0037",
-                    RoomId = "B301",
-                    DayOfWeek = 5,
-                    StartTime = new TimeSpan(7, 0, 0),
-                    EndTime = new TimeSpan(8, 30, 0),
-                    Capacity = 40,
-                    Enrolled = 28
-                },
-                // 11 - CS325
-                new Section
-                {
-                    SectionId = "CS325-01",
-                    CourseCode = "CS325",
-                    Term = "HK1 2026-2027",
-                    LecturerId = "GV0048",
-                    RoomId = "C102",
-                    DayOfWeek = 2,
-                    StartTime = new TimeSpan(9, 0, 0),
-                    EndTime = new TimeSpan(10, 30, 0),
-                    Capacity = 50,
-                    Enrolled = 35
-                },
-                // 12 - CS330
-                new Section
-                {
-                    SectionId = "CS330-01",
-                    CourseCode = "CS330",
-                    Term = "HK1 2026-2027",
-                    LecturerId = "GV0031",
-                    RoomId = "A202",
-                    DayOfWeek = 4,
-                    StartTime = new TimeSpan(15, 0, 0),
-                    EndTime = new TimeSpan(16, 30, 0),
-                    Capacity = 50,
-                    Enrolled = 22
-                },
-                // 13 - CS340
-                new Section
-                {
-                    SectionId = "CS340-01",
-                    CourseCode = "CS340",
-                    Term = "HK1 2026-2027",
-                    LecturerId = "GV0008",
-                    RoomId = "B203",
-                    DayOfWeek = 5,
-                    StartTime = new TimeSpan(9, 0, 0),
-                    EndTime = new TimeSpan(10, 30, 0),
-                    Capacity = 60,
-                    Enrolled = 50
-                },
-                // 14 - CS350
-                new Section
-                {
-                    SectionId = "CS350-01",
-                    CourseCode = "CS350",
-                    Term = "HK1 2026-2027",
-                    LecturerId = "GV0012",
-                    RoomId = "A305",
-                    DayOfWeek = 6,
-                    StartTime = new TimeSpan(9, 0, 0),
-                    EndTime = new TimeSpan(10, 30, 0),
-                    Capacity = 45,
-                    Enrolled = 30
-                },
-                // 15 - CS360
-                new Section
-                {
-                    SectionId = "CS360-01",
-                    CourseCode = "CS360",
-                    Term = "HK1 2026-2027",
-                    LecturerId = "GV0053",
-                    RoomId = "C205",
-                    DayOfWeek = 3,
-                    StartTime = new TimeSpan(18, 0, 0),
-                    EndTime = new TimeSpan(19, 30, 0),
-                    Capacity = 40,
-                    Enrolled = 27
-                },
-                // 16 - MA104
-                new Section
-                {
-                    SectionId = "MA104-01",
-                    CourseCode = "MA104",
-                    Term = "HK1 2026-2027",
-                    LecturerId = "GV0020",
-                    RoomId = "C102",
-                    DayOfWeek = 5,
-                    StartTime = new TimeSpan(13, 0, 0),
-                    EndTime = new TimeSpan(14, 30, 0),
-                    Capacity = 50,
-                    Enrolled = 30
-                },
-                // 17 - MA201
-                new Section
-                {
-                    SectionId = "MA201-01",
-                    CourseCode = "MA201",
-                    Term = "HK1 2026-2027",
-                    LecturerId = "GV0042",
-                    RoomId = "C102",
-                    DayOfWeek = 2,
-                    StartTime = new TimeSpan(15, 0, 0),
-                    EndTime = new TimeSpan(16, 30, 0),
-                    Capacity = 50,
-                    Enrolled = 35
-                },
-                // 18 - EN101
-                new Section
-                {
-                    SectionId = "EN101-01",
-                    CourseCode = "EN101",
-                    Term = "HK1 2026-2027",
-                    LecturerId = "GV0048",
-                    RoomId = "C201",
-                    DayOfWeek = 3,
-                    StartTime = new TimeSpan(15, 0, 0),
-                    EndTime = new TimeSpan(16, 30, 0),
-                    Capacity = 45,
-                    Enrolled = 38
-                },
-                // 19 - EN201
-                new Section
-                {
-                    SectionId = "EN201-01",
-                    CourseCode = "EN201",
-                    Term = "HK1 2026-2027",
-                    LecturerId = "GV0048",
-                    RoomId = "C201",
-                    DayOfWeek = 6,
-                    StartTime = new TimeSpan(13, 0, 0),
-                    EndTime = new TimeSpan(14, 30, 0),
-                    Capacity = 45,
-                    Enrolled = 25
-                },
-                // 20 - CS101
-                new Section
-                {
-                    SectionId = "CS101-01",
-                    CourseCode = "CS101",
-                    Term = "HK1 2026-2027",
-                    LecturerId = "GV0008",
-                    RoomId = "A201",
-                    DayOfWeek = 4,
-                    StartTime = new TimeSpan(19, 0, 0),
-                    EndTime = new TimeSpan(20, 30, 0),
-                    Capacity = 60,
-                    Enrolled = 42
-                }
-            });
+ // =========================================================
+// SECTIONS
+// Tổng cộng ~70+ lớp học phần
+// =========================================================
+Sections.AddRange(new[]
+{
+    // ==========================================
+    // 1. CS101 - Nhập môn lập trình (3 lớp)
+    // ==========================================
+    new Section
+    {
+        SectionId = "CS101-01",
+        CourseCode = "CS101",
+        Term = "HK1 2026-2027",
+        LecturerId = "GV0008",
+        RoomId = "A201",
+        DayOfWeek = 2,
+        StartTime = new TimeSpan(7, 0, 0),
+        EndTime = new TimeSpan(8, 30, 0),
+        Capacity = 60,
+        Enrolled = 42,
+        IsOpen = true,
+        Schedules = new List<ScheduleSlot>
+        {
+            new ScheduleSlot { DayOfWeek = 2, StartTime = new TimeSpan(7, 0, 0), EndTime = new TimeSpan(8, 30, 0), RoomId = "A201", SessionType = "Lý thuyết", Periods = "Tiết 1-3" },
+            new ScheduleSlot { DayOfWeek = 2, StartTime = new TimeSpan(9, 0, 0), EndTime = new TimeSpan(9, 45, 0), RoomId = "A201", SessionType = "Lý thuyết", Periods = "Tiết 4" },
+            new ScheduleSlot { DayOfWeek = 4, StartTime = new TimeSpan(7, 0, 0), EndTime = new TimeSpan(8, 30, 0), RoomId = "A201", SessionType = "Lý thuyết", Periods = "Tiết 1-3" },
+            new ScheduleSlot { DayOfWeek = 4, StartTime = new TimeSpan(9, 0, 0), EndTime = new TimeSpan(9, 45, 0), RoomId = "A201", SessionType = "Lý thuyết", Periods = "Tiết 4" },
+            new ScheduleSlot { DayOfWeek = 5, StartTime = new TimeSpan(13, 0, 0), EndTime = new TimeSpan(14, 30, 0), RoomId = "A305", SessionType = "Thực hành", Periods = "Tiết 7-9" },
+            new ScheduleSlot { DayOfWeek = 5, StartTime = new TimeSpan(14, 45, 0), EndTime = new TimeSpan(16, 15, 0), RoomId = "A305", SessionType = "Thực hành", Periods = "Tiết 10-12" },
+            new ScheduleSlot { DayOfWeek = 6, StartTime = new TimeSpan(7, 0, 0), EndTime = new TimeSpan(8, 30, 0), RoomId = "A201", SessionType = "Lý thuyết", Periods = "Tiết 1-3" },
+            new ScheduleSlot { DayOfWeek = 6, StartTime = new TimeSpan(9, 0, 0), EndTime = new TimeSpan(9, 45, 0), RoomId = "A201", SessionType = "Lý thuyết", Periods = "Tiết 4" }
+        }
+    },
+    new Section
+    {
+        SectionId = "CS101-02",
+        CourseCode = "CS101",
+        Term = "HK1 2026-2027",
+        LecturerId = "GV0012",
+        RoomId = "B203",
+        DayOfWeek = 2,
+        StartTime = new TimeSpan(13, 0, 0),
+        EndTime = new TimeSpan(14, 30, 0),
+        Capacity = 60,
+        Enrolled = 50,
+        IsOpen = true,
+        Schedules = new List<ScheduleSlot>
+        {
+            new ScheduleSlot { DayOfWeek = 2, StartTime = new TimeSpan(13, 0, 0), EndTime = new TimeSpan(14, 30, 0), RoomId = "B203", SessionType = "Lý thuyết", Periods = "Tiết 7-9" },
+            new ScheduleSlot { DayOfWeek = 2, StartTime = new TimeSpan(14, 45, 0), EndTime = new TimeSpan(15, 30, 0), RoomId = "B203", SessionType = "Lý thuyết", Periods = "Tiết 10" },
+            new ScheduleSlot { DayOfWeek = 3, StartTime = new TimeSpan(9, 0, 0), EndTime = new TimeSpan(10, 30, 0), RoomId = "B203", SessionType = "Lý thuyết", Periods = "Tiết 4-6" },
+            new ScheduleSlot { DayOfWeek = 3, StartTime = new TimeSpan(10, 45, 0), EndTime = new TimeSpan(11, 30, 0), RoomId = "B203", SessionType = "Lý thuyết", Periods = "Tiết 7" },
+            new ScheduleSlot { DayOfWeek = 5, StartTime = new TimeSpan(7, 0, 0), EndTime = new TimeSpan(8, 30, 0), RoomId = "C102", SessionType = "Thực hành", Periods = "Tiết 1-3" },
+            new ScheduleSlot { DayOfWeek = 5, StartTime = new TimeSpan(8, 45, 0), EndTime = new TimeSpan(10, 15, 0), RoomId = "C102", SessionType = "Thực hành", Periods = "Tiết 4-6" },
+            new ScheduleSlot { DayOfWeek = 6, StartTime = new TimeSpan(9, 0, 0), EndTime = new TimeSpan(10, 30, 0), RoomId = "B203", SessionType = "Lý thuyết", Periods = "Tiết 4-6" },
+            new ScheduleSlot { DayOfWeek = 6, StartTime = new TimeSpan(10, 45, 0), EndTime = new TimeSpan(11, 30, 0), RoomId = "B203", SessionType = "Lý thuyết", Periods = "Tiết 7" }
+        }
+    },
+    new Section
+    {
+        SectionId = "CS101-03",
+        CourseCode = "CS101",
+        Term = "HK1 2026-2027",
+        LecturerId = "GV0015",
+        RoomId = "C102",
+        DayOfWeek = 3,
+        StartTime = new TimeSpan(15, 0, 0),
+        EndTime = new TimeSpan(16, 30, 0),
+        Capacity = 60,
+        Enrolled = 35,
+        IsOpen = true,
+        Schedules = new List<ScheduleSlot>
+        {
+            new ScheduleSlot { DayOfWeek = 3, StartTime = new TimeSpan(15, 0, 0), EndTime = new TimeSpan(16, 30, 0), RoomId = "C102", SessionType = "Lý thuyết", Periods = "Tiết 10-12" },
+            new ScheduleSlot { DayOfWeek = 3, StartTime = new TimeSpan(16, 45, 0), EndTime = new TimeSpan(17, 30, 0), RoomId = "C102", SessionType = "Lý thuyết", Periods = "Tiết 13" },
+            new ScheduleSlot { DayOfWeek = 4, StartTime = new TimeSpan(7, 0, 0), EndTime = new TimeSpan(8, 30, 0), RoomId = "C102", SessionType = "Lý thuyết", Periods = "Tiết 1-3" },
+            new ScheduleSlot { DayOfWeek = 4, StartTime = new TimeSpan(8, 45, 0), EndTime = new TimeSpan(9, 30, 0), RoomId = "C102", SessionType = "Lý thuyết", Periods = "Tiết 4" },
+            new ScheduleSlot { DayOfWeek = 6, StartTime = new TimeSpan(13, 0, 0), EndTime = new TimeSpan(14, 30, 0), RoomId = "B203", SessionType = "Thực hành", Periods = "Tiết 7-9" },
+            new ScheduleSlot { DayOfWeek = 6, StartTime = new TimeSpan(14, 45, 0), EndTime = new TimeSpan(16, 15, 0), RoomId = "B203", SessionType = "Thực hành", Periods = "Tiết 10-12" },
+            new ScheduleSlot { DayOfWeek = 7, StartTime = new TimeSpan(7, 0, 0), EndTime = new TimeSpan(8, 30, 0), RoomId = "C102", SessionType = "Lý thuyết", Periods = "Tiết 1-3" },
+            new ScheduleSlot { DayOfWeek = 7, StartTime = new TimeSpan(8, 45, 0), EndTime = new TimeSpan(9, 30, 0), RoomId = "C102", SessionType = "Lý thuyết", Periods = "Tiết 4" },
+            new ScheduleSlot { DayOfWeek = 7, StartTime = new TimeSpan(9, 45, 0), EndTime = new TimeSpan(10, 30, 0), RoomId = "C102", SessionType = "Lý thuyết", Periods = "Tiết 5" }
+        }
+    },
+
+    // ==========================================
+    // 2. CS201 - Cấu trúc dữ liệu và giải thuật (3 lớp)
+    // ==========================================
+    new Section
+    {
+        SectionId = "CS201-01",
+        CourseCode = "CS201",
+        Term = "HK1 2026-2027",
+        LecturerId = "GV0008",
+        RoomId = "A201",
+        DayOfWeek = 2,
+        StartTime = new TimeSpan(9, 0, 0),
+        EndTime = new TimeSpan(10, 30, 0),
+        Capacity = 60,
+        Enrolled = 45,
+        IsOpen = true,
+        Schedules = new List<ScheduleSlot>
+        {
+            new ScheduleSlot { DayOfWeek = 2, StartTime = new TimeSpan(9, 0, 0), EndTime = new TimeSpan(10, 30, 0), RoomId = "A201", SessionType = "Lý thuyết", Periods = "Tiết 4-6" },
+            new ScheduleSlot { DayOfWeek = 2, StartTime = new TimeSpan(10, 45, 0), EndTime = new TimeSpan(11, 30, 0), RoomId = "A201", SessionType = "Lý thuyết", Periods = "Tiết 7" },
+            new ScheduleSlot { DayOfWeek = 3, StartTime = new TimeSpan(7, 0, 0), EndTime = new TimeSpan(8, 30, 0), RoomId = "A201", SessionType = "Lý thuyết", Periods = "Tiết 1-3" },
+            new ScheduleSlot { DayOfWeek = 3, StartTime = new TimeSpan(8, 45, 0), EndTime = new TimeSpan(9, 30, 0), RoomId = "A201", SessionType = "Lý thuyết", Periods = "Tiết 4" },
+            new ScheduleSlot { DayOfWeek = 5, StartTime = new TimeSpan(7, 0, 0), EndTime = new TimeSpan(8, 30, 0), RoomId = "A305", SessionType = "Thực hành", Periods = "Tiết 1-3" },
+            new ScheduleSlot { DayOfWeek = 5, StartTime = new TimeSpan(8, 45, 0), EndTime = new TimeSpan(10, 15, 0), RoomId = "A305", SessionType = "Thực hành", Periods = "Tiết 4-6" },
+            new ScheduleSlot { DayOfWeek = 6, StartTime = new TimeSpan(13, 0, 0), EndTime = new TimeSpan(14, 30, 0), RoomId = "A201", SessionType = "Lý thuyết", Periods = "Tiết 7-9" },
+            new ScheduleSlot { DayOfWeek = 6, StartTime = new TimeSpan(14, 45, 0), EndTime = new TimeSpan(15, 30, 0), RoomId = "A201", SessionType = "Lý thuyết", Periods = "Tiết 10" },
+            new ScheduleSlot { DayOfWeek = 7, StartTime = new TimeSpan(9, 0, 0), EndTime = new TimeSpan(10, 30, 0), RoomId = "A201", SessionType = "Lý thuyết", Periods = "Tiết 4-6" }
+        }
+    },
+    new Section
+    {
+        SectionId = "CS201-02",
+        CourseCode = "CS201",
+        Term = "HK1 2026-2027",
+        LecturerId = "GV0012",
+        RoomId = "B203",
+        DayOfWeek = 2,
+        StartTime = new TimeSpan(13, 0, 0),
+        EndTime = new TimeSpan(14, 30, 0),
+        Capacity = 60,
+        Enrolled = 35,
+        IsOpen = true,
+        Schedules = new List<ScheduleSlot>
+        {
+            new ScheduleSlot { DayOfWeek = 2, StartTime = new TimeSpan(13, 0, 0), EndTime = new TimeSpan(14, 30, 0), RoomId = "B203", SessionType = "Lý thuyết", Periods = "Tiết 7-9" },
+            new ScheduleSlot { DayOfWeek = 2, StartTime = new TimeSpan(14, 45, 0), EndTime = new TimeSpan(15, 30, 0), RoomId = "B203", SessionType = "Lý thuyết", Periods = "Tiết 10" },
+            new ScheduleSlot { DayOfWeek = 4, StartTime = new TimeSpan(13, 0, 0), EndTime = new TimeSpan(14, 30, 0), RoomId = "B203", SessionType = "Lý thuyết", Periods = "Tiết 7-9" },
+            new ScheduleSlot { DayOfWeek = 4, StartTime = new TimeSpan(14, 45, 0), EndTime = new TimeSpan(15, 30, 0), RoomId = "B203", SessionType = "Lý thuyết", Periods = "Tiết 10" },
+            new ScheduleSlot { DayOfWeek = 5, StartTime = new TimeSpan(13, 0, 0), EndTime = new TimeSpan(14, 30, 0), RoomId = "C102", SessionType = "Thực hành", Periods = "Tiết 7-9" },
+            new ScheduleSlot { DayOfWeek = 5, StartTime = new TimeSpan(14, 45, 0), EndTime = new TimeSpan(16, 15, 0), RoomId = "C102", SessionType = "Thực hành", Periods = "Tiết 10-12" },
+            new ScheduleSlot { DayOfWeek = 6, StartTime = new TimeSpan(9, 0, 0), EndTime = new TimeSpan(10, 30, 0), RoomId = "B203", SessionType = "Lý thuyết", Periods = "Tiết 4-6" },
+            new ScheduleSlot { DayOfWeek = 6, StartTime = new TimeSpan(10, 45, 0), EndTime = new TimeSpan(11, 30, 0), RoomId = "B203", SessionType = "Lý thuyết", Periods = "Tiết 7" }
+        }
+    },
+    new Section
+    {
+        SectionId = "CS201-03",
+        CourseCode = "CS201",
+        Term = "HK1 2026-2027",
+        LecturerId = "GV0037",
+        RoomId = "C102",
+        DayOfWeek = 3,
+        StartTime = new TimeSpan(15, 0, 0),
+        EndTime = new TimeSpan(16, 30, 0),
+        Capacity = 60,
+        Enrolled = 58,
+        IsOpen = true,
+        Schedules = new List<ScheduleSlot>
+        {
+            new ScheduleSlot { DayOfWeek = 3, StartTime = new TimeSpan(15, 0, 0), EndTime = new TimeSpan(16, 30, 0), RoomId = "C102", SessionType = "Lý thuyết", Periods = "Tiết 10-12" },
+            new ScheduleSlot { DayOfWeek = 3, StartTime = new TimeSpan(16, 45, 0), EndTime = new TimeSpan(17, 30, 0), RoomId = "C102", SessionType = "Lý thuyết", Periods = "Tiết 13" },
+            new ScheduleSlot { DayOfWeek = 4, StartTime = new TimeSpan(7, 0, 0), EndTime = new TimeSpan(8, 30, 0), RoomId = "C102", SessionType = "Lý thuyết", Periods = "Tiết 1-3" },
+            new ScheduleSlot { DayOfWeek = 4, StartTime = new TimeSpan(8, 45, 0), EndTime = new TimeSpan(9, 30, 0), RoomId = "C102", SessionType = "Lý thuyết", Periods = "Tiết 4" },
+            new ScheduleSlot { DayOfWeek = 6, StartTime = new TimeSpan(7, 0, 0), EndTime = new TimeSpan(8, 30, 0), RoomId = "B203", SessionType = "Thực hành", Periods = "Tiết 1-3" },
+            new ScheduleSlot { DayOfWeek = 6, StartTime = new TimeSpan(8, 45, 0), EndTime = new TimeSpan(10, 15, 0), RoomId = "B203", SessionType = "Thực hành", Periods = "Tiết 4-6" },
+            new ScheduleSlot { DayOfWeek = 7, StartTime = new TimeSpan(13, 0, 0), EndTime = new TimeSpan(14, 30, 0), RoomId = "C102", SessionType = "Lý thuyết", Periods = "Tiết 7-9" },
+            new ScheduleSlot { DayOfWeek = 7, StartTime = new TimeSpan(14, 45, 0), EndTime = new TimeSpan(15, 30, 0), RoomId = "C102", SessionType = "Lý thuyết", Periods = "Tiết 10" }
+        }
+    },
+
+    // ==========================================
+    // 3. CS208 - Cơ sở dữ liệu (3 lớp)
+    // ==========================================
+    new Section
+    {
+        SectionId = "CS208-01",
+        CourseCode = "CS208",
+        Term = "HK1 2026-2027",
+        LecturerId = "GV0015",
+        RoomId = "A302",
+        DayOfWeek = 2,
+        StartTime = new TimeSpan(7, 0, 0),
+        EndTime = new TimeSpan(8, 30, 0),
+        Capacity = 60,
+        Enrolled = 58,
+        IsOpen = true,
+        Schedules = new List<ScheduleSlot>
+        {
+            new ScheduleSlot { DayOfWeek = 2, StartTime = new TimeSpan(7, 0, 0), EndTime = new TimeSpan(8, 30, 0), RoomId = "A302", SessionType = "Lý thuyết", Periods = "Tiết 1-3" },
+            new ScheduleSlot { DayOfWeek = 2, StartTime = new TimeSpan(8, 45, 0), EndTime = new TimeSpan(9, 30, 0), RoomId = "A302", SessionType = "Lý thuyết", Periods = "Tiết 4" },
+            new ScheduleSlot { DayOfWeek = 4, StartTime = new TimeSpan(7, 0, 0), EndTime = new TimeSpan(8, 30, 0), RoomId = "A302", SessionType = "Lý thuyết", Periods = "Tiết 1-3" },
+            new ScheduleSlot { DayOfWeek = 4, StartTime = new TimeSpan(8, 45, 0), EndTime = new TimeSpan(9, 30, 0), RoomId = "A302", SessionType = "Lý thuyết", Periods = "Tiết 4" },
+            new ScheduleSlot { DayOfWeek = 5, StartTime = new TimeSpan(13, 0, 0), EndTime = new TimeSpan(14, 30, 0), RoomId = "B301", SessionType = "Thực hành", Periods = "Tiết 7-9" },
+            new ScheduleSlot { DayOfWeek = 5, StartTime = new TimeSpan(14, 45, 0), EndTime = new TimeSpan(16, 15, 0), RoomId = "B301", SessionType = "Thực hành", Periods = "Tiết 10-12" },
+            new ScheduleSlot { DayOfWeek = 6, StartTime = new TimeSpan(9, 0, 0), EndTime = new TimeSpan(10, 30, 0), RoomId = "A302", SessionType = "Lý thuyết", Periods = "Tiết 4-6" },
+            new ScheduleSlot { DayOfWeek = 6, StartTime = new TimeSpan(10, 45, 0), EndTime = new TimeSpan(11, 30, 0), RoomId = "A302", SessionType = "Lý thuyết", Periods = "Tiết 7" }
+        }
+    },
+    new Section
+    {
+        SectionId = "CS208-02",
+        CourseCode = "CS208",
+        Term = "HK1 2026-2027",
+        LecturerId = "GV0025",
+        RoomId = "B203",
+        DayOfWeek = 2,
+        StartTime = new TimeSpan(15, 0, 0),
+        EndTime = new TimeSpan(16, 30, 0),
+        Capacity = 60,
+        Enrolled = 30,
+        IsOpen = true,
+        Schedules = new List<ScheduleSlot>
+        {
+            new ScheduleSlot { DayOfWeek = 2, StartTime = new TimeSpan(15, 0, 0), EndTime = new TimeSpan(16, 30, 0), RoomId = "B203", SessionType = "Lý thuyết", Periods = "Tiết 10-12" },
+            new ScheduleSlot { DayOfWeek = 2, StartTime = new TimeSpan(16, 45, 0), EndTime = new TimeSpan(17, 30, 0), RoomId = "B203", SessionType = "Lý thuyết", Periods = "Tiết 13" },
+            new ScheduleSlot { DayOfWeek = 3, StartTime = new TimeSpan(13, 0, 0), EndTime = new TimeSpan(14, 30, 0), RoomId = "B203", SessionType = "Lý thuyết", Periods = "Tiết 7-9" },
+            new ScheduleSlot { DayOfWeek = 3, StartTime = new TimeSpan(14, 45, 0), EndTime = new TimeSpan(15, 30, 0), RoomId = "B203", SessionType = "Lý thuyết", Periods = "Tiết 10" },
+            new ScheduleSlot { DayOfWeek = 6, StartTime = new TimeSpan(7, 0, 0), EndTime = new TimeSpan(8, 30, 0), RoomId = "C205", SessionType = "Thực hành", Periods = "Tiết 1-3" },
+            new ScheduleSlot { DayOfWeek = 6, StartTime = new TimeSpan(8, 45, 0), EndTime = new TimeSpan(10, 15, 0), RoomId = "C205", SessionType = "Thực hành", Periods = "Tiết 4-6" },
+            new ScheduleSlot { DayOfWeek = 7, StartTime = new TimeSpan(13, 0, 0), EndTime = new TimeSpan(14, 30, 0), RoomId = "B203", SessionType = "Lý thuyết", Periods = "Tiết 7-9" },
+            new ScheduleSlot { DayOfWeek = 7, StartTime = new TimeSpan(14, 45, 0), EndTime = new TimeSpan(15, 30, 0), RoomId = "B203", SessionType = "Lý thuyết", Periods = "Tiết 10" }
+        }
+    },
+    new Section
+    {
+        SectionId = "CS208-03",
+        CourseCode = "CS208",
+        Term = "HK1 2026-2027",
+        LecturerId = "GV0031",
+        RoomId = "C205",
+        DayOfWeek = 3,
+        StartTime = new TimeSpan(18, 0, 0),
+        EndTime = new TimeSpan(19, 30, 0),
+        Capacity = 60,
+        Enrolled = 45,
+        IsOpen = true,
+        Schedules = new List<ScheduleSlot>
+        {
+            new ScheduleSlot { DayOfWeek = 3, StartTime = new TimeSpan(18, 0, 0), EndTime = new TimeSpan(19, 30, 0), RoomId = "C205", SessionType = "Lý thuyết", Periods = "Tiết 13-15" },
+            new ScheduleSlot { DayOfWeek = 3, StartTime = new TimeSpan(19, 45, 0), EndTime = new TimeSpan(20, 30, 0), RoomId = "C205", SessionType = "Lý thuyết", Periods = "Tiết 16" },
+            new ScheduleSlot { DayOfWeek = 4, StartTime = new TimeSpan(15, 0, 0), EndTime = new TimeSpan(16, 30, 0), RoomId = "C205", SessionType = "Lý thuyết", Periods = "Tiết 10-12" },
+            new ScheduleSlot { DayOfWeek = 4, StartTime = new TimeSpan(16, 45, 0), EndTime = new TimeSpan(17, 30, 0), RoomId = "C205", SessionType = "Lý thuyết", Periods = "Tiết 13" },
+            new ScheduleSlot { DayOfWeek = 6, StartTime = new TimeSpan(13, 0, 0), EndTime = new TimeSpan(14, 30, 0), RoomId = "A302", SessionType = "Thực hành", Periods = "Tiết 7-9" },
+            new ScheduleSlot { DayOfWeek = 6, StartTime = new TimeSpan(14, 45, 0), EndTime = new TimeSpan(16, 15, 0), RoomId = "A302", SessionType = "Thực hành", Periods = "Tiết 10-12" },
+            new ScheduleSlot { DayOfWeek = 7, StartTime = new TimeSpan(9, 0, 0), EndTime = new TimeSpan(10, 30, 0), RoomId = "C205", SessionType = "Lý thuyết", Periods = "Tiết 4-6" },
+            new ScheduleSlot { DayOfWeek = 7, StartTime = new TimeSpan(10, 45, 0), EndTime = new TimeSpan(11, 30, 0), RoomId = "C205", SessionType = "Lý thuyết", Periods = "Tiết 7" }
+        }
+    },
+
+    // ==========================================
+    // 4. CS305 - Mạng máy tính (2 lớp)
+    // ==========================================
+    new Section
+    {
+        SectionId = "CS305-01",
+        CourseCode = "CS305",
+        Term = "HK1 2026-2027",
+        LecturerId = "GV0015",
+        RoomId = "A302",
+        DayOfWeek = 2,
+        StartTime = new TimeSpan(13, 0, 0),
+        EndTime = new TimeSpan(14, 30, 0),
+        Capacity = 60,
+        Enrolled = 48,
+        IsOpen = true,
+        Schedules = new List<ScheduleSlot>
+        {
+            new ScheduleSlot { DayOfWeek = 2, StartTime = new TimeSpan(13, 0, 0), EndTime = new TimeSpan(14, 30, 0), RoomId = "A302", SessionType = "Lý thuyết", Periods = "Tiết 7-9" },
+            new ScheduleSlot { DayOfWeek = 2, StartTime = new TimeSpan(14, 45, 0), EndTime = new TimeSpan(15, 30, 0), RoomId = "A302", SessionType = "Lý thuyết", Periods = "Tiết 10" },
+            new ScheduleSlot { DayOfWeek = 4, StartTime = new TimeSpan(9, 0, 0), EndTime = new TimeSpan(10, 30, 0), RoomId = "A302", SessionType = "Lý thuyết", Periods = "Tiết 4-6" },
+            new ScheduleSlot { DayOfWeek = 4, StartTime = new TimeSpan(10, 45, 0), EndTime = new TimeSpan(11, 30, 0), RoomId = "A302", SessionType = "Lý thuyết", Periods = "Tiết 7" },
+            new ScheduleSlot { DayOfWeek = 5, StartTime = new TimeSpan(7, 0, 0), EndTime = new TimeSpan(8, 30, 0), RoomId = "C205", SessionType = "Thực hành", Periods = "Tiết 1-3" },
+            new ScheduleSlot { DayOfWeek = 5, StartTime = new TimeSpan(8, 45, 0), EndTime = new TimeSpan(10, 15, 0), RoomId = "C205", SessionType = "Thực hành", Periods = "Tiết 4-6" },
+            new ScheduleSlot { DayOfWeek = 6, StartTime = new TimeSpan(13, 0, 0), EndTime = new TimeSpan(14, 30, 0), RoomId = "A302", SessionType = "Lý thuyết", Periods = "Tiết 7-9" },
+            new ScheduleSlot { DayOfWeek = 6, StartTime = new TimeSpan(14, 45, 0), EndTime = new TimeSpan(15, 30, 0), RoomId = "A302", SessionType = "Lý thuyết", Periods = "Tiết 10" }
+        }
+    },
+    new Section
+    {
+        SectionId = "CS305-02",
+        CourseCode = "CS305",
+        Term = "HK1 2026-2027",
+        LecturerId = "GV0037",
+        RoomId = "C205",
+        DayOfWeek = 2,
+        StartTime = new TimeSpan(18, 0, 0),
+        EndTime = new TimeSpan(19, 30, 0),
+        Capacity = 40,
+        Enrolled = 25,
+        IsOpen = true,
+        Schedules = new List<ScheduleSlot>
+        {
+            new ScheduleSlot { DayOfWeek = 2, StartTime = new TimeSpan(18, 0, 0), EndTime = new TimeSpan(19, 30, 0), RoomId = "C205", SessionType = "Lý thuyết", Periods = "Tiết 13-15" },
+            new ScheduleSlot { DayOfWeek = 2, StartTime = new TimeSpan(19, 45, 0), EndTime = new TimeSpan(20, 30, 0), RoomId = "C205", SessionType = "Lý thuyết", Periods = "Tiết 16" },
+            new ScheduleSlot { DayOfWeek = 3, StartTime = new TimeSpan(15, 0, 0), EndTime = new TimeSpan(16, 30, 0), RoomId = "C205", SessionType = "Lý thuyết", Periods = "Tiết 10-12" },
+            new ScheduleSlot { DayOfWeek = 3, StartTime = new TimeSpan(16, 45, 0), EndTime = new TimeSpan(17, 30, 0), RoomId = "C205", SessionType = "Lý thuyết", Periods = "Tiết 13" },
+            new ScheduleSlot { DayOfWeek = 6, StartTime = new TimeSpan(9, 0, 0), EndTime = new TimeSpan(10, 30, 0), RoomId = "C205", SessionType = "Thực hành", Periods = "Tiết 4-6" },
+            new ScheduleSlot { DayOfWeek = 6, StartTime = new TimeSpan(10, 45, 0), EndTime = new TimeSpan(12, 15, 0), RoomId = "C205", SessionType = "Thực hành", Periods = "Tiết 7-9" },
+            new ScheduleSlot { DayOfWeek = 7, StartTime = new TimeSpan(13, 0, 0), EndTime = new TimeSpan(14, 30, 0), RoomId = "C205", SessionType = "Lý thuyết", Periods = "Tiết 7-9" },
+            new ScheduleSlot { DayOfWeek = 7, StartTime = new TimeSpan(14, 45, 0), EndTime = new TimeSpan(15, 30, 0), RoomId = "C205", SessionType = "Lý thuyết", Periods = "Tiết 10" }
+        }
+    },
+
+    // ==========================================
+    // 5. CS310 - Lập trình hướng đối tượng (3 lớp)
+    // ==========================================
+    new Section
+    {
+        SectionId = "CS310-01",
+        CourseCode = "CS310",
+        Term = "HK1 2026-2027",
+        LecturerId = "GV0031",
+        RoomId = "A305",
+        DayOfWeek = 2,
+        StartTime = new TimeSpan(7, 0, 0),
+        EndTime = new TimeSpan(8, 30, 0),
+        Capacity = 45,
+        Enrolled = 40,
+        IsOpen = true,
+        Schedules = new List<ScheduleSlot>
+        {
+            new ScheduleSlot { DayOfWeek = 2, StartTime = new TimeSpan(7, 0, 0), EndTime = new TimeSpan(8, 30, 0), RoomId = "A305", SessionType = "Lý thuyết", Periods = "Tiết 1-3" },
+            new ScheduleSlot { DayOfWeek = 2, StartTime = new TimeSpan(8, 45, 0), EndTime = new TimeSpan(9, 30, 0), RoomId = "A305", SessionType = "Lý thuyết", Periods = "Tiết 4" },
+            new ScheduleSlot { DayOfWeek = 3, StartTime = new TimeSpan(7, 0, 0), EndTime = new TimeSpan(8, 30, 0), RoomId = "A305", SessionType = "Lý thuyết", Periods = "Tiết 1-3" },
+            new ScheduleSlot { DayOfWeek = 3, StartTime = new TimeSpan(8, 45, 0), EndTime = new TimeSpan(9, 30, 0), RoomId = "A305", SessionType = "Lý thuyết", Periods = "Tiết 4" },
+            new ScheduleSlot { DayOfWeek = 5, StartTime = new TimeSpan(13, 0, 0), EndTime = new TimeSpan(14, 30, 0), RoomId = "B301", SessionType = "Thực hành", Periods = "Tiết 7-9" },
+            new ScheduleSlot { DayOfWeek = 5, StartTime = new TimeSpan(14, 45, 0), EndTime = new TimeSpan(16, 15, 0), RoomId = "B301", SessionType = "Thực hành", Periods = "Tiết 10-12" },
+            new ScheduleSlot { DayOfWeek = 6, StartTime = new TimeSpan(9, 0, 0), EndTime = new TimeSpan(10, 30, 0), RoomId = "A305", SessionType = "Lý thuyết", Periods = "Tiết 4-6" },
+            new ScheduleSlot { DayOfWeek = 6, StartTime = new TimeSpan(10, 45, 0), EndTime = new TimeSpan(11, 30, 0), RoomId = "A305", SessionType = "Lý thuyết", Periods = "Tiết 7" }
+        }
+    },
+    new Section
+    {
+        SectionId = "CS310-02",
+        CourseCode = "CS310",
+        Term = "HK1 2026-2027",
+        LecturerId = "GV0053",
+        RoomId = "B301",
+        DayOfWeek = 2,
+        StartTime = new TimeSpan(13, 0, 0),
+        EndTime = new TimeSpan(14, 30, 0),
+        Capacity = 40,
+        Enrolled = 38,
+        IsOpen = true,
+        Schedules = new List<ScheduleSlot>
+        {
+            new ScheduleSlot { DayOfWeek = 2, StartTime = new TimeSpan(13, 0, 0), EndTime = new TimeSpan(14, 30, 0), RoomId = "B301", SessionType = "Lý thuyết", Periods = "Tiết 7-9" },
+            new ScheduleSlot { DayOfWeek = 2, StartTime = new TimeSpan(14, 45, 0), EndTime = new TimeSpan(15, 30, 0), RoomId = "B301", SessionType = "Lý thuyết", Periods = "Tiết 10" },
+            new ScheduleSlot { DayOfWeek = 4, StartTime = new TimeSpan(9, 0, 0), EndTime = new TimeSpan(10, 30, 0), RoomId = "B301", SessionType = "Lý thuyết", Periods = "Tiết 4-6" },
+            new ScheduleSlot { DayOfWeek = 4, StartTime = new TimeSpan(10, 45, 0), EndTime = new TimeSpan(11, 30, 0), RoomId = "B301", SessionType = "Lý thuyết", Periods = "Tiết 7" },
+            new ScheduleSlot { DayOfWeek = 6, StartTime = new TimeSpan(13, 0, 0), EndTime = new TimeSpan(14, 30, 0), RoomId = "C102", SessionType = "Thực hành", Periods = "Tiết 7-9" },
+            new ScheduleSlot { DayOfWeek = 6, StartTime = new TimeSpan(14, 45, 0), EndTime = new TimeSpan(16, 15, 0), RoomId = "C102", SessionType = "Thực hành", Periods = "Tiết 10-12" },
+            new ScheduleSlot { DayOfWeek = 7, StartTime = new TimeSpan(9, 0, 0), EndTime = new TimeSpan(10, 30, 0), RoomId = "B301", SessionType = "Lý thuyết", Periods = "Tiết 4-6" },
+            new ScheduleSlot { DayOfWeek = 7, StartTime = new TimeSpan(10, 45, 0), EndTime = new TimeSpan(11, 30, 0), RoomId = "B301", SessionType = "Lý thuyết", Periods = "Tiết 7" }
+        }
+    },
+    new Section
+    {
+        SectionId = "CS310-03",
+        CourseCode = "CS310",
+        Term = "HK1 2026-2027",
+        LecturerId = "GV0048",
+        RoomId = "C102",
+        DayOfWeek = 3,
+        StartTime = new TimeSpan(15, 0, 0),
+        EndTime = new TimeSpan(16, 30, 0),
+        Capacity = 45,
+        Enrolled = 29,
+        IsOpen = true,
+        Schedules = new List<ScheduleSlot>
+        {
+            new ScheduleSlot { DayOfWeek = 3, StartTime = new TimeSpan(15, 0, 0), EndTime = new TimeSpan(16, 30, 0), RoomId = "C102", SessionType = "Lý thuyết", Periods = "Tiết 10-12" },
+            new ScheduleSlot { DayOfWeek = 3, StartTime = new TimeSpan(16, 45, 0), EndTime = new TimeSpan(17, 30, 0), RoomId = "C102", SessionType = "Lý thuyết", Periods = "Tiết 13" },
+            new ScheduleSlot { DayOfWeek = 5, StartTime = new TimeSpan(7, 0, 0), EndTime = new TimeSpan(8, 30, 0), RoomId = "C102", SessionType = "Lý thuyết", Periods = "Tiết 1-3" },
+            new ScheduleSlot { DayOfWeek = 5, StartTime = new TimeSpan(8, 45, 0), EndTime = new TimeSpan(9, 30, 0), RoomId = "C102", SessionType = "Lý thuyết", Periods = "Tiết 4" },
+            new ScheduleSlot { DayOfWeek = 6, StartTime = new TimeSpan(15, 0, 0), EndTime = new TimeSpan(16, 30, 0), RoomId = "A305", SessionType = "Thực hành", Periods = "Tiết 10-12" },
+            new ScheduleSlot { DayOfWeek = 6, StartTime = new TimeSpan(16, 45, 0), EndTime = new TimeSpan(18, 15, 0), RoomId = "A305", SessionType = "Thực hành", Periods = "Tiết 13-15" },
+            new ScheduleSlot { DayOfWeek = 7, StartTime = new TimeSpan(7, 0, 0), EndTime = new TimeSpan(8, 30, 0), RoomId = "C102", SessionType = "Lý thuyết", Periods = "Tiết 1-3" },
+            new ScheduleSlot { DayOfWeek = 7, StartTime = new TimeSpan(8, 45, 0), EndTime = new TimeSpan(9, 30, 0), RoomId = "C102", SessionType = "Lý thuyết", Periods = "Tiết 4" }
+        }
+    },
+
+    // ==========================================
+    // 6. CS315 - Lập trình Web (2 lớp)
+    // ==========================================
+    new Section
+    {
+        SectionId = "CS315-01",
+        CourseCode = "CS315",
+        Term = "HK1 2026-2027",
+        LecturerId = "GV0025",
+        RoomId = "A305",
+        DayOfWeek = 2,
+        StartTime = new TimeSpan(9, 0, 0),
+        EndTime = new TimeSpan(10, 30, 0),
+        Capacity = 45,
+        Enrolled = 41,
+        IsOpen = true,
+        Schedules = new List<ScheduleSlot>
+        {
+            new ScheduleSlot { DayOfWeek = 2, StartTime = new TimeSpan(9, 0, 0), EndTime = new TimeSpan(10, 30, 0), RoomId = "A305", SessionType = "Lý thuyết", Periods = "Tiết 4-6" },
+            new ScheduleSlot { DayOfWeek = 2, StartTime = new TimeSpan(10, 45, 0), EndTime = new TimeSpan(11, 30, 0), RoomId = "A305", SessionType = "Lý thuyết", Periods = "Tiết 7" },
+            new ScheduleSlot { DayOfWeek = 4, StartTime = new TimeSpan(13, 0, 0), EndTime = new TimeSpan(14, 30, 0), RoomId = "A305", SessionType = "Lý thuyết", Periods = "Tiết 7-9" },
+            new ScheduleSlot { DayOfWeek = 4, StartTime = new TimeSpan(14, 45, 0), EndTime = new TimeSpan(15, 30, 0), RoomId = "A305", SessionType = "Lý thuyết", Periods = "Tiết 10" },
+            new ScheduleSlot { DayOfWeek = 5, StartTime = new TimeSpan(7, 0, 0), EndTime = new TimeSpan(8, 30, 0), RoomId = "C102", SessionType = "Thực hành", Periods = "Tiết 1-3" },
+            new ScheduleSlot { DayOfWeek = 5, StartTime = new TimeSpan(8, 45, 0), EndTime = new TimeSpan(10, 15, 0), RoomId = "C102", SessionType = "Thực hành", Periods = "Tiết 4-6" },
+            new ScheduleSlot { DayOfWeek = 6, StartTime = new TimeSpan(13, 0, 0), EndTime = new TimeSpan(14, 30, 0), RoomId = "A305", SessionType = "Lý thuyết", Periods = "Tiết 7-9" },
+            new ScheduleSlot { DayOfWeek = 6, StartTime = new TimeSpan(14, 45, 0), EndTime = new TimeSpan(15, 30, 0), RoomId = "A305", SessionType = "Lý thuyết", Periods = "Tiết 10" }
+        }
+    },
+    new Section
+    {
+        SectionId = "CS315-02",
+        CourseCode = "CS315",
+        Term = "HK1 2026-2027",
+        LecturerId = "GV0031",
+        RoomId = "B203",
+        DayOfWeek = 3,
+        StartTime = new TimeSpan(13, 0, 0),
+        EndTime = new TimeSpan(14, 30, 0),
+        Capacity = 45,
+        Enrolled = 30,
+        IsOpen = true,
+        Schedules = new List<ScheduleSlot>
+        {
+            new ScheduleSlot { DayOfWeek = 3, StartTime = new TimeSpan(13, 0, 0), EndTime = new TimeSpan(14, 30, 0), RoomId = "B203", SessionType = "Lý thuyết", Periods = "Tiết 7-9" },
+            new ScheduleSlot { DayOfWeek = 3, StartTime = new TimeSpan(14, 45, 0), EndTime = new TimeSpan(15, 30, 0), RoomId = "B203", SessionType = "Lý thuyết", Periods = "Tiết 10" },
+            new ScheduleSlot { DayOfWeek = 5, StartTime = new TimeSpan(15, 0, 0), EndTime = new TimeSpan(16, 30, 0), RoomId = "B203", SessionType = "Lý thuyết", Periods = "Tiết 10-12" },
+            new ScheduleSlot { DayOfWeek = 5, StartTime = new TimeSpan(16, 45, 0), EndTime = new TimeSpan(17, 30, 0), RoomId = "B203", SessionType = "Lý thuyết", Periods = "Tiết 13" },
+            new ScheduleSlot { DayOfWeek = 6, StartTime = new TimeSpan(7, 0, 0), EndTime = new TimeSpan(8, 30, 0), RoomId = "A305", SessionType = "Thực hành", Periods = "Tiết 1-3" },
+            new ScheduleSlot { DayOfWeek = 6, StartTime = new TimeSpan(8, 45, 0), EndTime = new TimeSpan(10, 15, 0), RoomId = "A305", SessionType = "Thực hành", Periods = "Tiết 4-6" },
+            new ScheduleSlot { DayOfWeek = 7, StartTime = new TimeSpan(15, 0, 0), EndTime = new TimeSpan(16, 30, 0), RoomId = "B203", SessionType = "Lý thuyết", Periods = "Tiết 10-12" },
+            new ScheduleSlot { DayOfWeek = 7, StartTime = new TimeSpan(16, 45, 0), EndTime = new TimeSpan(17, 30, 0), RoomId = "B203", SessionType = "Lý thuyết", Periods = "Tiết 13" }
+        }
+    },
+
+    // ==========================================
+    // 7. CS320 - Hệ điều hành (2 lớp)
+    // ==========================================
+    new Section
+    {
+        SectionId = "CS320-01",
+        CourseCode = "CS320",
+        Term = "HK1 2026-2027",
+        LecturerId = "GV0037",
+        RoomId = "B301",
+        DayOfWeek = 2,
+        StartTime = new TimeSpan(15, 0, 0),
+        EndTime = new TimeSpan(16, 30, 0),
+        Capacity = 40,
+        Enrolled = 36,
+        IsOpen = true,
+        Schedules = new List<ScheduleSlot>
+        {
+            new ScheduleSlot { DayOfWeek = 2, StartTime = new TimeSpan(15, 0, 0), EndTime = new TimeSpan(16, 30, 0), RoomId = "B301", SessionType = "Lý thuyết", Periods = "Tiết 10-12" },
+            new ScheduleSlot { DayOfWeek = 2, StartTime = new TimeSpan(16, 45, 0), EndTime = new TimeSpan(17, 30, 0), RoomId = "B301", SessionType = "Lý thuyết", Periods = "Tiết 13" },
+            new ScheduleSlot { DayOfWeek = 4, StartTime = new TimeSpan(7, 0, 0), EndTime = new TimeSpan(8, 30, 0), RoomId = "B301", SessionType = "Lý thuyết", Periods = "Tiết 1-3" },
+            new ScheduleSlot { DayOfWeek = 4, StartTime = new TimeSpan(8, 45, 0), EndTime = new TimeSpan(9, 30, 0), RoomId = "B301", SessionType = "Lý thuyết", Periods = "Tiết 4" },
+            new ScheduleSlot { DayOfWeek = 5, StartTime = new TimeSpan(7, 0, 0), EndTime = new TimeSpan(8, 30, 0), RoomId = "B301", SessionType = "Thực hành", Periods = "Tiết 1-3" },
+            new ScheduleSlot { DayOfWeek = 5, StartTime = new TimeSpan(8, 45, 0), EndTime = new TimeSpan(10, 15, 0), RoomId = "B301", SessionType = "Thực hành", Periods = "Tiết 4-6" },
+            new ScheduleSlot { DayOfWeek = 6, StartTime = new TimeSpan(13, 0, 0), EndTime = new TimeSpan(14, 30, 0), RoomId = "B301", SessionType = "Lý thuyết", Periods = "Tiết 7-9" },
+            new ScheduleSlot { DayOfWeek = 6, StartTime = new TimeSpan(14, 45, 0), EndTime = new TimeSpan(15, 30, 0), RoomId = "B301", SessionType = "Lý thuyết", Periods = "Tiết 10" }
+        }
+    },
+    new Section
+    {
+        SectionId = "CS320-02",
+        CourseCode = "CS320",
+        Term = "HK1 2026-2027",
+        LecturerId = "GV0012",
+        RoomId = "A201",
+        DayOfWeek = 3,
+        StartTime = new TimeSpan(9, 0, 0),
+        EndTime = new TimeSpan(10, 30, 0),
+        Capacity = 40,
+        Enrolled = 39,
+        IsOpen = true,
+        Schedules = new List<ScheduleSlot>
+        {
+            new ScheduleSlot { DayOfWeek = 3, StartTime = new TimeSpan(9, 0, 0), EndTime = new TimeSpan(10, 30, 0), RoomId = "A201", SessionType = "Lý thuyết", Periods = "Tiết 4-6" },
+            new ScheduleSlot { DayOfWeek = 3, StartTime = new TimeSpan(10, 45, 0), EndTime = new TimeSpan(11, 30, 0), RoomId = "A201", SessionType = "Lý thuyết", Periods = "Tiết 7" },
+            new ScheduleSlot { DayOfWeek = 5, StartTime = new TimeSpan(13, 0, 0), EndTime = new TimeSpan(14, 30, 0), RoomId = "A201", SessionType = "Lý thuyết", Periods = "Tiết 7-9" },
+            new ScheduleSlot { DayOfWeek = 5, StartTime = new TimeSpan(14, 45, 0), EndTime = new TimeSpan(15, 30, 0), RoomId = "A201", SessionType = "Lý thuyết", Periods = "Tiết 10" },
+            new ScheduleSlot { DayOfWeek = 6, StartTime = new TimeSpan(9, 0, 0), EndTime = new TimeSpan(10, 30, 0), RoomId = "A201", SessionType = "Thực hành", Periods = "Tiết 4-6" },
+            new ScheduleSlot { DayOfWeek = 6, StartTime = new TimeSpan(10, 45, 0), EndTime = new TimeSpan(12, 15, 0), RoomId = "A201", SessionType = "Thực hành", Periods = "Tiết 7-9" },
+            new ScheduleSlot { DayOfWeek = 7, StartTime = new TimeSpan(9, 0, 0), EndTime = new TimeSpan(10, 30, 0), RoomId = "A201", SessionType = "Lý thuyết", Periods = "Tiết 4-6" },
+            new ScheduleSlot { DayOfWeek = 7, StartTime = new TimeSpan(10, 45, 0), EndTime = new TimeSpan(11, 30, 0), RoomId = "A201", SessionType = "Lý thuyết", Periods = "Tiết 7" }
+        }
+    },
+
+    // ==========================================
+    // 8. CS325 - Công nghệ phần mềm (2 lớp)
+    // ==========================================
+    new Section
+    {
+        SectionId = "CS325-01",
+        CourseCode = "CS325",
+        Term = "HK1 2026-2027",
+        LecturerId = "GV0048",
+        RoomId = "C102",
+        DayOfWeek = 2,
+        StartTime = new TimeSpan(9, 0, 0),
+        EndTime = new TimeSpan(10, 30, 0),
+        Capacity = 50,
+        Enrolled = 35,
+        IsOpen = true,
+        Schedules = new List<ScheduleSlot>
+        {
+            new ScheduleSlot { DayOfWeek = 2, StartTime = new TimeSpan(9, 0, 0), EndTime = new TimeSpan(10, 30, 0), RoomId = "C102", SessionType = "Lý thuyết", Periods = "Tiết 4-6" },
+            new ScheduleSlot { DayOfWeek = 2, StartTime = new TimeSpan(10, 45, 0), EndTime = new TimeSpan(11, 30, 0), RoomId = "C102", SessionType = "Lý thuyết", Periods = "Tiết 7" },
+            new ScheduleSlot { DayOfWeek = 4, StartTime = new TimeSpan(13, 0, 0), EndTime = new TimeSpan(14, 30, 0), RoomId = "C102", SessionType = "Lý thuyết", Periods = "Tiết 7-9" },
+            new ScheduleSlot { DayOfWeek = 4, StartTime = new TimeSpan(14, 45, 0), EndTime = new TimeSpan(15, 30, 0), RoomId = "C102", SessionType = "Lý thuyết", Periods = "Tiết 10" },
+            new ScheduleSlot { DayOfWeek = 5, StartTime = new TimeSpan(13, 0, 0), EndTime = new TimeSpan(14, 30, 0), RoomId = "B203", SessionType = "Thực hành", Periods = "Tiết 7-9" },
+            new ScheduleSlot { DayOfWeek = 5, StartTime = new TimeSpan(14, 45, 0), EndTime = new TimeSpan(16, 15, 0), RoomId = "B203", SessionType = "Thực hành", Periods = "Tiết 10-12" },
+            new ScheduleSlot { DayOfWeek = 6, StartTime = new TimeSpan(9, 0, 0), EndTime = new TimeSpan(10, 30, 0), RoomId = "C102", SessionType = "Lý thuyết", Periods = "Tiết 4-6" },
+            new ScheduleSlot { DayOfWeek = 6, StartTime = new TimeSpan(10, 45, 0), EndTime = new TimeSpan(11, 30, 0), RoomId = "C102", SessionType = "Lý thuyết", Periods = "Tiết 7" }
+        }
+    },
+    new Section
+    {
+        SectionId = "CS325-02",
+        CourseCode = "CS325",
+        Term = "HK1 2026-2027",
+        LecturerId = "GV0053",
+        RoomId = "A305",
+        DayOfWeek = 3,
+        StartTime = new TimeSpan(15, 0, 0),
+        EndTime = new TimeSpan(16, 30, 0),
+        Capacity = 50,
+        Enrolled = 48,
+        IsOpen = true,
+        Schedules = new List<ScheduleSlot>
+        {
+            new ScheduleSlot { DayOfWeek = 3, StartTime = new TimeSpan(15, 0, 0), EndTime = new TimeSpan(16, 30, 0), RoomId = "A305", SessionType = "Lý thuyết", Periods = "Tiết 10-12" },
+            new ScheduleSlot { DayOfWeek = 3, StartTime = new TimeSpan(16, 45, 0), EndTime = new TimeSpan(17, 30, 0), RoomId = "A305", SessionType = "Lý thuyết", Periods = "Tiết 13" },
+            new ScheduleSlot { DayOfWeek = 5, StartTime = new TimeSpan(9, 0, 0), EndTime = new TimeSpan(10, 30, 0), RoomId = "A305", SessionType = "Lý thuyết", Periods = "Tiết 4-6" },
+            new ScheduleSlot { DayOfWeek = 5, StartTime = new TimeSpan(10, 45, 0), EndTime = new TimeSpan(11, 30, 0), RoomId = "A305", SessionType = "Lý thuyết", Periods = "Tiết 7" },
+            new ScheduleSlot { DayOfWeek = 6, StartTime = new TimeSpan(13, 0, 0), EndTime = new TimeSpan(14, 30, 0), RoomId = "C102", SessionType = "Thực hành", Periods = "Tiết 7-9" },
+            new ScheduleSlot { DayOfWeek = 6, StartTime = new TimeSpan(14, 45, 0), EndTime = new TimeSpan(16, 15, 0), RoomId = "C102", SessionType = "Thực hành", Periods = "Tiết 10-12" },
+            new ScheduleSlot { DayOfWeek = 7, StartTime = new TimeSpan(15, 0, 0), EndTime = new TimeSpan(16, 30, 0), RoomId = "A305", SessionType = "Lý thuyết", Periods = "Tiết 10-12" },
+            new ScheduleSlot { DayOfWeek = 7, StartTime = new TimeSpan(16, 45, 0), EndTime = new TimeSpan(17, 30, 0), RoomId = "A305", SessionType = "Lý thuyết", Periods = "Tiết 13" }
+        }
+    },
+
+    // ==========================================
+    // 9. CS330 - Phân tích và thiết kế hệ thống (2 lớp)
+    // ==========================================
+    new Section
+    {
+        SectionId = "CS330-01",
+        CourseCode = "CS330",
+        Term = "HK1 2026-2027",
+        LecturerId = "GV0031",
+        RoomId = "A202",
+        DayOfWeek = 2,
+        StartTime = new TimeSpan(13, 0, 0),
+        EndTime = new TimeSpan(14, 30, 0),
+        Capacity = 50,
+        Enrolled = 45,
+        IsOpen = true,
+        Schedules = new List<ScheduleSlot>
+        {
+            new ScheduleSlot { DayOfWeek = 2, StartTime = new TimeSpan(13, 0, 0), EndTime = new TimeSpan(14, 30, 0), RoomId = "A202", SessionType = "Lý thuyết", Periods = "Tiết 7-9" },
+            new ScheduleSlot { DayOfWeek = 2, StartTime = new TimeSpan(14, 45, 0), EndTime = new TimeSpan(15, 30, 0), RoomId = "A202", SessionType = "Lý thuyết", Periods = "Tiết 10" },
+            new ScheduleSlot { DayOfWeek = 4, StartTime = new TimeSpan(15, 0, 0), EndTime = new TimeSpan(16, 30, 0), RoomId = "A202", SessionType = "Lý thuyết", Periods = "Tiết 10-12" },
+            new ScheduleSlot { DayOfWeek = 4, StartTime = new TimeSpan(16, 45, 0), EndTime = new TimeSpan(17, 30, 0), RoomId = "A202", SessionType = "Lý thuyết", Periods = "Tiết 13" },
+            new ScheduleSlot { DayOfWeek = 5, StartTime = new TimeSpan(9, 0, 0), EndTime = new TimeSpan(10, 30, 0), RoomId = "C102", SessionType = "Thực hành", Periods = "Tiết 4-6" },
+            new ScheduleSlot { DayOfWeek = 5, StartTime = new TimeSpan(10, 45, 0), EndTime = new TimeSpan(12, 15, 0), RoomId = "C102", SessionType = "Thực hành", Periods = "Tiết 7-9" },
+            new ScheduleSlot { DayOfWeek = 6, StartTime = new TimeSpan(13, 0, 0), EndTime = new TimeSpan(14, 30, 0), RoomId = "A202", SessionType = "Lý thuyết", Periods = "Tiết 7-9" },
+            new ScheduleSlot { DayOfWeek = 6, StartTime = new TimeSpan(14, 45, 0), EndTime = new TimeSpan(15, 30, 0), RoomId = "A202", SessionType = "Lý thuyết", Periods = "Tiết 10" },
+            new ScheduleSlot { DayOfWeek = 7, StartTime = new TimeSpan(9, 0, 0), EndTime = new TimeSpan(10, 30, 0), RoomId = "A202", SessionType = "Lý thuyết", Periods = "Tiết 4-6" }
+        }
+    },
+    new Section
+    {
+        SectionId = "CS330-02",
+        CourseCode = "CS330",
+        Term = "HK1 2026-2027",
+        LecturerId = "GV0008",
+        RoomId = "B301",
+        DayOfWeek = 3,
+        StartTime = new TimeSpan(9, 0, 0),
+        EndTime = new TimeSpan(10, 30, 0),
+        Capacity = 50,
+        Enrolled = 50,
+        IsOpen = true,
+        Schedules = new List<ScheduleSlot>
+        {
+            new ScheduleSlot { DayOfWeek = 3, StartTime = new TimeSpan(9, 0, 0), EndTime = new TimeSpan(10, 30, 0), RoomId = "B301", SessionType = "Lý thuyết", Periods = "Tiết 4-6" },
+            new ScheduleSlot { DayOfWeek = 3, StartTime = new TimeSpan(10, 45, 0), EndTime = new TimeSpan(11, 30, 0), RoomId = "B301", SessionType = "Lý thuyết", Periods = "Tiết 7" },
+            new ScheduleSlot { DayOfWeek = 5, StartTime = new TimeSpan(15, 0, 0), EndTime = new TimeSpan(16, 30, 0), RoomId = "B301", SessionType = "Lý thuyết", Periods = "Tiết 10-12" },
+            new ScheduleSlot { DayOfWeek = 5, StartTime = new TimeSpan(16, 45, 0), EndTime = new TimeSpan(17, 30, 0), RoomId = "B301", SessionType = "Lý thuyết", Periods = "Tiết 13" },
+            new ScheduleSlot { DayOfWeek = 6, StartTime = new TimeSpan(7, 0, 0), EndTime = new TimeSpan(8, 30, 0), RoomId = "C205", SessionType = "Thực hành", Periods = "Tiết 1-3" },
+            new ScheduleSlot { DayOfWeek = 6, StartTime = new TimeSpan(8, 45, 0), EndTime = new TimeSpan(10, 15, 0), RoomId = "C205", SessionType = "Thực hành", Periods = "Tiết 4-6" },
+            new ScheduleSlot { DayOfWeek = 7, StartTime = new TimeSpan(13, 0, 0), EndTime = new TimeSpan(14, 30, 0), RoomId = "B301", SessionType = "Lý thuyết", Periods = "Tiết 7-9" },
+            new ScheduleSlot { DayOfWeek = 7, StartTime = new TimeSpan(14, 45, 0), EndTime = new TimeSpan(15, 30, 0), RoomId = "B301", SessionType = "Lý thuyết", Periods = "Tiết 10" }
+        }
+    },
+
+    // ==========================================
+    // 10. MA104 - Toán rời rạc (3 lớp)
+    // ==========================================
+    new Section
+    {
+        SectionId = "MA104-01",
+        CourseCode = "MA104",
+        Term = "HK1 2026-2027",
+        LecturerId = "GV0020",
+        RoomId = "C102",
+        DayOfWeek = 2,
+        StartTime = new TimeSpan(7, 0, 0),
+        EndTime = new TimeSpan(8, 30, 0),
+        Capacity = 50,
+        Enrolled = 45,
+        IsOpen = true,
+        Schedules = new List<ScheduleSlot>
+        {
+            new ScheduleSlot { DayOfWeek = 2, StartTime = new TimeSpan(7, 0, 0), EndTime = new TimeSpan(8, 30, 0), RoomId = "C102", SessionType = "Lý thuyết", Periods = "Tiết 1-3" },
+            new ScheduleSlot { DayOfWeek = 2, StartTime = new TimeSpan(8, 45, 0), EndTime = new TimeSpan(9, 30, 0), RoomId = "C102", SessionType = "Lý thuyết", Periods = "Tiết 4" },
+            new ScheduleSlot { DayOfWeek = 4, StartTime = new TimeSpan(7, 0, 0), EndTime = new TimeSpan(8, 30, 0), RoomId = "C102", SessionType = "Lý thuyết", Periods = "Tiết 1-3" },
+            new ScheduleSlot { DayOfWeek = 4, StartTime = new TimeSpan(8, 45, 0), EndTime = new TimeSpan(9, 30, 0), RoomId = "C102", SessionType = "Lý thuyết", Periods = "Tiết 4" },
+            new ScheduleSlot { DayOfWeek = 5, StartTime = new TimeSpan(13, 0, 0), EndTime = new TimeSpan(14, 30, 0), RoomId = "C102", SessionType = "Thực hành", Periods = "Tiết 7-9" },
+            new ScheduleSlot { DayOfWeek = 5, StartTime = new TimeSpan(14, 45, 0), EndTime = new TimeSpan(16, 15, 0), RoomId = "C102", SessionType = "Thực hành", Periods = "Tiết 10-12" },
+            new ScheduleSlot { DayOfWeek = 6, StartTime = new TimeSpan(7, 0, 0), EndTime = new TimeSpan(8, 30, 0), RoomId = "C102", SessionType = "Lý thuyết", Periods = "Tiết 1-3" },
+            new ScheduleSlot { DayOfWeek = 6, StartTime = new TimeSpan(8, 45, 0), EndTime = new TimeSpan(9, 30, 0), RoomId = "C102", SessionType = "Lý thuyết", Periods = "Tiết 4" }
+        }
+    },
+    new Section
+    {
+        SectionId = "MA104-02",
+        CourseCode = "MA104",
+        Term = "HK1 2026-2027",
+        LecturerId = "GV0042",
+        RoomId = "A201",
+        DayOfWeek = 3,
+        StartTime = new TimeSpan(13, 0, 0),
+        EndTime = new TimeSpan(14, 30, 0),
+        Capacity = 50,
+        Enrolled = 32,
+        IsOpen = true,
+        Schedules = new List<ScheduleSlot>
+        {
+            new ScheduleSlot { DayOfWeek = 3, StartTime = new TimeSpan(13, 0, 0), EndTime = new TimeSpan(14, 30, 0), RoomId = "A201", SessionType = "Lý thuyết", Periods = "Tiết 7-9" },
+            new ScheduleSlot { DayOfWeek = 3, StartTime = new TimeSpan(14, 45, 0), EndTime = new TimeSpan(15, 30, 0), RoomId = "A201", SessionType = "Lý thuyết", Periods = "Tiết 10" },
+            new ScheduleSlot { DayOfWeek = 5, StartTime = new TimeSpan(13, 0, 0), EndTime = new TimeSpan(14, 30, 0), RoomId = "A201", SessionType = "Lý thuyết", Periods = "Tiết 7-9" },
+            new ScheduleSlot { DayOfWeek = 5, StartTime = new TimeSpan(14, 45, 0), EndTime = new TimeSpan(15, 30, 0), RoomId = "A201", SessionType = "Lý thuyết", Periods = "Tiết 10" },
+            new ScheduleSlot { DayOfWeek = 6, StartTime = new TimeSpan(13, 0, 0), EndTime = new TimeSpan(14, 30, 0), RoomId = "A201", SessionType = "Thực hành", Periods = "Tiết 7-9" },
+            new ScheduleSlot { DayOfWeek = 6, StartTime = new TimeSpan(14, 45, 0), EndTime = new TimeSpan(16, 15, 0), RoomId = "A201", SessionType = "Thực hành", Periods = "Tiết 10-12" },
+            new ScheduleSlot { DayOfWeek = 7, StartTime = new TimeSpan(13, 0, 0), EndTime = new TimeSpan(14, 30, 0), RoomId = "A201", SessionType = "Lý thuyết", Periods = "Tiết 7-9" },
+            new ScheduleSlot { DayOfWeek = 7, StartTime = new TimeSpan(14, 45, 0), EndTime = new TimeSpan(15, 30, 0), RoomId = "A201", SessionType = "Lý thuyết", Periods = "Tiết 10" },
+            new ScheduleSlot { DayOfWeek = 7, StartTime = new TimeSpan(15, 45, 0), EndTime = new TimeSpan(16, 30, 0), RoomId = "A201", SessionType = "Lý thuyết", Periods = "Tiết 11" }
+        }
+    },
+    new Section
+    {
+        SectionId = "MA104-03",
+        CourseCode = "MA104",
+        Term = "HK1 2026-2027",
+        LecturerId = "GV0020",
+        RoomId = "B203",
+        DayOfWeek = 4,
+        StartTime = new TimeSpan(9, 0, 0),
+        EndTime = new TimeSpan(10, 30, 0),
+        Capacity = 50,
+        Enrolled = 50,
+        IsOpen = true,
+        Schedules = new List<ScheduleSlot>
+        {
+            new ScheduleSlot { DayOfWeek = 4, StartTime = new TimeSpan(9, 0, 0), EndTime = new TimeSpan(10, 30, 0), RoomId = "B203", SessionType = "Lý thuyết", Periods = "Tiết 4-6" },
+            new ScheduleSlot { DayOfWeek = 4, StartTime = new TimeSpan(10, 45, 0), EndTime = new TimeSpan(11, 30, 0), RoomId = "B203", SessionType = "Lý thuyết", Periods = "Tiết 7" },
+            new ScheduleSlot { DayOfWeek = 6, StartTime = new TimeSpan(9, 0, 0), EndTime = new TimeSpan(10, 30, 0), RoomId = "B203", SessionType = "Lý thuyết", Periods = "Tiết 4-6" },
+            new ScheduleSlot { DayOfWeek = 6, StartTime = new TimeSpan(10, 45, 0), EndTime = new TimeSpan(11, 30, 0), RoomId = "B203", SessionType = "Lý thuyết", Periods = "Tiết 7" },
+            new ScheduleSlot { DayOfWeek = 7, StartTime = new TimeSpan(7, 0, 0), EndTime = new TimeSpan(8, 30, 0), RoomId = "B203", SessionType = "Thực hành", Periods = "Tiết 1-3" },
+            new ScheduleSlot { DayOfWeek = 7, StartTime = new TimeSpan(8, 45, 0), EndTime = new TimeSpan(10, 15, 0), RoomId = "B203", SessionType = "Thực hành", Periods = "Tiết 4-6" },
+            new ScheduleSlot { DayOfWeek = 7, StartTime = new TimeSpan(10, 45, 0), EndTime = new TimeSpan(11, 30, 0), RoomId = "B203", SessionType = "Lý thuyết", Periods = "Tiết 7" }
+        }
+    },
+
+    // ==========================================
+    // 11. MA201 - Xác suất thống kê (2 lớp)
+    // ==========================================
+    new Section
+    {
+        SectionId = "MA201-01",
+        CourseCode = "MA201",
+        Term = "HK1 2026-2027",
+        LecturerId = "GV0042",
+        RoomId = "C102",
+        DayOfWeek = 2,
+        StartTime = new TimeSpan(15, 0, 0),
+        EndTime = new TimeSpan(16, 30, 0),
+        Capacity = 50,
+        Enrolled = 35,
+        IsOpen = true,
+        Schedules = new List<ScheduleSlot>
+        {
+            new ScheduleSlot { DayOfWeek = 2, StartTime = new TimeSpan(15, 0, 0), EndTime = new TimeSpan(16, 30, 0), RoomId = "C102", SessionType = "Lý thuyết", Periods = "Tiết 10-12" },
+            new ScheduleSlot { DayOfWeek = 2, StartTime = new TimeSpan(16, 45, 0), EndTime = new TimeSpan(17, 30, 0), RoomId = "C102", SessionType = "Lý thuyết", Periods = "Tiết 13" },
+            new ScheduleSlot { DayOfWeek = 4, StartTime = new TimeSpan(13, 0, 0), EndTime = new TimeSpan(14, 30, 0), RoomId = "C102", SessionType = "Lý thuyết", Periods = "Tiết 7-9" },
+            new ScheduleSlot { DayOfWeek = 4, StartTime = new TimeSpan(14, 45, 0), EndTime = new TimeSpan(15, 30, 0), RoomId = "C102", SessionType = "Lý thuyết", Periods = "Tiết 10" },
+            new ScheduleSlot { DayOfWeek = 5, StartTime = new TimeSpan(13, 0, 0), EndTime = new TimeSpan(14, 30, 0), RoomId = "C102", SessionType = "Thực hành", Periods = "Tiết 7-9" },
+            new ScheduleSlot { DayOfWeek = 5, StartTime = new TimeSpan(14, 45, 0), EndTime = new TimeSpan(16, 15, 0), RoomId = "C102", SessionType = "Thực hành", Periods = "Tiết 10-12" },
+            new ScheduleSlot { DayOfWeek = 6, StartTime = new TimeSpan(13, 0, 0), EndTime = new TimeSpan(14, 30, 0), RoomId = "C102", SessionType = "Lý thuyết", Periods = "Tiết 7-9" },
+            new ScheduleSlot { DayOfWeek = 6, StartTime = new TimeSpan(14, 45, 0), EndTime = new TimeSpan(15, 30, 0), RoomId = "C102", SessionType = "Lý thuyết", Periods = "Tiết 10" }
+        }
+    },
+    new Section
+    {
+        SectionId = "MA201-02",
+        CourseCode = "MA201",
+        Term = "HK1 2026-2027",
+        LecturerId = "GV0020",
+        RoomId = "A302",
+        DayOfWeek = 3,
+        StartTime = new TimeSpan(7, 0, 0),
+        EndTime = new TimeSpan(8, 30, 0),
+        Capacity = 50,
+        Enrolled = 49,
+        IsOpen = true,
+        Schedules = new List<ScheduleSlot>
+        {
+            new ScheduleSlot { DayOfWeek = 3, StartTime = new TimeSpan(7, 0, 0), EndTime = new TimeSpan(8, 30, 0), RoomId = "A302", SessionType = "Lý thuyết", Periods = "Tiết 1-3" },
+            new ScheduleSlot { DayOfWeek = 3, StartTime = new TimeSpan(8, 45, 0), EndTime = new TimeSpan(9, 30, 0), RoomId = "A302", SessionType = "Lý thuyết", Periods = "Tiết 4" },
+            new ScheduleSlot { DayOfWeek = 5, StartTime = new TimeSpan(7, 0, 0), EndTime = new TimeSpan(8, 30, 0), RoomId = "A302", SessionType = "Lý thuyết", Periods = "Tiết 1-3" },
+            new ScheduleSlot { DayOfWeek = 5, StartTime = new TimeSpan(8, 45, 0), EndTime = new TimeSpan(9, 30, 0), RoomId = "A302", SessionType = "Lý thuyết", Periods = "Tiết 4" },
+            new ScheduleSlot { DayOfWeek = 6, StartTime = new TimeSpan(7, 0, 0), EndTime = new TimeSpan(8, 30, 0), RoomId = "A302", SessionType = "Thực hành", Periods = "Tiết 1-3" },
+            new ScheduleSlot { DayOfWeek = 6, StartTime = new TimeSpan(8, 45, 0), EndTime = new TimeSpan(10, 15, 0), RoomId = "A302", SessionType = "Thực hành", Periods = "Tiết 4-6" },
+            new ScheduleSlot { DayOfWeek = 7, StartTime = new TimeSpan(7, 0, 0), EndTime = new TimeSpan(8, 30, 0), RoomId = "A302", SessionType = "Lý thuyết", Periods = "Tiết 1-3" },
+            new ScheduleSlot { DayOfWeek = 7, StartTime = new TimeSpan(8, 45, 0), EndTime = new TimeSpan(9, 30, 0), RoomId = "A302", SessionType = "Lý thuyết", Periods = "Tiết 4" }
+        }
+    }
+});
 
             // =========================================================
             // STUDENTS
