@@ -142,11 +142,15 @@
 
     <!-- 2. KHAI BÁO GIAO DIỆN NẰM RIÊNG Ở ĐÂY -->
     <TransitioningContentControl.DataTemplates>
-        
+
+        <DataTemplate DataType="{x:Type vm:OpenSectionsViewModel}">
+            <views:OpenSectionsView />
+        </DataTemplate>
+
         <DataTemplate DataType="{x:Type vm:StudentOpenSectionsViewModel}">
             <views:StudentOpenSectionsView />
         </DataTemplate>
-        
+
     </TransitioningContentControl.DataTemplates>
 
 </TransitioningContentControl>

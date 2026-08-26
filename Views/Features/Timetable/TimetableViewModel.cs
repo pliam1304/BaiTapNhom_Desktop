@@ -1,7 +1,9 @@
 using EduPath.Avalonia.Models;
 using EduPath.Avalonia.Services;
+using System.Collections.Generic;
+using System.Linq;
 
-namespace EduPath.Avalonia.ViewModels
+namespace EduPath.Avalonia.ViewModels  // ← namespace này phải khớp với các ViewModel khác
 {
     public class DayColumn
     {
@@ -18,19 +20,28 @@ namespace EduPath.Avalonia.ViewModels
 
         public TimetableViewModel(Student student)
         {
-            var active = _enrollSvc.GetActiveEnrollments(student.StudentId)
+            var activeSections = _enrollSvc.GetActiveEnrollments(student.StudentId)
                 .Select(e => _enrollSvc.GetSection(e.SectionId))
                 .Where(s => s != null)
-                .Select(s => new SectionRow(s!, _enrollSvc.GetCourse(s!.CourseCode), _enrollSvc.GetLecturer(s!.LecturerId)))
                 .ToList();
 
             for (int day = 2; day <= 8; day++)
             {
                 var label = day == 8 ? "Chủ nhật" : $"Thứ {day}";
-                var sections = active.Where(r => r.Section.DayOfWeek == day)
-                    .OrderBy(r => r.Section.StartTime)
+
+                var sectionsOnDay = activeSections
+                    .Where(s => s.DayOfWeek == day)
+                    .OrderBy(s => s.StartTime)
                     .ToList();
-                Days.Add(new DayColumn { Label = label, Sections = sections });
+
+                var rows = sectionsOnDay
+                    .Select(s => new SectionRow(
+                        s,
+                        _enrollSvc.GetCourse(s.CourseCode),
+                        _enrollSvc.GetLecturer(s.LecturerId)))
+                    .ToList();
+
+                Days.Add(new DayColumn { Label = label, Sections = rows });
             }
         }
     }

@@ -1,16 +1,14 @@
-// Views/Features/Shells/StudentShellViewModel.cs
-
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using EduPath.Avalonia.Models;
+using System.IO;
 using Avalonia.Media.Imaging;
+using EduPath.Avalonia.Models;
 
 namespace EduPath.Avalonia.ViewModels
 {
     // =========================================================
-    // NAV ITEM DÙNG CHUNG CHO STUDENT + ADMIN
+    // NAV ITEM
     // =========================================================
     public class NavItem
     {
@@ -18,8 +16,6 @@ namespace EduPath.Avalonia.ViewModels
 
         public string Label { get; init; } = string.Empty;
 
-        // Ví dụ:
-        // images_icons/tongQuan.png
         public string IconPath { get; init; } = string.Empty;
 
         public Bitmap? IconImage { get; }
@@ -28,7 +24,10 @@ namespace EduPath.Avalonia.ViewModels
         {
         }
 
-        public NavItem(string key, string label, string iconPath)
+        public NavItem(
+            string key,
+            string label,
+            string iconPath)
         {
             Key = key;
             Label = label;
@@ -37,9 +36,6 @@ namespace EduPath.Avalonia.ViewModels
             IconImage = TaoBitmap(iconPath);
         }
 
-        // =====================================================
-        // ĐỌC ẢNH TRỰC TIẾP TỪ FILE
-        // =====================================================
         private static Bitmap? TaoBitmap(string imagePath)
         {
             try
@@ -49,8 +45,6 @@ namespace EduPath.Avalonia.ViewModels
                     return null;
                 }
 
-                // AppContext.BaseDirectory:
-                // bin/Debug/net8.0/
                 string fullPath = Path.Combine(
                     AppContext.BaseDirectory,
                     imagePath.Replace(
@@ -59,8 +53,9 @@ namespace EduPath.Avalonia.ViewModels
                     )
                 );
 
-                //Console.WriteLine($"[NavItem] Đang load ảnh:");
-                //Console.WriteLine($"[NavItem] {fullPath}");
+                Console.WriteLine(
+                    $"[NavItem] Đang load ảnh: {fullPath}"
+                );
 
                 if (!File.Exists(fullPath))
                 {
@@ -75,9 +70,9 @@ namespace EduPath.Avalonia.ViewModels
             }
             catch (Exception ex)
             {
-                    // //Console.WriteLine(
-                    //     $"[NavItem] Lỗi khi load ảnh: {imagePath}"
-                    // );
+                Console.WriteLine(
+                    $"[NavItem] Lỗi load ảnh: {imagePath}"
+                );
 
                 Console.WriteLine(ex);
 
@@ -96,9 +91,11 @@ namespace EduPath.Avalonia.ViewModels
 
         public Student Student { get; }
 
+
         // =====================================================
-        // MENU STUDENT
+        // MENU
         // =====================================================
+
         public List<NavItem> NavItems { get; } = new()
         {
             new NavItem(
@@ -106,30 +103,33 @@ namespace EduPath.Avalonia.ViewModels
                 "Tổng quan",
                 "images_icons/tongQuan.png"
             ),
+
             new NavItem(
-                "open", 
+                "open",
                 "Đăng ký học phần",
                 "images_icons/dangKiHocPhan.png"
             ),
+
             new NavItem(
-                "enrolled", // Đổi từ "open" thành "enrolled" để map với EnrolledSectionsViewModel
+                "enrolled",
                 "Lớp học phần",
                 "images_icons/danhSach.png"
             ),
+
             new NavItem(
                 "timetable",
                 "Thời khoá biểu",
                 "images_icons/thoiKhoaBieu.png"
             ),
-            // Các trang dưới đây chưa có View trong hàm Navigate, 
-            // tạm thời đặt key riêng để không bị đụng độ với "open"
+
             new NavItem(
-                "fee", 
+                "fee",
                 "Học phí",
                 "images_icons/hocPhi.png"
             ),
+
             new NavItem(
-                "notification", 
+                "notification",
                 "Thông báo",
                 "images_icons/thongBao.png"
             )
@@ -139,6 +139,7 @@ namespace EduPath.Avalonia.ViewModels
         // =====================================================
         // SELECTED NAV
         // =====================================================
+
         private NavItem _selectedNav;
 
         public NavItem SelectedNav
@@ -147,7 +148,9 @@ namespace EduPath.Avalonia.ViewModels
 
             set
             {
-                if (SetProperty(ref _selectedNav, value))
+                if (SetProperty(
+                    ref _selectedNav,
+                    value))
                 {
                     Navigate(value.Key);
                 }
@@ -158,34 +161,42 @@ namespace EduPath.Avalonia.ViewModels
         // =====================================================
         // CURRENT PAGE
         // =====================================================
+
         private object _currentPage = null!;
 
         public object CurrentPage
         {
             get => _currentPage;
 
-            private set => SetProperty(
-                ref _currentPage,
-                value
-            );
+            private set
+            {
+                SetProperty(
+                    ref _currentPage,
+                    value
+                );
+            }
         }
 
 
         // =====================================================
         // LOGOUT
         // =====================================================
+
         public RelayCommand LogoutCommand { get; }
 
 
         // =====================================================
         // PAGE CACHE
         // =====================================================
-        private readonly Dictionary<string, object> _pageCache = new();
+
+        private readonly Dictionary<string, object> _pageCache
+            = new();
 
 
         // =====================================================
         // CONSTRUCTOR
         // =====================================================
+
         public StudentShellViewModel(Student student)
         {
             Student = student;
@@ -203,17 +214,33 @@ namespace EduPath.Avalonia.ViewModels
         // =====================================================
         // NAVIGATE
         // =====================================================
+
         public void Navigate(string key)
         {
-            if (!_pageCache.TryGetValue(key, out var page))
+            Console.WriteLine(
+                $"[StudentShell] Navigate: {key}"
+            );
+
+            if (!_pageCache.TryGetValue(
+                key,
+                out var page))
             {
                 page = key switch
                 {
+                    // ==============================
+                    // TỔNG QUAN
+                    // ==============================
+
                     "dashboard" =>
                         new StudentDashboardViewModel(
                             Student,
                             this
                         ),
+
+
+                    // ==============================
+                    // ĐĂNG KÝ HỌC PHẦN
+                    // ==============================
 
                     "open" =>
                         new OpenSectionsViewModel(
@@ -221,21 +248,41 @@ namespace EduPath.Avalonia.ViewModels
                             this
                         ),
 
+
+                    // ==============================
+                    // LỚP HỌC PHẦN ĐÃ ĐĂNG KÝ
+                    // ==============================
+
                     "enrolled" =>
                         new StudentOpenSectionsViewModel(
                             Student,
                             this
                         ),
 
+
+                    // ==============================
+                    // THỜI KHÓA BIỂU
+                    // ==============================
+
                     "timetable" =>
                         new TimetableViewModel(
                             Student
                         ),
 
+
+                    // ==============================
+                    // LỊCH SỬ
+                    // ==============================
+
                     "history" =>
                         new HistoryViewModel(
                             Student
                         ),
+
+
+                    // ==============================
+                    // MẶC ĐỊNH
+                    // ==============================
 
                     _ =>
                         new StudentDashboardViewModel(
@@ -246,20 +293,28 @@ namespace EduPath.Avalonia.ViewModels
 
                 _pageCache[key] = page;
             }
-            else if (page is IRefreshable refreshable)
+            else
             {
-                refreshable.Refresh();
+                if (page is IRefreshable refreshable)
+                {
+                    refreshable.Refresh();
+                }
             }
 
             CurrentPage = page;
 
-            var match = NavItems.FirstOrDefault(
-                n => n.Key == key
-            );
+            NavItem? match =
+                NavItems.FirstOrDefault(
+                    n => n.Key == key
+                );
 
             if (match != null)
             {
                 _selectedNav = match;
+
+                RaisePropertyChanged(
+                    nameof(SelectedNav)
+                );
             }
         }
 
@@ -267,6 +322,7 @@ namespace EduPath.Avalonia.ViewModels
         // =====================================================
         // CLEAR CACHE
         // =====================================================
+
         public void InvalidateAll()
         {
             _pageCache.Clear();
@@ -277,6 +333,7 @@ namespace EduPath.Avalonia.ViewModels
     // =========================================================
     // REFRESHABLE
     // =========================================================
+
     public interface IRefreshable
     {
         void Refresh();

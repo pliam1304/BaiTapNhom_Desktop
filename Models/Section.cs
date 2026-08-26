@@ -19,7 +19,7 @@ namespace EduPath.Avalonia.Models
         public int Capacity { get; set; }
         public int Enrolled { get; set; }
         public bool IsOpen { get; set; } = true;
-
+    
         public int Remaining => Capacity - Enrolled;
 
         public string DayLabel => DayOfWeek == 8 ? "Chủ nhật" : $"Thứ {DayOfWeek}";
