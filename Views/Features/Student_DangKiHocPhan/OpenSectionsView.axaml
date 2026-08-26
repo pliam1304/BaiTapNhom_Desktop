@@ -1,148 +1,169 @@
-<UserControl
-    xmlns="https://github.com/avaloniaui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:vm="using:EduPath.Avalonia.ViewModels"
-    xmlns:behaviors="using:EduPath.Avalonia.Behaviors"
-    x:Class="EduPath.Avalonia.Views.OpenSectionsView"
-    x:Name="Root"
-    x:DataType="vm:OpenSectionsViewModel">
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:EduPath.Avalonia.ViewModels"
+             x:Class="EduPath.Avalonia.Views.OpenSectionsView"
+             x:Name="Root"
+             x:DataType="vm:OpenSectionsViewModel">
 
-    <Grid ColumnDefinitions="2.2*, 1.1*" Margin="0,0,16,0">
+  <!-- CHIA 2 CỘT: Cột trái (Nội dung) và Cột phải (Danh sách đã chọn & Validation) -->
+  <Grid ColumnDefinitions="*, 400" Background="{StaticResource BgBrush}">
 
-        <Border Grid.Column="0" Classes="card" Padding="0">
-            <Grid RowDefinitions="Auto,*">
+    <!-- ========================================== -->
+    <!-- CỘT TRÁI: MAIN CONTENT                     -->
+    <!-- ========================================== -->
+    <Grid Grid.Column="0" RowDefinitions="Auto, Auto, Auto, *, *" Margin="24">
 
-                <Grid Grid.Row="0" ColumnDefinitions="*,Auto" Margin="20,18,20,12">
-                    <TextBlock
-                        Grid.Column="0"
-                        Text="Danh sách lớp học phần có sẵn"
-                        FontSize="17"
-                        FontWeight="Bold"
-                        Foreground="{StaticResource TextDarkBrush}"
-                        VerticalAlignment="Center" />
+      <!-- 1. KHUNG CHÀO SINH VIÊN (NAVY BACKGROUND) -->
+      <Border Grid.Row="0" Background="{StaticResource NavyBrush}" CornerRadius="12" Padding="24" Margin="0,0,0,24">
+        <Grid ColumnDefinitions="*, Auto">
+          <!-- Thông tin sinh viên -->
+          <StackPanel Grid.Column="0">
+            <TextBlock Text="{Binding StudentWelcomeText}" FontSize="24" FontWeight="Bold" Foreground="White" />
+            <TextBlock Text="{Binding StudentInfoText}" FontSize="14" Foreground="#93a4bd" Margin="0,6,0,4" />
+            <TextBlock Text="{Binding RegistrationDateText}" FontSize="13" Foreground="#93a4bd" />
+          </StackPanel>
 
-                    <TextBox
-                        Grid.Column="1"
-                        Width="220"
-                        Height="38"
-                        Watermark="Q Mã học phần..."
-                        Text="{Binding SearchText}"
-                        Classes="rounded" />
-                </Grid>
+          <!-- Status Badges (Vàng = Mở, Đỏ = Đóng) -->
+          <StackPanel Grid.Column="1" VerticalAlignment="Center">
+            <!-- Badge Vàng (Đang Mở) -->
+            <Border Background="{StaticResource GoldBrush}" CornerRadius="6" Padding="12,6" IsVisible="{Binding IsRegistrationOpen}">
+              <TextBlock Text="{Binding RegistrationStatusText}" Foreground="{StaticResource NavyBrush}" FontWeight="Bold" FontSize="12" />
+            </Border>
+            <!-- Badge Đỏ (Đã Đóng) -->
+            <Border Background="#ef4444" CornerRadius="6" Padding="12,6" IsVisible="{Binding !IsRegistrationOpen}">
+              <TextBlock Text="{Binding RegistrationStatusText}" Foreground="White" FontWeight="Bold" FontSize="12" />
+            </Border>
+          </StackPanel>
+        </Grid>
+      </Border>
 
-                <Border Grid.Row="1" Margin="0,0,0,4">
-                    <Grid RowDefinitions="Auto,*">
-                        <Grid Grid.Row="0" ColumnDefinitions="1.1*,2.2*,1.2*,1.2*,1.8*,1.2*,Auto" Margin="20,0,20,8">
-                            <TextBlock Grid.Column="0" Text="Mã lớp HP" FontSize="12" FontWeight="Bold" Foreground="{StaticResource TextMutedBrush}" />
-                            <TextBlock Grid.Column="1" Text="Môn học" FontSize="12" FontWeight="Bold" Foreground="{StaticResource TextMutedBrush}" />
-                            <TextBlock Grid.Column="2" Text="TC" FontSize="12" FontWeight="Bold" Foreground="{StaticResource TextMutedBrush}" />
-                            <TextBlock Grid.Column="3" Text="Lịch học" FontSize="12" FontWeight="Bold" Foreground="{StaticResource TextMutedBrush}" />
-                            <TextBlock Grid.Column="4" Text="Giảng viên" FontSize="12" FontWeight="Bold" Foreground="{StaticResource TextMutedBrush}" />
-                            <TextBlock Grid.Column="5" Text="Sĩ số" FontSize="12" FontWeight="Bold" Foreground="{StaticResource TextMutedBrush}" />
-                            <TextBlock Grid.Column="6" Text="Đăng ký" FontSize="12" FontWeight="Bold" Foreground="{StaticResource TextMutedBrush}" HorizontalAlignment="Center" />
-                        </Grid>
+      <!-- FEEDBACK SYSTEM THÔNG BÁO TỪ VIEWMODEL -->
+      <Border Grid.Row="1" Classes.feedback-error="{Binding !IsRegistrationOpen}" Classes.feedback-ok="{Binding IsRegistrationOpen}" CornerRadius="8" Padding="12" Margin="0,0,0,16" IsVisible="{Binding HasFeedback}">
+        <TextBlock Text="{Binding Feedback}" FontWeight="Medium" />
+      </Border>
 
-                        <ListBox Grid.Row="1"
-                                 ItemsSource="{Binding Sections}"
-                                 Background="Transparent"
-                                 BorderThickness="0"
-                                 Padding="0,0,0,10">
-                            <ListBox.ItemTemplate>
-                                <DataTemplate x:DataType="vm:SectionRow">
-                                    <Border BorderBrush="{StaticResource BorderBrush2}" BorderThickness="0,0,0,1" Padding="20,12">
-                                        <Grid ColumnDefinitions="1.1*,2.2*,1.2*,1.2*,1.8*,1.2*,Auto" Margin="0,0,0,0">
-                                            <TextBlock Grid.Column="0" Text="{Binding SectionId}" FontWeight="SemiBold" Foreground="{StaticResource TextDarkBrush}" VerticalAlignment="Center" />
-                                            <TextBlock Grid.Column="1" Text="{Binding CourseName}" Foreground="{StaticResource TextDarkBrush}" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" />
-                                            <TextBlock Grid.Column="2" Text="{Binding Credits, StringFormat='{}{0}'}" Foreground="{StaticResource TextDarkBrush}" VerticalAlignment="Center" />
-                                            <TextBlock Grid.Column="3" Text="{Binding Schedule}" Foreground="{StaticResource TextMutedBrush}" VerticalAlignment="Center" />
-                                            <TextBlock Grid.Column="4" Text="{Binding LecturerName}" Foreground="{StaticResource TextMutedBrush}" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" />
-                                            <TextBlock Grid.Column="5" Text="{Binding SeatsLabel}" Foreground="{StaticResource TextMutedBrush}" VerticalAlignment="Center" />
+      <!-- 2. MỘT Ô TÌM KIẾM DUY NHẤT -->
+      <TextBox Grid.Row="2" Watermark="🔍 Tìm theo mã lớp, tên môn, giảng viên..." Text="{Binding SearchText}" Classes="rounded" Margin="0,0,0,20" Padding="14,10" FontSize="14" />
 
-                                            <Button Grid.Column="6"
-                                                    Content="+ Thêm"
-                                                    Classes="primary"
-                                                    Padding="10,6"
-                                                    FontSize="12"
-                                                    HorizontalAlignment="Center"
-                                                    VerticalAlignment="Center"
-                                                    Command="{Binding #Root.((vm:OpenSectionsViewModel)DataContext).RegisterCommand}"
-                                                    CommandParameter="{Binding}"
-                                                    IsEnabled="{Binding !IsFull}" />
-                                        </Grid>
-                                    </Border>
-                                </DataTemplate>
-                            </ListBox.ItemTemplate>
-                        </ListBox>
-                    </Grid>
-                </Border>
-            </Grid>
-        </Border>
+      <!-- 3. BẢNG MÔN BẮT BUỘC (Cuộn độc lập) -->
+      <Grid Grid.Row="3" RowDefinitions="Auto, *" Margin="0,0,0,20">
+        <TextBlock Grid.Row="0" Text="HỌC PHẦN BẮT BUỘC" FontWeight="Bold" Foreground="{StaticResource TextDarkBrush}" Margin="0,0,0,10" />
+        <DataGrid Grid.Row="1" ItemsSource="{Binding RequiredSections}" AutoGenerateColumns="False" IsReadOnly="True" GridLinesVisibility="Horizontal" HeadersVisibility="Column" Background="White" BorderBrush="{StaticResource BorderBrush2}" BorderThickness="1" CornerRadius="8">
+          <DataGrid.Columns>
+            <!-- Môn bắt buộc hiển thị đậm (FontWeight="Bold") -->
+            <DataGridTemplateColumn Header="Mã lớp" Width="1.2*">
+              <DataGridTemplateColumn.CellTemplate>
+                <DataTemplate>
+                  <TextBlock Text="{Binding SectionId}" FontWeight="Bold" VerticalAlignment="Center" Margin="12,0"/>
+                </DataTemplate>
+              </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+            <DataGridTemplateColumn Header="Tên môn học" Width="2*">
+              <DataGridTemplateColumn.CellTemplate>
+                <DataTemplate>
+                  <TextBlock Text="{Binding CourseName}" FontWeight="Bold" VerticalAlignment="Center" Margin="12,0"/>
+                </DataTemplate>
+              </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+            <DataGridTextColumn Header="Giảng viên" Binding="{Binding LecturerName}" Width="1.5*" />
+            <DataGridTextColumn Header="TC" Binding="{Binding Credits}" Width="0.8*" />
+            <DataGridTemplateColumn Header="Thao tác" Width="1*">
+              <DataGridTemplateColumn.CellTemplate>
+                <DataTemplate>
+                  <Button Content="Thêm" Classes="outline" Padding="8,4" FontSize="12" HorizontalAlignment="Center" Command="{Binding #Root.((vm:OpenSectionsViewModel)DataContext).RegisterCommand}" CommandParameter="{Binding}"/>
+                </DataTemplate>
+              </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+          </DataGrid.Columns>
+        </DataGrid>
+      </Grid>
 
-        <Border Grid.Column="1" Classes="card" Padding="18" VerticalAlignment="Top">
-            <Grid RowDefinitions="Auto,Auto,*,Auto">
-                <TextBlock Grid.Row="0" Text="{Binding SelectedSections.Count, StringFormat='Lớp học phần đã chọn ({0})'}" FontSize="18" FontWeight="Bold" Foreground="{StaticResource TextDarkBrush}" Margin="0,0,0,12" />
-
-                <Grid Grid.Row="1" Margin="0,0,0,12">
-                    <TextBlock Text="Tổng tín chỉ đã chọn:" FontSize="12" Foreground="{StaticResource TextMutedBrush}" />
-                    <TextBlock Text="{Binding SelectedSummaryText}" FontSize="12" FontWeight="SemiBold" Foreground="{StaticResource TextDarkBrush}" HorizontalAlignment="Right" />
-                </Grid>
-
-                <ProgressBar Grid.Row="1"
-                             Margin="0,24,0,0"
-                             Value="{Binding SelectedCredits}"
-                             Maximum="{Binding MaxCredits}"
-                             Height="8"
-                             Foreground="#3b82f6"
-                             Background="#dfeafc" />
-
-                <ScrollViewer Grid.Row="2" Margin="0,12,0,0" MaxHeight="430">
-                    <ItemsControl ItemsSource="{Binding SelectedSections}">
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate x:DataType="vm:SectionRow">
-                                <Border Background="#edf3fb" CornerRadius="12" Padding="12,10" Margin="0,0,0,10">
-                                    <Grid ColumnDefinitions="*,Auto">
-                                        <StackPanel Grid.Column="0" Spacing="4">
-                                            <TextBlock Text="{Binding SectionId}" FontWeight="Bold" Foreground="{StaticResource TextDarkBrush}" />
-                                            <TextBlock Text="{Binding Credits, StringFormat='{}{0} tín chỉ'}" FontSize="12" Foreground="{StaticResource TextMutedBrush}" />
-                                            <TextBlock Text="{Binding CourseName}" FontSize="12" Foreground="{StaticResource TextDarkBrush}" TextTrimming="CharacterEllipsis" />
-                                            <TextBlock Text="{Binding LecturerName}" FontSize="12" Foreground="{StaticResource TextMutedBrush}" TextTrimming="CharacterEllipsis" />
-                                        </StackPanel>
-
-                                        <Button Grid.Column="1"
-                                                Width="32"
-                                                Height="32"
-                                                CornerRadius="8"
-                                                Background="#fee2e2"
-                                                Foreground="#dc2626"
-                                                Content="🗑"
-                                                FontSize="14"
-                                                HorizontalAlignment="Center"
-                                                VerticalAlignment="Center"
-                                                Command="{Binding #Root.((vm:OpenSectionsViewModel)DataContext).RemoveSelectedCommand}"
-                                                CommandParameter="{Binding}" />
-                                    </Grid>
-                                </Border>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                </ScrollViewer>
-
-                <Grid Grid.Row="3" ColumnDefinitions="*,Auto" Margin="0,16,0,0">
-                    <Button Grid.Column="0"
-                            Content="Xóa toàn bộ"
-                            Classes="outline"
-                            HorizontalAlignment="Stretch"
-                            Height="42" />
-
-                    <Button Grid.Column="1"
-                            Content="Gửi đăng ký"
-                            Classes="primary"
-                            Width="150"
-                            Height="42"
-                            Command="{Binding SubmitRegistrationCommand}" />
-                </Grid>
-            </Grid>
-        </Border>
+      <!-- 4. BẢNG MÔN TỰ CHỌN (Cuộn độc lập) -->
+      <Grid Grid.Row="4" RowDefinitions="Auto, *">
+        <TextBlock Grid.Row="0" Text="HỌC PHẦN TỰ CHỌN" FontWeight="Bold" Foreground="{StaticResource TextDarkBrush}" Margin="0,0,0,10" />
+        <DataGrid Grid.Row="1" ItemsSource="{Binding ElectiveSections}" AutoGenerateColumns="False" IsReadOnly="True" GridLinesVisibility="Horizontal" HeadersVisibility="Column" Background="White" BorderBrush="{StaticResource BorderBrush2}" BorderThickness="1" CornerRadius="8">
+          <DataGrid.Columns>
+            <!-- Môn tự chọn hiển thị Font bình thường -->
+            <DataGridTextColumn Header="Mã lớp" Binding="{Binding SectionId}" Width="1.2*" />
+            <DataGridTextColumn Header="Tên môn học" Binding="{Binding CourseName}" Width="2*" />
+            <DataGridTextColumn Header="Giảng viên" Binding="{Binding LecturerName}" Width="1.5*" />
+            <DataGridTextColumn Header="TC" Binding="{Binding Credits}" Width="0.8*" />
+            <DataGridTemplateColumn Header="Thao tác" Width="1*">
+              <DataGridTemplateColumn.CellTemplate>
+                <DataTemplate>
+                  <Button Content="Thêm" Classes="outline" Padding="8,4" FontSize="12" HorizontalAlignment="Center" Command="{Binding #Root.((vm:OpenSectionsViewModel)DataContext).RegisterCommand}" CommandParameter="{Binding}"/>
+                </DataTemplate>
+              </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+          </DataGrid.Columns>
+        </DataGrid>
+      </Grid>
 
     </Grid>
+
+
+    <!-- ========================================== -->
+    <!-- CỘT PHẢI: PANEL ĐÃ CHỌN & VALIDATION       -->
+    <!-- ========================================== -->
+    <Border Grid.Column="1" Background="White" BorderBrush="{StaticResource BorderBrush2}" BorderThickness="1,0,0,0" Padding="24">
+      <Grid RowDefinitions="Auto, *, Auto, Auto">
+
+        <TextBlock Grid.Row="0" Text="LỚP ĐÃ CHỌN" FontWeight="Bold" FontSize="16" Foreground="{StaticResource TextDarkBrush}" Margin="0,0,0,16" />
+
+        <!-- 5. DANH SÁCH LỚP ĐÃ CHỌN -->
+        <ScrollViewer Grid.Row="1" Margin="0,0,0,20">
+          <ItemsControl ItemsSource="{Binding SelectedSections}">
+            <ItemsControl.ItemTemplate>
+              <DataTemplate>
+                <Border BorderBrush="{StaticResource BorderBrush2}" BorderThickness="1" CornerRadius="8" Padding="12" Margin="0,0,0,12" Background="#f8fafc">
+                  <Grid ColumnDefinitions="*, Auto">
+                    <StackPanel Grid.Column="0" Spacing="4">
+                      <TextBlock Text="{Binding CourseName}" FontWeight="Bold" TextWrapping="Wrap" />
+                      <TextBlock Text="{Binding SectionId}" FontSize="12" Foreground="{StaticResource TextMutedBrush}" />
+                      <TextBlock Text="{Binding Credits, StringFormat='Số TC: {0}'}" FontSize="12" Foreground="{StaticResource TextMutedBrush}" />
+                    </StackPanel>
+                    <Button Grid.Column="1" Content="✕" Classes="outline" Padding="6" VerticalAlignment="Top" Command="{Binding #Root.((vm:OpenSectionsViewModel)DataContext).RemoveSelectedCommand}" CommandParameter="{Binding}" />
+                  </Grid>
+                </Border>
+              </DataTemplate>
+            </ItemsControl.ItemTemplate>
+          </ItemsControl>
+        </ScrollViewer>
+
+        <!-- 6. VALIDATION PANEL -->
+        <Border Grid.Row="2" Background="#f8fafc" BorderBrush="{StaticResource BorderBrush2}" BorderThickness="1" CornerRadius="8" Padding="16" Margin="0,0,0,20">
+          <StackPanel Spacing="10">
+            <TextBlock Text="ĐIỀU KIỆN ĐĂNG KÝ" FontWeight="Bold" FontSize="13" Foreground="{StaticResource TextDarkBrush}" Margin="0,0,0,4" />
+            
+            <Grid ColumnDefinitions="*, Auto">
+              <TextBlock Grid.Column="0" Text="Môn bắt buộc:" FontSize="13" Foreground="{StaticResource TextMutedBrush}" />
+              <TextBlock Grid.Column="1" Text="{Binding RequiredSummaryText}" FontSize="13" FontWeight="SemiBold" />
+            </Grid>
+            <Grid ColumnDefinitions="*, Auto">
+              <TextBlock Grid.Column="0" Text="Tín chỉ tự chọn:" FontSize="13" Foreground="{StaticResource TextMutedBrush}" />
+              <TextBlock Grid.Column="1" Text="{Binding ElectiveSummaryText}" FontSize="13" FontWeight="SemiBold" />
+            </Grid>
+            <Grid ColumnDefinitions="*, Auto">
+              <TextBlock Grid.Column="0" Text="Tổng số tín chỉ:" FontSize="13" Foreground="{StaticResource TextMutedBrush}" />
+              <TextBlock Grid.Column="1" Text="{Binding SelectedSummaryText}" FontSize="13" FontWeight="SemiBold" />
+            </Grid>
+
+            <Separator Background="{StaticResource BorderBrush2}" Margin="0,4" />
+
+            <!-- Trạng thái Validation động -->
+            <TextBlock Text="{Binding RegistrationValidationMessage}" FontSize="13" TextWrapping="Wrap" FontWeight="Medium" Foreground="{Binding CanSubmit, Converter={x:Static ObjectConverters.IsNull}}" />
+          </StackPanel>
+        </Border>
+
+        <!-- 7. THAO TÁC -->
+        <Grid Grid.Row="3" ColumnDefinitions="*, *" Margin="0,10,0,0">
+          <!-- Nút Xóa Toàn Bộ -->
+          <Button Grid.Column="0" Content="Xóa toàn bộ" Classes="outline" HorizontalAlignment="Stretch" Margin="0,0,6,0" Command="{Binding ClearAllCommand}" />
+          <!-- Nút Gửi Đăng Ký (Tự động khóa nhờ CanSubmit) -->
+          <Button Grid.Column="1" Content="Gửi đăng ký" Classes="primary" HorizontalAlignment="Stretch" Margin="6,0,0,0" Command="{Binding SubmitRegistrationCommand}" />
+        </Grid>
+
+      </Grid>
+    </Border>
+  </Grid>
 </UserControl>

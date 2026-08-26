@@ -5,11 +5,14 @@ namespace EduPath.Avalonia.Models
     /// </summary>
     public class Course
     {
-        public string CourseCode { get; set; } = string.Empty;   // CS201
+        public string CourseCode { get; set; } = string.Empty;            
         public string CourseName { get; set; } = string.Empty;
         public int Credits { get; set; }
-        public string Faculty { get; set; } = string.Empty;       // Khoa/Bộ môn
-        public string? PrerequisiteCode { get; set; }              // CS101, có thể null
+        public string Faculty { get; set; } = string.Empty;        
+        public string? PrerequisiteCode { get; set; }              
         public bool IsActive { get; set; } = true;
+        public bool IsRequired { get; set; } = true;
+
+        public string ElectiveGroup { get; set; } = string.Empty;
     }
 }

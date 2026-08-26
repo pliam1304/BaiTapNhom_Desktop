@@ -43,7 +43,7 @@
 
   <Application.Styles>
     <FluentTheme />
-
+    <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml"/>
     <!-- ============ Bảng màu (giữ tinh thần navy/gold của bản gốc) ============ -->
     <Style>
       <Style.Resources>
