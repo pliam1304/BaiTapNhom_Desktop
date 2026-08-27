@@ -1,0 +1,448 @@
+<UserControl
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vm="using:EduPath.Avalonia.ViewModels"
+    x:Class="EduPath.Avalonia.Views.Features.Tuition.TuitionView"
+    x:DataType="vm:TuitionViewModel">
+
+    <Grid
+        Margin="0,0,16,0"
+        RowDefinitions="Auto,*"
+        Background="Transparent">
+
+        <!-- ===================================================== -->
+        <!-- HEADER -->
+        <!-- ===================================================== -->
+
+        <Border
+            Grid.Row="0"
+            Background="{StaticResource NavyBrush}"
+            CornerRadius="12"
+            Padding="22"
+            Margin="0,0,0,16">
+
+            <Grid ColumnDefinitions="*,Auto">
+
+                <StackPanel
+                    Grid.Column="0"
+                    Spacing="5">
+
+                    <TextBlock
+                        Text="💳 Quản lý hóa đơn &amp; Học phí sinh viên"
+                        FontSize="20"
+                        FontWeight="Bold"
+                        Foreground="{StaticResource GoldTextBrush}" />
+
+                    <TextBlock
+                        Text="{Binding StudentName, StringFormat='Sinh viên: {0}'}"
+                        FontSize="13"
+                        Foreground="#c9d6e8" />
+
+                    <TextBlock
+                        Text="{Binding SemesterName, StringFormat='Học kỳ: {0}'}"
+                        FontSize="13"
+                        Foreground="#c9d6e8" />
+
+                </StackPanel>
+
+                <!-- Trạng thái học phí -->
+
+                <Border
+                    Grid.Column="1"
+                    Background="#173f5f"
+                    CornerRadius="8"
+                    Padding="16,10"
+                    VerticalAlignment="Center">
+
+                    <StackPanel Spacing="2">
+
+                        <TextBlock
+                            Text="TRẠNG THÁI HỌC PHÍ"
+                            FontSize="10"
+                            FontWeight="SemiBold"
+                            Foreground="#9fb4c9" />
+
+                        <TextBlock
+                            Text="{Binding InvoiceStatusText}"
+                            FontSize="13"
+                            FontWeight="Bold"
+                            Foreground="{StaticResource GoldTextBrush}" />
+
+                    </StackPanel>
+
+                </Border>
+
+            </Grid>
+
+        </Border>
+
+
+        <!-- ===================================================== -->
+        <!-- BODY -->
+        <!-- ===================================================== -->
+
+        <Grid
+            Grid.Row="1"
+            ColumnDefinitions="350,*"
+            RowDefinitions="Auto,*">
+
+            <!-- ================================================= -->
+            <!-- LEFT: THÔNG TIN HỌC PHÍ -->
+            <!-- ================================================= -->
+
+            <Border
+                Grid.Column="0"
+                Grid.RowSpan="2"
+                Classes="card"
+                Padding="20"
+                VerticalAlignment="Top"
+                Margin="0,0,8,0">
+
+                <StackPanel Spacing="14">
+
+                    <!-- Tiêu đề -->
+
+                    <TextBlock
+                        Text="Thông tin học phí"
+                        FontSize="18"
+                        FontWeight="Bold"
+                        Foreground="{StaticResource TextDarkBrush}" />
+
+                    <!-- Học kỳ -->
+
+                    <Grid ColumnDefinitions="*,Auto">
+
+                        <TextBlock
+                            Text="Học kỳ"
+                            Foreground="{StaticResource TextMutedBrush}" />
+
+                        <TextBlock
+                            Grid.Column="1"
+                            Text="{Binding SemesterName}"
+                            FontWeight="SemiBold"
+                            Foreground="{StaticResource TextDarkBrush}" />
+
+                    </Grid>
+
+
+                    <!-- Tổng tín chỉ -->
+
+                    <Grid ColumnDefinitions="*,Auto">
+
+                        <TextBlock
+                            Text="Tổng số tín chỉ đăng ký"
+                            Foreground="{StaticResource TextMutedBrush}" />
+
+                        <TextBlock
+                            Grid.Column="1"
+                            Text="{Binding TotalCredits}"
+                            FontWeight="SemiBold"
+                            Foreground="{StaticResource TextDarkBrush}" />
+
+                    </Grid>
+
+
+                    <!-- Tín chỉ lý thuyết -->
+
+                    <Grid ColumnDefinitions="*,Auto">
+
+                        <TextBlock
+                            Text="Số tín chỉ Lý thuyết (LT)"
+                            Foreground="{StaticResource TextMutedBrush}" />
+
+                        <TextBlock
+                            Grid.Column="1"
+                            Text="{Binding LectureCredits}"
+                            FontWeight="SemiBold"
+                            Foreground="{StaticResource TextDarkBrush}" />
+
+                    </Grid>
+
+
+                    <!-- Tín chỉ thực hành -->
+
+                    <Grid ColumnDefinitions="*,Auto">
+
+                        <TextBlock
+                            Text="Số tín chỉ Thực hành (TH)"
+                            Foreground="{StaticResource TextMutedBrush}" />
+
+                        <TextBlock
+                            Grid.Column="1"
+                            Text="{Binding PracticeCredits}"
+                            FontWeight="SemiBold"
+                            Foreground="{StaticResource TextDarkBrush}" />
+
+                    </Grid>
+
+
+                    <!-- Đơn giá LT -->
+
+                    <Grid ColumnDefinitions="*,Auto">
+
+                        <TextBlock
+                            Text="Đơn giá Lý thuyết (LT)"
+                            Foreground="{StaticResource TextMutedBrush}" />
+
+                        <TextBlock
+                            Grid.Column="1"
+                            Text="{Binding LectureUnitPriceText}"
+                            FontWeight="SemiBold"
+                            Foreground="{StaticResource TextDarkBrush}" />
+
+                    </Grid>
+
+
+                    <!-- Đơn giá TH -->
+
+                    <Grid ColumnDefinitions="*,Auto">
+
+                        <TextBlock
+                            Text="Đơn giá Thực hành (TH)"
+                            Foreground="{StaticResource TextMutedBrush}" />
+
+                        <TextBlock
+                            Grid.Column="1"
+                            Text="{Binding PracticeUnitPriceText}"
+                            FontWeight="SemiBold"
+                            Foreground="{StaticResource TextDarkBrush}" />
+
+                    </Grid>
+
+
+                    <!-- Divider -->
+
+                    <Border
+                        Height="1"
+                        Background="{StaticResource BorderBrush2}"
+                        Margin="0,4" />
+
+
+                    <!-- Tổng tiền -->
+
+                    <Border
+                        Background="#fff8e8"
+                        CornerRadius="10"
+                        Padding="16">
+
+                        <StackPanel Spacing="6">
+
+                            <TextBlock
+                                Text="Tổng học phí tạm tính"
+                                FontSize="13"
+                                Foreground="{StaticResource TextMutedBrush}" />
+
+                            <TextBlock
+                                Text="{Binding TotalTuitionText}"
+                                FontSize="26"
+                                FontWeight="Bold"
+                                Foreground="{StaticResource TextDarkBrush}" />
+
+                        </StackPanel>
+
+                    </Border>
+
+
+                    <!-- Nút thanh toán -->
+
+                    <Button
+                        Content="Thanh toán ngay"
+                        Classes="primary"
+                        Height="46"
+                        HorizontalAlignment="Stretch"
+                        Command="{Binding PayCommand}" />
+
+
+                    <!-- Nút in hóa đơn -->
+
+                    <Button
+                        Content="🖨 In hóa đơn"
+                        Classes="outline"
+                        Height="42"
+                        HorizontalAlignment="Stretch"
+                        Command="{Binding PrintInvoiceCommand}" />
+
+                </StackPanel>
+
+            </Border>
+
+
+            <!-- ================================================= -->
+            <!-- RIGHT: BẢNG HỌC PHÍ -->
+            <!-- ================================================= -->
+
+            <Border
+                Grid.Column="1"
+                Grid.Row="0"
+                Classes="card"
+                Padding="20"
+                Margin="8,0,0,16">
+
+                <Grid RowDefinitions="Auto,*">
+
+                    <!-- Header -->
+
+                    <Grid
+                        Grid.Row="0"
+                        ColumnDefinitions="*,Auto"
+                        Margin="0,0,0,14">
+
+                        <TextBlock
+                            Grid.Column="0"
+                            Text="Bảng tính học phí chi tiết"
+                            FontSize="18"
+                            FontWeight="Bold"
+                            Foreground="{StaticResource TextDarkBrush}" />
+
+                        <Button
+                            Grid.Column="1"
+                            Content="Xuất Excel"
+                            Classes="outline"
+                            Padding="14,7"
+                            Command="{Binding ExportTuitionExcelCommand}" />
+
+                    </Grid>
+
+
+                    <!-- DataGrid Bảng học phí -->
+                    <!-- ĐÃ SỬA THEO YÊU CẦU: Binding Type, UnitPrice, Amount -->
+
+                    <DataGrid
+                        Grid.Row="1"
+                        ItemsSource="{Binding TuitionDetails}"
+                        AutoGenerateColumns="False"
+                        CanUserResizeColumns="True"
+                        CanUserSortColumns="True"
+                        IsReadOnly="True"
+                        GridLinesVisibility="Horizontal"
+                        HeadersVisibility="Column"
+                        MinHeight="220"
+                        MaxHeight="350"
+                        HorizontalScrollBarVisibility="Auto"
+                        VerticalScrollBarVisibility="Auto">
+
+                        <DataGrid.Columns>
+
+                            <DataGridTextColumn
+                                Header="Loại tín chỉ"
+                                Binding="{Binding Type}"
+                                Width="2*" />
+
+                            <DataGridTextColumn
+                                Header="Số tín chỉ"
+                                Binding="{Binding Credits}"
+                                Width="*" />
+
+                            <DataGridTextColumn
+                                Header="Đơn giá"
+                                Binding="{Binding UnitPrice, StringFormat='{}{0:N0} đ'}"
+                                Width="1.4*" />
+
+                            <DataGridTextColumn
+                                Header="Thành tiền"
+                                Binding="{Binding Amount, StringFormat='{}{0:N0} đ'}"
+                                Width="1.5*" />
+
+                        </DataGrid.Columns>
+
+                    </DataGrid>
+
+                </Grid>
+
+            </Border>
+
+
+            <!-- ================================================= -->
+            <!-- RIGHT: LỊCH SỬ THANH TOÁN -->
+            <!-- ================================================= -->
+
+            <Border
+                Grid.Column="1"
+                Grid.Row="1"
+                Classes="card"
+                Padding="20"
+                Margin="8,0,0,0">
+
+                <Grid RowDefinitions="Auto,*">
+
+                    <!-- Header -->
+
+                    <Grid
+                        Grid.Row="0"
+                        ColumnDefinitions="*,Auto"
+                        Margin="0,0,0,14">
+
+                        <TextBlock
+                            Grid.Column="0"
+                            Text="Lịch sử thanh toán"
+                            FontSize="18"
+                            FontWeight="Bold"
+                            Foreground="{StaticResource TextDarkBrush}" />
+
+                        <Button
+                            Grid.Column="1"
+                            Content="Xuất Excel"
+                            Classes="outline"
+                            Padding="14,7"
+                            Command="{Binding ExportPaymentExcelCommand}" />
+
+                    </Grid>
+
+
+                    <!-- DataGrid Lịch sử thanh toán -->
+                    <!-- ĐÃ SỬA THEO YÊU CẦU: TransactionDate, Amount, Method, Status -->
+
+                    <DataGrid
+                        Grid.Row="1"
+                        ItemsSource="{Binding PaymentHistory}"
+                        AutoGenerateColumns="False"
+                        CanUserResizeColumns="True"
+                        CanUserSortColumns="True"
+                        IsReadOnly="True"
+                        GridLinesVisibility="Horizontal"
+                        HeadersVisibility="Column"
+                        MinHeight="160"
+                        MaxHeight="300"
+                        HorizontalScrollBarVisibility="Auto"
+                        VerticalScrollBarVisibility="Auto">
+
+                        <DataGrid.Columns>
+
+                            <DataGridTextColumn
+                                Header="Mã biên lai"
+                                Binding="{Binding ReceiptCode}"
+                                Width="1.3*" />
+
+                            <DataGridTextColumn
+                                Header="Ngày giao dịch"
+                                Binding="{Binding TransactionDate, StringFormat='{}{0:dd/MM/yyyy}'}"
+                                Width="1.3*" />
+
+                            <DataGridTextColumn
+                                Header="Số tiền"
+                                Binding="{Binding Amount, StringFormat='{}{0:N0} đ'}"
+                                Width="1.2*" />
+
+                            <DataGridTextColumn
+                                Header="Phương thức"
+                                Binding="{Binding Method}"
+                                Width="1.4*" />
+
+                            <DataGridTextColumn
+                                Header="Trạng thái"
+                                Binding="{Binding Status}"
+                                Width="1.3*" />
+
+                        </DataGrid.Columns>
+
+                    </DataGrid>
+
+                </Grid>
+
+            </Border>
+
+        </Grid>
+
+    </Grid>
+
+</UserControl>

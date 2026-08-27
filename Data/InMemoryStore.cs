@@ -1,3 +1,5 @@
+// Data/InMemoryStore.cs
+
 using EduPath.Avalonia.Models;
 
 namespace EduPath.Avalonia.Data
@@ -20,7 +22,16 @@ namespace EduPath.Avalonia.Data
         public List<Section> Sections { get; } = new();
         public List<Room> Rooms { get; } = new();
         public List<RegistrationPeriod> Periods { get; } = new();
+
         public List<Enrollment> Enrollments { get; } = new();
+
+        // =========================================================
+        // TUITION
+        // =========================================================
+
+        public List<TuitionInvoice> TuitionInvoices { get; } = new();
+
+        public List<TuitionPayment> TuitionPayments { get; } = new();
 
         private InMemoryStore() => Seed();
 
@@ -74,234 +85,45 @@ namespace EduPath.Avalonia.Data
                 // ==================== BẮT BUỘC ====================
                 // Môn đại cương
                 new Course
-                {
-                    CourseCode = "MA104",
-                    CourseName = "Toán rời rạc",
-                    Credits = 3,
-                    Faculty = "Toán",
-                    PrerequisiteCode = null,
-                    IsRequired = true,
-                    ElectiveGroup = ""
-                },
-                new Course
-                {
-                    CourseCode = "EN101",
-                    CourseName = "Tiếng Anh cơ bản",
-                    Credits = 2,
-                    Faculty = "Ngoại ngữ",
-                    PrerequisiteCode = null,
-                    IsRequired = true,
-                    ElectiveGroup = ""
-                },
-                // Môn cơ sở ngành
-                new Course
-                {
-                    CourseCode = "CS101",
-                    CourseName = "Nhập môn lập trình",
-                    Credits = 3,
-                    Faculty = "CNTT",
-                    PrerequisiteCode = null,
-                    IsRequired = true,
-                    ElectiveGroup = ""
-                },
-                new Course
-                {
-                    CourseCode = "CS201",
-                    CourseName = "Cấu trúc dữ liệu và giải thuật",
-                    Credits = 4,
-                    Faculty = "CNTT",
-                    PrerequisiteCode = "CS101",
-                    IsRequired = true,
-                    ElectiveGroup = ""
-                },
-                new Course
-                {
-                    CourseCode = "CS208",
-                    CourseName = "Cơ sở dữ liệu",
-                    Credits = 4,
-                    Faculty = "CNTT",
-                    PrerequisiteCode = "CS201",
-                    IsRequired = true,
-                    ElectiveGroup = ""
-                },
-                new Course
-                {
-                    CourseCode = "CS310",
-                    CourseName = "Lập trình hướng đối tượng",
-                    Credits = 3,
-                    Faculty = "CNTT",
-                    PrerequisiteCode = "CS101",
-                    IsRequired = true,
-                    ElectiveGroup = ""
-                },
-                new Course
-                {
-                    CourseCode = "CS320",
-                    CourseName = "Hệ điều hành",
-                    Credits = 4,
-                    Faculty = "CNTT",
-                    PrerequisiteCode = "CS201",
-                    IsRequired = true,
-                    ElectiveGroup = ""
-                },
-                new Course
-                {
-                    CourseCode = "CS325",
-                    CourseName = "Công nghệ phần mềm",
-                    Credits = 3,
-                    Faculty = "CNTT",
-                    PrerequisiteCode = "CS310",
-                    IsRequired = true,
-                    ElectiveGroup = ""
-                },
-                new Course
-                {
-                    CourseCode = "CS330",
-                    CourseName = "Phân tích và thiết kế hệ thống",
-                    Credits = 3,
-                    Faculty = "CNTT",
-                    PrerequisiteCode = "CS310",
-                    IsRequired = true,
-                    ElectiveGroup = ""
-                },
-
-                // ==================== TỰ CHỌN ====================
-                // Nhóm CNTT tự chọn
-                new Course
-                {
-                    CourseCode = "CS305",
-                    CourseName = "Mạng máy tính",
-                    Credits = 3,
-                    Faculty = "CNTT",
-                    PrerequisiteCode = null,
-                    IsRequired = false,
-                    ElectiveGroup = "CNTT Tự chọn"
-                },
-                new Course
-                {
-                    CourseCode = "CS315",
-                    CourseName = "Lập trình Web",
-                    Credits = 3,
-                    Faculty = "CNTT",
-                    PrerequisiteCode = "CS310",
-                    IsRequired = false,
-                    ElectiveGroup = "CNTT Tự chọn"
-                },
-                new Course
-                {
-                    CourseCode = "CS340",
-                    CourseName = "Trí tuệ nhân tạo",
-                    Credits = 3,
-                    Faculty = "CNTT",
-                    PrerequisiteCode = "CS201",
-                    IsRequired = false,
-                    ElectiveGroup = "CNTT Tự chọn"
-                },
-                new Course
-                {
-                    CourseCode = "CS350",
-                    CourseName = "Khai phá dữ liệu",
-                    Credits = 3,
-                    Faculty = "CNTT",
-                    PrerequisiteCode = "CS208",
-                    IsRequired = false,
-                    ElectiveGroup = "CNTT Tự chọn"
-                },
-                new Course
-                {
-                    CourseCode = "CS360",
-                    CourseName = "An toàn thông tin",
-                    Credits = 3,
-                    Faculty = "CNTT",
-                    PrerequisiteCode = "CS305",
-                    IsRequired = false,
-                    ElectiveGroup = "CNTT Tự chọn"
-                },
-                // Môn tự chọn mới
-                new Course
-                {
-                    CourseCode = "CS410",
-                    CourseName = "Lập trình di động",
-                    Credits = 3,
-                    Faculty = "CNTT",
-                    PrerequisiteCode = "CS310",
-                    IsRequired = false,
-                    ElectiveGroup = "CNTT Tự chọn"
-                },
-                new Course
-                {
-                    CourseCode = "CS420",
-                    CourseName = "Phát triển game",
-                    Credits = 3,
-                    Faculty = "CNTT",
-                    PrerequisiteCode = "CS310",
-                    IsRequired = false,
-                    ElectiveGroup = "CNTT Tự chọn"
-                },
-                new Course
-                {
-                    CourseCode = "CS430",
-                    CourseName = "Học máy",
-                    Credits = 4,
-                    Faculty = "CNTT",
-                    PrerequisiteCode = "CS340",
-                    IsRequired = false,
-                    ElectiveGroup = "CNTT Tự chọn"
-                },
-                new Course
-                {
-                    CourseCode = "CS440",
-                    CourseName = "Big Data",
-                    Credits = 3,
-                    Faculty = "CNTT",
-                    PrerequisiteCode = "CS350",
-                    IsRequired = false,
-                    ElectiveGroup = "CNTT Tự chọn"
-                },
-
-                // Nhóm Toán tự chọn
-                new Course
-                {
-                    CourseCode = "MA201",
-                    CourseName = "Xác suất thống kê",
-                    Credits = 3,
-                    Faculty = "Toán",
-                    PrerequisiteCode = null,
-                    IsRequired = false,
-                    ElectiveGroup = "Toán Tự chọn"
-                },
-                new Course
-                {
-                    CourseCode = "MA301",
-                    CourseName = "Toán ứng dụng",
-                    Credits = 3,
-                    Faculty = "Toán",
-                    PrerequisiteCode = "MA104",
-                    IsRequired = false,
-                    ElectiveGroup = "Toán Tự chọn"
-                },
-
-                // Nhóm Ngoại ngữ tự chọn
-                new Course
-                {
-                    CourseCode = "EN201",
-                    CourseName = "Tiếng Anh chuyên ngành CNTT",
-                    Credits = 2,
-                    Faculty = "Ngoại ngữ",
-                    PrerequisiteCode = "EN101",
-                    IsRequired = false,
-                    ElectiveGroup = "Ngoại ngữ Tự chọn"
-                },
-                new Course
-                {
-                    CourseCode = "EN202",
-                    CourseName = "Tiếng Anh giao tiếp nâng cao",
-                    Credits = 2,
-                    Faculty = "Ngoại ngữ",
-                    PrerequisiteCode = "EN101",
-                    IsRequired = false,
-                    ElectiveGroup = "Ngoại ngữ Tự chọn"
-                }
+{
+    CourseCode = "CS201",
+    CourseName = "Cấu trúc dữ liệu và giải thuật",
+    Credits = 4,
+    LectureCredits = 3,
+    PracticeCredits = 1,
+    Faculty = "CNTT",
+    PrerequisiteCode = "CS101"
+},
+new Course
+{
+    CourseCode = "CS208",
+    CourseName = "Cơ sở dữ liệu",
+    Credits = 4,
+    LectureCredits = 3,
+    PracticeCredits = 1,
+    Faculty = "CNTT",
+    PrerequisiteCode = "CS201"
+},
+new Course
+{
+    CourseCode = "MA104",
+    CourseName = "Toán rời rạc",
+    Credits = 3,
+    LectureCredits = 3,
+    PracticeCredits = 0,
+    Faculty = "Toán",
+    PrerequisiteCode = null
+},
+new Course
+{
+    CourseCode = "EN101",
+    CourseName = "Tiếng Anh cơ bản",
+    Credits = 2,
+    LectureCredits = 2,
+    PracticeCredits = 0,
+    Faculty = "Ngoại ngữ",
+    PrerequisiteCode = null
+},
             });
 
             // =========================================================
@@ -332,12 +154,12 @@ namespace EduPath.Avalonia.Data
                 IsOpen = false
             });
 
- // =========================================================
-// SECTIONS
-// Tổng cộng ~70+ lớp học phần
-// =========================================================
-Sections.AddRange(new[]
-{
+            // =========================================================
+            // SECTIONS
+            // Tổng cộng ~70+ lớp học phần
+            // =========================================================
+            Sections.AddRange(new[]
+            {
     // ==========================================
     // 1. CS101 - Nhập môn lập trình (3 lớp)
     // ==========================================
@@ -1137,8 +959,39 @@ Sections.AddRange(new[]
                 new Enrollment { StudentId = "SV2411871", SectionId = "CS340-01", RegisteredAt = new DateTime(2026, 8, 21, 10, 25, 0), Status = EnrollmentStatus.Enrolled },
                 // Sinh viên SV2411872
                 new Enrollment { StudentId = "SV2411872", SectionId = "CS350-01", RegisteredAt = new DateTime(2026, 8, 22, 7, 30, 0), Status = EnrollmentStatus.Enrolled },
-                new Enrollment { StudentId = "SV2411872", SectionId = "CS360-01", RegisteredAt = new DateTime(2026, 8, 22, 7, 35, 0), Status = EnrollmentStatus.Enrolled }
+                new Enrollment { StudentId = "SV2411872", SectionId = "CS360-01", RegisteredAt = new DateTime(2026, 8, 22, 7, 35, 0), Status = EnrollmentStatus.Enrolled },
+                new Enrollment
+{
+    StudentId = "SV2411869",
+    SectionId = "MA104-01",
+    RegisteredAt = new DateTime(2026, 8, 20, 8, 45, 0),
+    Status = EnrollmentStatus.Enrolled
+},
+new Enrollment
+{
+    StudentId = "SV2411869",
+    SectionId = "EN101-01",
+    RegisteredAt = new DateTime(2026, 8, 20, 8, 50, 0),
+    Status = EnrollmentStatus.Enrolled
+},
             });
+
+            // =========================================================
+            // TUITION INVOICES
+            // =========================================================
+
+            TuitionInvoices.AddRange(new[]
+            {
+    new TuitionInvoice
+    {
+        InvoiceId = "HD-SV2411869-HK1-2026",
+        StudentId = "SV2411869",
+        Term = "HK1 2026-2027",
+        CreatedAt = new DateTime(2026, 8, 21),
+        // Sinh viên hiện mới đóng một phần
+        Status = TuitionInvoiceStatus.PartiallyPaid
+    }
+});
         }
     }
 }

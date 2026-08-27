@@ -8,6 +8,14 @@ namespace EduPath.Avalonia.Models
         public string CourseCode { get; set; } = string.Empty;            
         public string CourseName { get; set; } = string.Empty;
         public int Credits { get; set; }
+        /// <summary>
+        /// Số tín chỉ lý thuyết.
+        /// </summary>
+        public int LectureCredits { get; set; }
+        /// <summary>
+        /// Số tín chỉ thực hành.
+        /// </summary>
+        public int PracticeCredits { get; set; }
         public string Faculty { get; set; } = string.Empty;        
         public string? PrerequisiteCode { get; set; }              
         public bool IsActive { get; set; } = true;

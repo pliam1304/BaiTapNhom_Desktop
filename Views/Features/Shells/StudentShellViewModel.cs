@@ -123,7 +123,7 @@ namespace EduPath.Avalonia.ViewModels
             ),
 
             new NavItem(
-                "fee",
+                "tuition",
                 "Học phí",
                 "images_icons/hocPhi.png"
             ),
@@ -270,6 +270,15 @@ namespace EduPath.Avalonia.ViewModels
                         ),
 
 
+
+                    // ==============================
+                    // HOÁ ĐƠN
+                    // ==============================
+                    "tuition"  =>
+                        new TuitionViewModel(
+                            Student
+                        ),
+
                     // ==============================
                     // LỊCH SỬ
                     // ==============================
@@ -316,6 +325,7 @@ namespace EduPath.Avalonia.ViewModels
                     nameof(SelectedNav)
                 );
             }
+            
         }
 
 

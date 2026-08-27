@@ -1,43 +1,47 @@
 <UserControl xmlns="https://github.com/avaloniaui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:vm="using:EduPath.Avalonia.ViewModels"
-             xmlns:views="using:EduPath.Avalonia.Views"
-             xmlns:conv="using:EduPath.Avalonia.Converters" 
-             x:Class="EduPath.Avalonia.Views.StudentShellView"
-             x:DataType="vm:StudentShellViewModel">
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:vm="using:EduPath.Avalonia.ViewModels"
+  xmlns:views="using:EduPath.Avalonia.Views"
+  xmlns:conv="using:EduPath.Avalonia.Converters"
+  xmlns:tuition="using:EduPath.Avalonia.Views.Features.Tuition"
+  x:Class="EduPath.Avalonia.Views.StudentShellView"
+  x:DataType="vm:StudentShellViewModel">
 
   <!-- KHAI BÁO CONVERTER (Dùng để tính toán ẩn/hiện chữ) -->
   <UserControl.Resources>
-    <conv:SidebarWidthConverter x:Key="SidebarWidthConv"/>
+    <conv:SidebarWidthConverter x:Key="SidebarWidthConv" />
   </UserControl.Resources>
 
   <!-- CHIA 3 CỘT: Sidebar (0) - Thanh kéo (1) - Nội dung chính (2) -->
   <Grid>
     <Grid.ColumnDefinitions>
-      <ColumnDefinition Width="260" MinWidth="85" MaxWidth="350"/>
-      <ColumnDefinition Width="Auto"/>
-      <ColumnDefinition Width="*"/>
+      <ColumnDefinition Width="260" MinWidth="85" MaxWidth="350" />
+      <ColumnDefinition Width="Auto" />
+      <ColumnDefinition Width="*" />
     </Grid.ColumnDefinitions>
 
     <!-- ========================================== -->
     <!-- CỘT 0: SIDEBAR MENU -->
     <!-- ========================================== -->
     <Border Grid.Column="0"
-            Name="SidebarBorder"
-            Background="{StaticResource NavyBrush}"
-            Padding="16,24,12,24">
+      Name="SidebarBorder"
+      Background="{StaticResource NavyBrush}"
+      Padding="16,24,12,24">
 
       <Grid RowDefinitions="Auto,*,Auto">
 
         <!-- 1. HEADER (LOGO & TÊN HỆ THỐNG) -->
-        <StackPanel Grid.Row="0" Orientation="Horizontal" Spacing="12" Margin="10,0,0,32" HorizontalAlignment="Left">
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Spacing="12" Margin="10,0,0,32"
+          HorizontalAlignment="Left">
           <Border Background="{StaticResource GoldBrush}" CornerRadius="8" Width="40" Height="40">
-            <TextBlock Text="DL" FontSize="20" FontWeight="Bold" Foreground="{StaticResource NavyBrush}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            <TextBlock Text="DL" FontSize="20" FontWeight="Bold"
+              Foreground="{StaticResource NavyBrush}" HorizontalAlignment="Center"
+              VerticalAlignment="Center" />
           </Border>
-          
+
           <!-- ẨN/HIỆN CHỮ HEADER -->
           <StackPanel VerticalAlignment="Center"
-                      IsVisible="{Binding #SidebarBorder.Bounds.Width, Converter={StaticResource SidebarWidthConv}}">
+            IsVisible="{Binding #SidebarBorder.Bounds.Width, Converter={StaticResource SidebarWidthConv}}">
             <TextBlock Text="DKHP" FontWeight="Bold" FontSize="18" Foreground="White" />
             <TextBlock Text="Hệ thống học phần" FontSize="12" Foreground="#93a4bd" />
           </StackPanel>
@@ -45,10 +49,10 @@
 
         <!-- 2. DANH SÁCH MENU -->
         <ListBox Grid.Row="1"
-                 ItemsSource="{Binding NavItems}"
-                 SelectedItem="{Binding SelectedNav}"
-                 Background="Transparent"
-                 BorderThickness="0">
+          ItemsSource="{Binding NavItems}"
+          SelectedItem="{Binding SelectedNav}"
+          Background="Transparent"
+          BorderThickness="0">
 
           <ListBox.Styles>
             <Style Selector="ListBoxItem">
@@ -76,12 +80,13 @@
           <ListBox.ItemTemplate>
             <DataTemplate x:DataType="vm:NavItem">
               <StackPanel Orientation="Horizontal" Spacing="14">
-                <Image Source="{Binding IconImage}" Width="20" Height="20" Stretch="Uniform" RenderOptions.BitmapInterpolationMode="HighQuality" />
-                
+                <Image Source="{Binding IconImage}" Width="20" Height="20" Stretch="Uniform"
+                  RenderOptions.BitmapInterpolationMode="HighQuality" />
+
                 <!-- ẨN/HIỆN TÊN MENU -->
                 <TextBlock Text="{Binding Label}"
-                           VerticalAlignment="Center"
-                           IsVisible="{Binding #SidebarBorder.Bounds.Width, Converter={StaticResource SidebarWidthConv}}" />
+                  VerticalAlignment="Center"
+                  IsVisible="{Binding #SidebarBorder.Bounds.Width, Converter={StaticResource SidebarWidthConv}}" />
               </StackPanel>
             </DataTemplate>
           </ListBox.ItemTemplate>
@@ -90,30 +95,30 @@
         <!-- 3. FOOTER (ĐĂNG XUẤT) -->
         <StackPanel Grid.Row="2" Spacing="16">
           <Border Height="1" Background="#1e3656" Margin="10,0" />
-          
+
           <Button Command="{Binding LogoutCommand}"
-                  Background="Transparent"
-                  BorderThickness="0"
-                  HorizontalAlignment="Stretch"
-                  Padding="14,14"
-                  CornerRadius="8"
-                  Cursor="Hand">
+            Background="Transparent"
+            BorderThickness="0"
+            HorizontalAlignment="Stretch"
+            Padding="14,14"
+            CornerRadius="8"
+            Cursor="Hand">
             <Button.Styles>
               <Style Selector="Button:pointerover /template/ ContentPresenter">
                 <Setter Property="Background" Value="#142c4c" />
               </Style>
             </Button.Styles>
-            
+
             <StackPanel Orientation="Horizontal" Spacing="14">
               <TextBlock Text="[→" FontSize="16" Foreground="#c9d6e8" VerticalAlignment="Center" />
-              
+
               <!-- ẨN/HIỆN CHỮ ĐĂNG XUẤT -->
               <TextBlock Text="Đăng xuất"
-                         Foreground="#c9d6e8"
-                         FontSize="14.5"
-                         FontWeight="Medium"
-                         VerticalAlignment="Center"
-                         IsVisible="{Binding #SidebarBorder.Bounds.Width, Converter={StaticResource SidebarWidthConv}}" />
+                Foreground="#c9d6e8"
+                FontSize="14.5"
+                FontWeight="Medium"
+                VerticalAlignment="Center"
+                IsVisible="{Binding #SidebarBorder.Bounds.Width, Converter={StaticResource SidebarWidthConv}}" />
             </StackPanel>
           </Button>
         </StackPanel>
@@ -132,28 +137,37 @@
       <ScrollViewer>
         <Border Padding="32">
           <TransitioningContentControl Content="{Binding CurrentPage}">
-    
-    <!-- 1. HIỆU ỨNG CHUYỂN TRANG (Bạn giữ nguyên code cũ của bạn ở phần này) -->
-    <TransitioningContentControl.PageTransition>
-        <!-- Ví dụ: <CrossFade Duration="0:00:00.25" /> -->
-        <!-- Đừng nhét DataTemplate vào trong này nữa nhé! -->
-    </TransitioningContentControl.PageTransition>
+
+            <!-- 1. HIỆU ỨNG CHUYỂN TRANG (Bạn giữ nguyên code cũ của bạn ở phần này) -->
+            <TransitioningContentControl.PageTransition>
+              <!-- Ví dụ: <CrossFade Duration="0:00:00.25" /> -->
+              <!-- Đừng nhét DataTemplate vào trong này nữa nhé! -->
+            </TransitioningContentControl.PageTransition>
 
 
-    <!-- 2. KHAI BÁO GIAO DIỆN NẰM RIÊNG Ở ĐÂY -->
-    <TransitioningContentControl.DataTemplates>
+            <!-- 2. KHAI BÁO GIAO DIỆN NẰM RIÊNG Ở ĐÂY -->
+            <TransitioningContentControl.DataTemplates>
 
-        <DataTemplate DataType="{x:Type vm:OpenSectionsViewModel}">
-            <views:OpenSectionsView />
-        </DataTemplate>
+              <!-- ĐĂNG KÝ HỌC PHẦN -->
+              <DataTemplate DataType="{x:Type vm:OpenSectionsViewModel}">
+                <views:OpenSectionsView />
+              </DataTemplate>
 
-        <DataTemplate DataType="{x:Type vm:StudentOpenSectionsViewModel}">
-            <views:StudentOpenSectionsView />
-        </DataTemplate>
 
-    </TransitioningContentControl.DataTemplates>
+              <!-- LỚP HỌC PHẦN ĐÃ ĐĂNG KÝ -->
+              <DataTemplate DataType="{x:Type vm:StudentOpenSectionsViewModel}">
+                <views:StudentOpenSectionsView />
+              </DataTemplate>
 
-</TransitioningContentControl>
+
+              <!-- HỌC PHÍ -->
+              <DataTemplate DataType="{x:Type vm:TuitionViewModel}">
+                <tuition:TuitionView />
+              </DataTemplate>
+
+            </TransitioningContentControl.DataTemplates>
+
+          </TransitioningContentControl>
         </Border>
       </ScrollViewer>
     </Border>
