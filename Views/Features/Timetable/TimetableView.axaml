@@ -4,53 +4,110 @@
              x:Class="EduPath.Avalonia.Views.TimetableView"
              x:DataType="vm:TimetableViewModel">
 
-  <StackPanel Spacing="18">
-    <StackPanel Spacing="2">
-      <TextBlock Text="Thời khóa biểu" FontSize="22" FontWeight="Bold" Foreground="{StaticResource TextDarkBrush}" />
-      <TextBlock Text="Lịch học theo tuần cho các lớp học phần đã đăng ký." Foreground="{StaticResource TextMutedBrush}" />
+  <ScrollViewer Padding="0,0,16,16">
+    <StackPanel Spacing="18">
+
+      <!-- HEADER & KHUYẾN NGHỊ -->
+      <StackPanel Spacing="12">
+        <TextBlock Text="Kiểm tra trùng lịch &amp; Giới hạn đăng ký" FontSize="22" FontWeight="Bold" Foreground="{StaticResource TextDarkBrush}" />
+        
+        <!-- Banner thông báo khuyến nghị màu vàng -->
+        <Border Background="#FEF3C7" BorderBrush="#FCD34D" BorderThickness="1" CornerRadius="8" Padding="14,10">
+          <StackPanel Orientation="Horizontal" Spacing="8">
+            <TextBlock Text="⚠️  Khuyến nghị xếp lịch:" FontWeight="Bold" Foreground="#92400E" VerticalAlignment="Center" />
+            <TextBlock Text="Sinh viên cần chủ động rà soát lịch học và thi để hạn chế trùng lịch. Ưu tiên đăng ký trước các học phần bắt buộc." 
+                       Foreground="#B45309" VerticalAlignment="Center" TextWrapping="Wrap" />
+          </StackPanel>
+        </Border>
+      </StackPanel>
+
+      <!-- KHUNG BẢNG THỜI KHÓA BIỂU -->
+      <Border Classes="card" Padding="20" Background="White" CornerRadius="12">
+        <StackPanel Spacing="16">
+          
+          <TextBlock Text="Bảng thời khóa biểu tuần học kỳ 1 (2026-2027)" FontSize="16" FontWeight="Bold" Foreground="{StaticResource TextDarkBrush}" />
+
+          <Grid RowDefinitions="Auto, *">
+            
+            <!-- HEADER CÁC THỨ (Cột tiêu đề) -->
+            <Grid Grid.Row="0" ColumnDefinitions="120, *, *, *, *, *, *" Margin="0,0,0,8">
+              <Border Grid.Column="0" /> <!-- Ô trống góc trên bên trái -->
+              
+              <!-- Thứ 2 -> Thứ 7 -->
+              <Border Grid.Column="1" Background="#0F172A" CornerRadius="6" Margin="4,0" Padding="0,10">
+                <TextBlock Text="Thứ 2" Foreground="White" FontWeight="Bold" HorizontalAlignment="Center" />
+              </Border>
+              <Border Grid.Column="2" Background="#0F172A" CornerRadius="6" Margin="4,0" Padding="0,10">
+                <TextBlock Text="Thứ 3" Foreground="White" FontWeight="Bold" HorizontalAlignment="Center" />
+              </Border>
+              <Border Grid.Column="3" Background="#0F172A" CornerRadius="6" Margin="4,0" Padding="0,10">
+                <TextBlock Text="Thứ 4" Foreground="White" FontWeight="Bold" HorizontalAlignment="Center" />
+              </Border>
+              <Border Grid.Column="4" Background="#0F172A" CornerRadius="6" Margin="4,0" Padding="0,10">
+                <TextBlock Text="Thứ 5" Foreground="White" FontWeight="Bold" HorizontalAlignment="Center" />
+              </Border>
+              <Border Grid.Column="5" Background="#0F172A" CornerRadius="6" Margin="4,0" Padding="0,10">
+                <TextBlock Text="Thứ 6" Foreground="White" FontWeight="Bold" HorizontalAlignment="Center" />
+              </Border>
+              <Border Grid.Column="6" Background="#0F172A" CornerRadius="6" Margin="4,0" Padding="0,10">
+                <TextBlock Text="Thứ 7" Foreground="White" FontWeight="Bold" HorizontalAlignment="Center" />
+              </Border>
+            </Grid>
+
+            <!-- CÁC HÀNG KHUNG GIỜ VÀ Ô DỮ LIỆU -->
+            <ItemsControl Grid.Row="1" ItemsSource="{Binding MatrixRows}">
+              <ItemsControl.ItemTemplate>
+                <DataTemplate x:DataType="vm:TimeSlotRow">
+                  <Grid ColumnDefinitions="120, *, *, *, *, *, *" Margin="0,4">
+                    
+                    <!-- Cột Khung Giờ -->
+                    <Border Grid.Column="0" Background="#F1F5F9" CornerRadius="6" Margin="0,0,4,0" Height="70">
+                      <TextBlock Text="{Binding TimeLabel}" FontSize="12" FontWeight="SemiBold" 
+                                 Foreground="{StaticResource TextDarkBrush}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Border>
+
+                    <!-- Danh sách 6 ô tương ứng 6 ngày -->
+                    <ItemsControl Grid.Column="1" Grid.ColumnSpan="6" ItemsSource="{Binding Cells}">
+                      <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                          <UniformGrid Columns="6" />
+                        </ItemsPanelTemplate>
+                      </ItemsControl.ItemsPanel>
+                      <ItemsControl.ItemTemplate>
+                        <DataTemplate x:DataType="vm:TimeSlotCell">
+                          <Border Background="{Binding BackgroundColor}" BorderBrush="{Binding BorderColor}" BorderThickness="1"
+                                  CornerRadius="6" Margin="4,0" Height="70" Padding="8,6">
+                            <Panel>
+                            <!-- Nếu CÓ môn học -->
+                            <Panel IsVisible="{Binding HasClass}">
+                              <StackPanel Spacing="2" VerticalAlignment="Center">
+                                <TextBlock Text="{Binding Section.SectionId}" FontWeight="Bold" FontSize="12" Foreground="#0F172A" />
+                                <TextBlock Text="{Binding Section.CourseName}" FontSize="11" Foreground="#334155" TextTrimming="CharacterEllipsis" />
+                                <Border Background="White" CornerRadius="4" HorizontalAlignment="Left" Padding="4,2" Margin="0,2,0,0">
+                                  <TextBlock Text="{Binding Section.RoomId}" FontSize="10.5" FontWeight="SemiBold" Foreground="#64748B" />
+                                </Border>
+                              </StackPanel>
+                            </Panel>
+
+                            <!-- Nếu KHÔNG có môn học (Hiện dấu - mờ) -->
+                            <TextBlock Text="-" IsVisible="{Binding !HasClass}" Foreground="#94A3B8" 
+                                       HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14" />
+                                       </Panel>
+                          </Border>
+                        </DataTemplate>
+                      </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+
+                  </Grid>
+                </DataTemplate>
+              </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+          </Grid>
+
+        </StackPanel>
+      </Border>
+
     </StackPanel>
-
-    <ScrollViewer HorizontalScrollBarVisibility="Auto">
-      <ItemsControl ItemsSource="{Binding Days}">
-        <ItemsControl.ItemsPanel>
-          <ItemsPanelTemplate>
-            <StackPanel Orientation="Horizontal" Spacing="14" />
-          </ItemsPanelTemplate>
-        </ItemsControl.ItemsPanel>
-        <ItemsControl.ItemTemplate>
-          <DataTemplate x:DataType="vm:DayColumn">
-            <Border Classes="card" Width="230" VerticalAlignment="Top" Padding="16">
-              <StackPanel Spacing="12">
-                <TextBlock Text="{Binding Label}" FontWeight="Bold" FontSize="14.5" Foreground="{StaticResource TextDarkBrush}" />
-
-                <ItemsControl ItemsSource="{Binding Sections}">
-                  <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                      <StackPanel Spacing="10" />
-                    </ItemsPanelTemplate>
-                  </ItemsControl.ItemsPanel>
-                  <ItemsControl.ItemTemplate>
-                    <DataTemplate x:DataType="vm:SectionRow">
-                      <Border Background="{StaticResource BgBrush}" CornerRadius="10" Padding="10">
-                        <StackPanel Spacing="3">
-                          <TextBlock Text="{Binding CourseName}" FontWeight="SemiBold" FontSize="12.5" TextWrapping="Wrap" Foreground="{StaticResource TextDarkBrush}" />
-                          <TextBlock Text="{Binding Section.TimeLabel}" FontSize="11.5" Foreground="{StaticResource TextMutedBrush}" />
-                          <TextBlock FontSize="11" Foreground="{StaticResource TextMutedBrush}">
-                            Phòng <Run Text="{Binding RoomId}" />
-                          </TextBlock>
-                        </StackPanel>
-                      </Border>
-                    </DataTemplate>
-                  </ItemsControl.ItemTemplate>
-                </ItemsControl>
-
-                <TextBlock Text="Không có lịch" FontSize="12" Foreground="{StaticResource TextMutedBrush}"
-                           IsVisible="{Binding !HasClasses}" />
-              </StackPanel>
-            </Border>
-          </DataTemplate>
-        </ItemsControl.ItemTemplate>
-      </ItemsControl>
-    </ScrollViewer>
-  </StackPanel>
+  </ScrollViewer>
 </UserControl>
