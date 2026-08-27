@@ -336,3 +336,63 @@ sàng hoặc dễ bổ sung theo đúng pattern `ViewModel + View` hiện có:
 ## Giấy phép
 
 Đây là dự án bài tập nhóm (`BaiTapNhom_Desktop`), phục vụ mục đích học tập.
+
+
+
+## 🖼️ Giao diện demo
+
+> 📁 **Tất cả ảnh demo được lưu tại:** `docs/images_demo/`
+
+---
+
+### 1. Màn hình đăng nhập
+
+![Màn hình đăng nhập](docs/images_demo/DangNhap.png)
+
+- _**(Điền mô tả tính năng của màn hình đăng nhập tại đây)**_
+- _Ví dụ: Sinh viên/Admin đăng nhập bằng tài khoản và mật khẩu..._
+
+---
+
+### 2. Trang chủ sinh viên
+
+![Trang chủ sinh viên](docs/images_demo/SinhVien_TrangChu.png)
+
+- _**(Điền mô tả tính năng của trang chủ sinh viên tại đây)**_
+- _Ví dụ: Hiển thị thông tin sinh viên, tiến độ học tập, thông báo mới nhất..._
+
+---
+
+### 3. Đăng ký học phần (Sinh viên)
+
+![Đăng ký học phần](docs/images_demo/SinhVien_DKHP.png)
+
+- _**(Điền mô tả tính năng đăng ký học phần tại đây)**_
+- _Ví dụ: Danh sách lớp học phần đang mở, tìm kiếm theo mã/tên môn, chọn và đăng ký..._
+
+---
+
+### 4. Lớp học phần (Sinh viên)
+
+![Lớp học phần](docs/images_demo/SinhVien_LopHP.png)
+
+- _**(Điền mô tả tính năng lớp học phần tại đây)**_
+- _Ví dụ: Danh sách các lớp đã đăng ký, trạng thái (đã duyệt/chờ phê duyệt), xem chi tiết..._
+
+---
+
+### 5. Học phí (Sinh viên)
+
+![Học phí](docs/images_demo/SinhVien_HocPhi.png)
+
+- _**(Điền mô tả tính năng học phí tại đây)**_
+- _Ví dụ: Bảng tính chi tiết học phí theo tín chỉ, tổng tiền tạm tính, lịch sử thanh toán..._
+
+---
+
+### 6. Thời khóa biểu (Sinh viên)
+
+![Thời khóa biểu](docs/images_demo/SinhVien_TKB.png)
+
+- _**(Điền mô tả tính năng thời khóa biểu tại đây)**_
+- _Ví dụ: Hiển thị lịch học theo tuần, thông tin giảng viên, phòng học, tiết học..._
